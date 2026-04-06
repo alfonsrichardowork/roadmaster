@@ -5,27 +5,35 @@ import Link from 'next/link'
 import { Button } from '@/components/ui/button'
 import { Menu, X } from 'lucide-react'
 import Image from 'next/image'
+import { usePathname } from 'next/navigation'
 
 export function Navigation() {
+    const pathname = usePathname();
     const [isOpen, setIsOpen] = useState(false)
     const [navbarBg, setNavbarBg] = useState(false);
     useEffect(() => {
-        const handleScroll = () => {
-        if (window.scrollY > 0) { // Change this value based on when you want the background to change
+        const updateNavbarBg = () => {
+            if (pathname.includes('/products')) {
             setNavbarBg(true);
-        } else {
-            setNavbarBg(false);
-        }
+            return;
+            }
+
+            if (isOpen) {
+            setNavbarBg(true);
+            return;
+            }
+
+            setNavbarBg(window.scrollY > 0);
         };
 
-        handleScroll()
+        updateNavbarBg(); // run once on mount / pathname change
 
-        window.addEventListener('scroll', handleScroll);
+        window.addEventListener('scroll', updateNavbarBg);
 
         return () => {
-        window.removeEventListener('scroll', handleScroll);
+            window.removeEventListener('scroll', updateNavbarBg);
         };
-    }, []);
+    }, [pathname, isOpen]);
     return (
         <nav className={`fixed top-0 w-full z-50 duration-300 ease-in-out ${navbarBg ? 'bg-white/95 shadow-md' : 'bg-transparent'} px-4 sm:px-6 lg:px-8`}>
         <div className="max-w-7xl mx-auto w-full relative z-10">
@@ -44,7 +52,7 @@ export function Navigation() {
 
             {/* Desktop Menu */}
             <div className={`w-1/3 hidden md:flex items-center justify-center gap-8 text-sm font-medium ${navbarBg ? 'text-primary' : 'text-white'}`}>
-                <Link href="/products" className="hover:text-accent transition-colors font-medium">
+                <Link href="/category" className="hover:text-accent transition-colors font-medium">
                 Products
                 </Link>
                 <Link href="/about" className="hover:text-accent transition-colors font-medium">
@@ -68,31 +76,31 @@ export function Navigation() {
             {/* Mobile Menu Button */}
             <Button
                 onClick={() => setIsOpen(!isOpen)}
-                className={`md:hidden p-0 ${navbarBg ? 'text-primary' : 'text-white'} bg-transparent`}
+                className={`md:hidden p-0 text-primary bg-transparent hover:bg-transparent hover:text-accent`}
                 aria-label="Toggle menu"
                 // variant={navbarBg ? "ghost" : "default"}
             >
-                {isOpen ? <X size={24} /> : <Menu size={24} />}
+                {isOpen ? <X size={24} /> : <Menu size={24} className={navbarBg ? 'text-primary' : 'text-background'}/>}
             </Button>
             </div>
 
             {/* Mobile Menu */}
             {isOpen && (
-            <div className="md:hidden pb-4 space-y-2">
-                <Link href="/products" className="block text-foreground py-2 hover:text-accent transition-colors">
+            <div className="md:hidden p-4 space-y-2 rounded-md">
+                <Link href="/category" className="block text-foreground py-2 hover:text-accent transition-colors" onClick={() => setIsOpen(false)}>
                 Products
                 </Link>
-                <Link href="/about" className="block text-foreground py-2 hover:text-accent transition-colors">
+                <Link href="/about" className="block text-foreground py-2 hover:text-accent transition-colors" onClick={() => setIsOpen(false)}>
                 About Us
                 </Link>
-                <Link href="/contact" className="block text-foreground py-2 hover:text-accent transition-colors">
+                <Link href="/contact" className="block text-foreground py-2 hover:text-accent transition-colors" onClick={() => setIsOpen(false)}>
                 Contact
                 </Link>
                 <div className="flex gap-2 pt-2">
-                <Button variant="outline" className="flex-1">
+                {/* <Button variant="outline" className="flex-1">
                     Shop
-                </Button>
-                <Button className="flex-1 bg-accent text-accent-foreground hover:bg-accent/90">
+                </Button> */}
+                <Button className="flex-1 bg-accent text-accent-foreground hover:bg-accent/90" onClick={() => setIsOpen(false)}>
                     Support
                 </Button>
                 </div>

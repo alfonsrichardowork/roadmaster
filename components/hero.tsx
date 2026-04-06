@@ -48,11 +48,11 @@ export function Hero() {
               </p>
 
               <div className="flex flex-col sm:flex-row gap-4 pt-6 fade-in-up">
-                <Link href="#products" className="w-full sm:w-auto">
-                  <Button size="lg" className="w-full bg-accent text-white hover:bg-accent/90 transition-all duration-300 transform hover:scale-105">
+                <Button size="lg" className="w-full bg-accent text-white hover:bg-accent/90 transition-all duration-300 transform hover:scale-105" asChild>
+                  <Link href="/category" className="w-full sm:w-auto">
                     Explore Products
-                  </Button>
-                </Link>
+                  </Link>
+                </Button>
                 <Button size="lg" variant="outline" className="w-full sm:w-auto border-white/30 text-foreground hover:text-white hover:bg-white/10 backdrop-blur-sm transition-all duration-300">
                   <Play className="w-4 h-4 mr-2" />
                   Watch Demo

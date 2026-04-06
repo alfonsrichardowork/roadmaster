@@ -2,8 +2,6 @@ import { Button } from '@/components/ui/button'
 import prismadb from '@/lib/prismadb'
 import { Calendar } from 'lucide-react'
 import Image from 'next/image'
-import DompurifyContent from './dompurifyText';
-import { Suspense } from 'react';
 
  const formatDate = (isoDate: string): string => {
     const date = new Date(isoDate);
@@ -79,12 +77,6 @@ export async function NewsEvents() {
                     <h3 className="text-lg font-bold text-primary mb-3 group-hover:text-accent transition-colors line-clamp-2">
                       {item.title}
                     </h3>
-
-                    <p className="text-sm text-foreground/70 mb-6 flex-1 line-clamp-2">
-                      {/* <Suspense fallback={<div className="h-4 bg-gray-200 rounded w-3/4 mb-2 animate-pulse"></div>}> */}
-                        {/* <DompurifyContent text={item.description} /> */}
-                      {/* </Suspense> */}
-                    </p>
 
                     <div className="flex items-center gap-2 text-sm text-foreground/60 border-t border-border pt-4">
                       <Calendar className="w-4 h-4" />

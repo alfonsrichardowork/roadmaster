@@ -80,7 +80,7 @@ export async function Footer() {
             <ul className="space-y-3 text-sm">
               {categories && categories.length > 0 && categories.map((category, index) => 
                 <li key={index}>
-                  <Link href={`/products/${category.slug}`} className="text-primary-foreground/80 hover:text-primary-foreground transition-colors">
+                  <Link href={`/category/${category.slug}`} className="text-primary-foreground/80 hover:text-primary-foreground transition-colors">
                     {category.name}
                   </Link>
                 </li>

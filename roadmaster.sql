@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 04, 2026 at 09:11 AM
--- Server version: 10.4.32-MariaDB
--- PHP Version: 8.2.12
+-- Generation Time: Apr 06, 2026 at 09:34 AM
+-- Server version: 10.4.28-MariaDB
+-- PHP Version: 8.2.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -45,8 +45,8 @@ CREATE TABLE `allcategory` (
 --
 
 INSERT INTO `allcategory` (`id`, `brandId`, `type`, `name`, `slug`, `description`, `thumbnail_url`, `createdAt`, `updatedAt`, `updatedBy`) VALUES
-('059516df-7497-420c-9ba6-6fb9d04d0ee4', '680c5eee-7ed7-41bc-b14b-4185f8a1c379', 'Category', 'Powered Stereo', 'powered-stereo', 'Powered Stereo Speaker', '/uploads/others/Cozy living room with speakers and turntable.webp', '2026-03-31 14:49:57.103', '2026-03-31 14:49:57.103', 'admin'),
-('0625a69d-efa3-4d80-a69e-a42aaeb4ecbd', '680c5eee-7ed7-41bc-b14b-4185f8a1c379', 'Category', 'Powered Tower', 'powered-tower', 'Powered Tower Speaker', '/uploads/others/Modern living room with sleek speakers.webp', '2026-03-31 14:50:22.270', '2026-03-31 14:50:22.270', 'admin'),
+('059516df-7497-420c-9ba6-6fb9d04d0ee4', '680c5eee-7ed7-41bc-b14b-4185f8a1c379', 'Category', 'Powered Stereo', 'powered-stereo', 'Stereo speakers with integrated amplification that produce balanced left-right audio for clear and immersive listening.', '/uploads/others/Cozy living room with speakers and turntable.webp', '2026-03-31 14:49:57.103', '2026-04-06 01:52:06.818', 'admin'),
+('0625a69d-efa3-4d80-a69e-a42aaeb4ecbd', '680c5eee-7ed7-41bc-b14b-4185f8a1c379', 'Category', 'Powered Tower', 'powered-tower', 'Tall speakers with built-in amplifiers designed to deliver powerful, room-filling sound for home or event setups.', '/uploads/others/Modern living room with sleek speakers.webp', '2026-03-31 14:50:22.270', '2026-04-06 01:51:49.119', 'admin'),
 ('3f7a7f28-0faf-40f2-b266-1528a4445b68', '680c5eee-7ed7-41bc-b14b-4185f8a1c379', 'Sub Category', 'Monster Series', 'monster-series', 'Monster Series Speaker', '', '2026-03-31 14:51:11.533', '2026-03-31 14:51:11.533', 'admin'),
 ('488f1247-3dc3-4071-9945-f3317236c1a1', '680c5eee-7ed7-41bc-b14b-4185f8a1c379', 'Sub Category', 'KD Pro Series', 'kd-pro-series', 'KD Pro Series Speaker', '', '2026-03-31 14:51:22.983', '2026-03-31 14:51:22.983', 'admin'),
 ('49abbb86-f7a6-4d61-a57e-278991a31f30', '680c5eee-7ed7-41bc-b14b-4185f8a1c379', 'Sub Category', 'Party Series', 'party-series', 'Party Series Speaker', '', '2026-03-31 14:51:59.131', '2026-03-31 14:51:59.131', 'admin'),
@@ -54,7 +54,7 @@ INSERT INTO `allcategory` (`id`, `brandId`, `type`, `name`, `slug`, `description
 ('705cbf21-1e44-4f8f-ae0e-39d568369e8a', '680c5eee-7ed7-41bc-b14b-4185f8a1c379', 'Sub Category', 'PA Series', 'pa-series', 'PA Series Speaker', '', '2026-03-31 14:51:43.808', '2026-03-31 16:02:58.491', 'admin'),
 ('821782fa-eede-4710-9d67-f803cc56be3b', '680c5eee-7ed7-41bc-b14b-4185f8a1c379', 'Sub Category', 'Minion', 'minion', 'Minion Speaker', '', '2026-03-31 14:51:31.058', '2026-03-31 14:51:31.058', 'admin'),
 ('9945a47f-0755-4f8c-b421-434c7f733f66', '680c5eee-7ed7-41bc-b14b-4185f8a1c379', 'Sub Category', 'Probeat Series', 'probeat-series', 'Probeat Series Speaker', '', '2026-03-31 14:52:13.506', '2026-03-31 16:02:54.085', 'admin'),
-('b5def30b-0648-4c0c-8602-2a8d4363b36b', '680c5eee-7ed7-41bc-b14b-4185f8a1c379', 'Category', 'Portable', 'portable', 'Portable Speaker', '/uploads/others/Beachside speaker and tropical vibes.webp', '2026-03-31 14:50:07.571', '2026-03-31 14:50:07.571', 'admin');
+('b5def30b-0648-4c0c-8602-2a8d4363b36b', '680c5eee-7ed7-41bc-b14b-4185f8a1c379', 'Category', 'Portable', 'portable', 'Compact and lightweight speakers that provide convenient, high-quality sound for music anywhere you go.', '/uploads/others/Beachside speaker and tropical vibes.webp', '2026-03-31 14:50:07.571', '2026-04-06 01:51:58.170', 'admin');
 
 -- --------------------------------------------------------
 
@@ -79,52 +79,52 @@ CREATE TABLE `allproductcategory` (
 
 INSERT INTO `allproductcategory` (`id`, `productId`, `categoryId`, `createdAt`, `updatedAt`, `name`, `slug`, `type`) VALUES
 ('03d44fa5-9983-4c8d-8b98-15e5b623efd0', 'd96ca88f-1b20-437d-973e-4a5fc0655de1', '3f7a7f28-0faf-40f2-b266-1528a4445b68', '2026-03-31 15:21:22.552', '2026-03-31 15:21:22.552', 'Monster Series', 'monster-series', 'Sub Category'),
-('0931f041-62e0-4eef-9088-4b2b1adc9140', 'd96ca88f-1b20-437d-973e-4a5fc0655de1', '059516df-7497-420c-9ba6-6fb9d04d0ee4', '2026-03-31 15:21:22.550', '2026-03-31 15:21:22.550', 'Powered Stereo', 'powered-stereo', 'Category'),
+('0931f041-62e0-4eef-9088-4b2b1adc9140', 'd96ca88f-1b20-437d-973e-4a5fc0655de1', '059516df-7497-420c-9ba6-6fb9d04d0ee4', '2026-03-31 15:21:22.550', '2026-04-06 01:52:06.823', 'Powered Stereo', 'powered-stereo', 'Category'),
 ('2461cc16-a397-4d7d-8f09-d95683303843', '5a4b4994-bb7c-4ef5-9f7f-0764fde8cbe1', '49abbb86-f7a6-4d61-a57e-278991a31f30', '2026-03-31 15:10:57.073', '2026-03-31 15:10:57.073', 'Party Series', 'party-series', 'Sub Category'),
-('2e058330-4020-4a07-916b-8df1acb17e4f', 'f33a3fca-2a2c-4913-8ec9-9a98946ba7b1', 'b5def30b-0648-4c0c-8602-2a8d4363b36b', '2026-03-31 15:10:21.505', '2026-03-31 15:10:21.505', 'Portable', 'portable', 'Category'),
-('327ac585-4af2-4072-95a5-98b270af0c41', '15a9bc11-1dfb-49c5-8a06-8836d35f9921', '059516df-7497-420c-9ba6-6fb9d04d0ee4', '2026-03-31 15:27:04.617', '2026-03-31 15:27:04.617', 'Powered Stereo', 'powered-stereo', 'Category'),
-('38294b07-a629-483c-ad0b-bdd4cd238276', '0fc1bf44-b61d-4991-9403-0b0ecef8c791', 'b5def30b-0648-4c0c-8602-2a8d4363b36b', '2026-03-31 15:09:54.637', '2026-03-31 15:09:54.637', 'Portable', 'portable', 'Category'),
-('4092044f-df39-452f-a7b8-ae1648c78b6b', '8cf82b55-a985-4a5f-83ff-0484ffcdf5c5', '059516df-7497-420c-9ba6-6fb9d04d0ee4', '2026-03-31 15:18:31.589', '2026-03-31 15:18:31.589', 'Powered Stereo', 'powered-stereo', 'Category'),
+('2e058330-4020-4a07-916b-8df1acb17e4f', 'f33a3fca-2a2c-4913-8ec9-9a98946ba7b1', 'b5def30b-0648-4c0c-8602-2a8d4363b36b', '2026-03-31 15:10:21.505', '2026-04-06 01:51:58.180', 'Portable', 'portable', 'Category'),
+('327ac585-4af2-4072-95a5-98b270af0c41', '15a9bc11-1dfb-49c5-8a06-8836d35f9921', '059516df-7497-420c-9ba6-6fb9d04d0ee4', '2026-03-31 15:27:04.617', '2026-04-06 01:52:06.823', 'Powered Stereo', 'powered-stereo', 'Category'),
+('38294b07-a629-483c-ad0b-bdd4cd238276', '0fc1bf44-b61d-4991-9403-0b0ecef8c791', 'b5def30b-0648-4c0c-8602-2a8d4363b36b', '2026-03-31 15:09:54.637', '2026-04-06 01:51:58.180', 'Portable', 'portable', 'Category'),
+('4092044f-df39-452f-a7b8-ae1648c78b6b', '8cf82b55-a985-4a5f-83ff-0484ffcdf5c5', '059516df-7497-420c-9ba6-6fb9d04d0ee4', '2026-03-31 15:18:31.589', '2026-04-06 01:52:06.823', 'Powered Stereo', 'powered-stereo', 'Category'),
 ('4224f6fc-86ef-41c4-85e5-95b123bcf8ca', 'f33a3fca-2a2c-4913-8ec9-9a98946ba7b1', '49abbb86-f7a6-4d61-a57e-278991a31f30', '2026-03-31 15:10:21.507', '2026-03-31 15:10:21.507', 'Party Series', 'party-series', 'Sub Category'),
 ('43236125-930a-427e-a915-71857d019e61', 'cd34c76d-1738-4a80-be66-0e51d7da6693', '49abbb86-f7a6-4d61-a57e-278991a31f30', '2026-03-31 15:29:10.357', '2026-03-31 15:29:10.357', 'Party Series', 'party-series', 'Sub Category'),
-('47c94c2a-8ec9-45b2-8191-53a15a7fe7c2', '3c1f02e6-80d0-42e3-85e2-303261105341', '059516df-7497-420c-9ba6-6fb9d04d0ee4', '2026-03-31 15:13:35.315', '2026-03-31 15:13:35.315', 'Powered Stereo', 'powered-stereo', 'Category'),
+('47c94c2a-8ec9-45b2-8191-53a15a7fe7c2', '3c1f02e6-80d0-42e3-85e2-303261105341', '059516df-7497-420c-9ba6-6fb9d04d0ee4', '2026-03-31 15:13:35.315', '2026-04-06 01:52:06.823', 'Powered Stereo', 'powered-stereo', 'Category'),
 ('505e47dd-0ad1-4226-9c92-18c7a7350bd9', '3c1f02e6-80d0-42e3-85e2-303261105341', '4f4f59f5-1904-4ba3-bac6-149a991a4c64', '2026-03-31 15:13:35.318', '2026-03-31 15:13:35.318', 'Bass Series', 'bass-series', 'Sub Category'),
 ('509078e9-cf83-4cb7-97a2-fc6b0b02a55f', '8cf82b55-a985-4a5f-83ff-0484ffcdf5c5', '4f4f59f5-1904-4ba3-bac6-149a991a4c64', '2026-03-31 15:18:31.591', '2026-03-31 15:18:31.591', 'Bass Series', 'bass-series', 'Sub Category'),
 ('5b9d3c33-8342-4166-aa2d-fa54e4d530db', '6e7c0a0f-be33-4490-826c-814a59048eb5', '705cbf21-1e44-4f8f-ae0e-39d568369e8a', '2026-03-31 15:06:31.095', '2026-03-31 16:02:58.494', 'PA Series', 'pa-series', 'Sub Category'),
-('5d8a35a1-de80-4d66-8bc8-d4a71a8f5882', 'a8887af0-547d-42e1-8cca-779cf1841ed5', '059516df-7497-420c-9ba6-6fb9d04d0ee4', '2026-03-31 15:17:50.589', '2026-03-31 15:17:50.589', 'Powered Stereo', 'powered-stereo', 'Category'),
-('65156752-611d-482f-9333-966557ec5349', 'a4c4828a-80c1-4698-be71-892994e657df', '059516df-7497-420c-9ba6-6fb9d04d0ee4', '2026-03-31 15:13:16.242', '2026-03-31 15:13:16.242', 'Powered Stereo', 'powered-stereo', 'Category'),
-('6826948f-bb12-44f7-9df2-b8fd003b6f95', '8403ceac-7570-475d-81df-82586ff41921', '059516df-7497-420c-9ba6-6fb9d04d0ee4', '2026-03-31 15:17:02.896', '2026-03-31 15:17:02.896', 'Powered Stereo', 'powered-stereo', 'Category'),
+('5d8a35a1-de80-4d66-8bc8-d4a71a8f5882', 'a8887af0-547d-42e1-8cca-779cf1841ed5', '059516df-7497-420c-9ba6-6fb9d04d0ee4', '2026-03-31 15:17:50.589', '2026-04-06 01:52:06.823', 'Powered Stereo', 'powered-stereo', 'Category'),
+('65156752-611d-482f-9333-966557ec5349', 'a4c4828a-80c1-4698-be71-892994e657df', '059516df-7497-420c-9ba6-6fb9d04d0ee4', '2026-03-31 15:13:16.242', '2026-04-06 01:52:06.823', 'Powered Stereo', 'powered-stereo', 'Category'),
+('6826948f-bb12-44f7-9df2-b8fd003b6f95', '8403ceac-7570-475d-81df-82586ff41921', '059516df-7497-420c-9ba6-6fb9d04d0ee4', '2026-03-31 15:17:02.896', '2026-04-06 01:52:06.823', 'Powered Stereo', 'powered-stereo', 'Category'),
 ('78d5bc7b-7e68-4a4f-b552-1827d3a6122c', '3847c27a-f9f3-4c62-9213-8f4072e62117', '3f7a7f28-0faf-40f2-b266-1528a4445b68', '2026-03-31 15:21:46.462', '2026-03-31 15:21:46.462', 'Monster Series', 'monster-series', 'Sub Category'),
 ('7c10230f-dc0e-4b6c-9edd-8bf52d25971e', 'a8887af0-547d-42e1-8cca-779cf1841ed5', '4f4f59f5-1904-4ba3-bac6-149a991a4c64', '2026-03-31 15:17:50.591', '2026-03-31 15:17:50.591', 'Bass Series', 'bass-series', 'Sub Category'),
 ('7d69729f-bf91-4c9c-afd1-627006ef2133', 'a4c4828a-80c1-4698-be71-892994e657df', '4f4f59f5-1904-4ba3-bac6-149a991a4c64', '2026-03-31 15:13:16.245', '2026-03-31 15:13:16.245', 'Bass Series', 'bass-series', 'Sub Category'),
-('7dc00797-9afb-4bc3-897c-af6b94df5e6b', '3847c27a-f9f3-4c62-9213-8f4072e62117', '059516df-7497-420c-9ba6-6fb9d04d0ee4', '2026-03-31 15:21:46.460', '2026-03-31 15:21:46.460', 'Powered Stereo', 'powered-stereo', 'Category'),
+('7dc00797-9afb-4bc3-897c-af6b94df5e6b', '3847c27a-f9f3-4c62-9213-8f4072e62117', '059516df-7497-420c-9ba6-6fb9d04d0ee4', '2026-03-31 15:21:46.460', '2026-04-06 01:52:06.823', 'Powered Stereo', 'powered-stereo', 'Category'),
 ('82532671-a297-4eb2-ae84-3f9784829bb2', '57777133-51e7-4ae8-b0de-fee20edce0cc', '488f1247-3dc3-4071-9945-f3317236c1a1', '2026-03-31 15:19:50.787', '2026-03-31 15:19:50.787', 'KD Pro Series', 'kd-pro-series', 'Sub Category'),
-('84881e8a-24f9-4ec7-a9a1-52ef9eb5ce85', '4e49b2aa-2eb2-4ae4-93af-7729e23fa404', 'b5def30b-0648-4c0c-8602-2a8d4363b36b', '2026-03-31 15:09:29.172', '2026-03-31 15:09:29.172', 'Portable', 'portable', 'Category'),
+('84881e8a-24f9-4ec7-a9a1-52ef9eb5ce85', '4e49b2aa-2eb2-4ae4-93af-7729e23fa404', 'b5def30b-0648-4c0c-8602-2a8d4363b36b', '2026-03-31 15:09:29.172', '2026-04-06 01:51:58.180', 'Portable', 'portable', 'Category'),
 ('8c899b10-4bee-441e-9cc3-8c5ac1ab47dc', '5826462f-b495-4df7-a21f-bbf19b981a48', '9945a47f-0755-4f8c-b421-434c7f733f66', '2026-03-31 15:12:02.370', '2026-03-31 16:02:54.087', 'Probeat Series', 'probeat-series', 'Sub Category'),
-('8d312cc8-7225-4da4-b9e1-b4346c840c72', '9ab06c62-3e47-4751-abf9-9c2a96d70421', 'b5def30b-0648-4c0c-8602-2a8d4363b36b', '2026-03-31 15:03:57.014', '2026-03-31 15:03:57.014', 'Portable', 'portable', 'Category'),
+('8d312cc8-7225-4da4-b9e1-b4346c840c72', '9ab06c62-3e47-4751-abf9-9c2a96d70421', 'b5def30b-0648-4c0c-8602-2a8d4363b36b', '2026-03-31 15:03:57.014', '2026-04-06 01:51:58.180', 'Portable', 'portable', 'Category'),
 ('8f5795b6-ce32-41ef-9812-90676cd09619', '95a8386d-0151-4ef5-9b7a-23f2988ffbd8', '488f1247-3dc3-4071-9945-f3317236c1a1', '2026-03-31 15:19:20.279', '2026-03-31 15:19:20.279', 'KD Pro Series', 'kd-pro-series', 'Sub Category'),
 ('8fcdfcfb-bf79-4239-8fe4-23313461ecd3', '15a9bc11-1dfb-49c5-8a06-8836d35f9921', '821782fa-eede-4710-9d67-f803cc56be3b', '2026-03-31 15:27:04.621', '2026-03-31 15:27:04.621', 'Minion', 'minion', 'Sub Category'),
 ('9391cbb2-1720-4d18-befd-58690402edfa', 'ee550140-1522-4320-8790-b868ce5b74f3', '9945a47f-0755-4f8c-b421-434c7f733f66', '2026-03-31 15:11:37.282', '2026-03-31 16:02:54.087', 'Probeat Series', 'probeat-series', 'Sub Category'),
 ('95345109-bfe9-4665-a8a2-559adb8dc723', '9ab06c62-3e47-4751-abf9-9c2a96d70421', '705cbf21-1e44-4f8f-ae0e-39d568369e8a', '2026-03-31 15:03:57.017', '2026-03-31 16:02:58.494', 'PA Series', 'pa-series', 'Sub Category'),
 ('9b0d5fd4-8bc2-4da8-9824-b7b0a364c4c8', '83d4e98c-e184-4c24-978e-0f6d0aafffbc', '705cbf21-1e44-4f8f-ae0e-39d568369e8a', '2026-03-31 15:05:41.667', '2026-03-31 16:02:58.494', 'PA Series', 'pa-series', 'Sub Category'),
-('9c04946b-9b96-41c2-8499-43782daf5636', '9be101d2-1c34-450b-a0dd-01cf009c560e', '059516df-7497-420c-9ba6-6fb9d04d0ee4', '2026-03-31 15:13:03.721', '2026-03-31 15:13:03.721', 'Powered Stereo', 'powered-stereo', 'Category'),
+('9c04946b-9b96-41c2-8499-43782daf5636', '9be101d2-1c34-450b-a0dd-01cf009c560e', '059516df-7497-420c-9ba6-6fb9d04d0ee4', '2026-03-31 15:13:03.721', '2026-04-06 01:52:06.823', 'Powered Stereo', 'powered-stereo', 'Category'),
 ('9f1bacb8-056d-4dc9-ae09-c67b8f319705', '4e49b2aa-2eb2-4ae4-93af-7729e23fa404', '49abbb86-f7a6-4d61-a57e-278991a31f30', '2026-03-31 15:09:29.176', '2026-03-31 15:09:29.176', 'Party Series', 'party-series', 'Sub Category'),
-('a0fdca77-1a33-42df-901b-8f188ef03ae1', 'ee550140-1522-4320-8790-b868ce5b74f3', '0625a69d-efa3-4d80-a69e-a42aaeb4ecbd', '2026-03-31 15:11:37.280', '2026-03-31 15:11:37.280', 'Powered Tower', 'powered-tower', 'Category'),
-('a6ccbad7-bb1c-4204-8449-8d5ad0575968', '6e7c0a0f-be33-4490-826c-814a59048eb5', 'b5def30b-0648-4c0c-8602-2a8d4363b36b', '2026-03-31 15:06:31.093', '2026-03-31 15:06:31.093', 'Portable', 'portable', 'Category'),
-('ab27574c-b6ea-4f5e-8e76-c357567ee614', '4dc849b5-3796-4ba4-8878-c194953a9fa3', 'b5def30b-0648-4c0c-8602-2a8d4363b36b', '2026-03-31 15:04:57.797', '2026-03-31 15:04:57.797', 'Portable', 'portable', 'Category'),
-('b1a87d19-1819-458a-acd7-ae4749182665', 'd1e7baa1-7ce6-4720-9530-30b84eb97c31', 'b5def30b-0648-4c0c-8602-2a8d4363b36b', '2026-03-31 15:09:05.033', '2026-03-31 15:09:05.033', 'Portable', 'portable', 'Category'),
+('a0fdca77-1a33-42df-901b-8f188ef03ae1', 'ee550140-1522-4320-8790-b868ce5b74f3', '0625a69d-efa3-4d80-a69e-a42aaeb4ecbd', '2026-03-31 15:11:37.280', '2026-04-06 01:51:49.148', 'Powered Tower', 'powered-tower', 'Category'),
+('a6ccbad7-bb1c-4204-8449-8d5ad0575968', '6e7c0a0f-be33-4490-826c-814a59048eb5', 'b5def30b-0648-4c0c-8602-2a8d4363b36b', '2026-03-31 15:06:31.093', '2026-04-06 01:51:58.180', 'Portable', 'portable', 'Category'),
+('ab27574c-b6ea-4f5e-8e76-c357567ee614', '4dc849b5-3796-4ba4-8878-c194953a9fa3', 'b5def30b-0648-4c0c-8602-2a8d4363b36b', '2026-03-31 15:04:57.797', '2026-04-06 01:51:58.180', 'Portable', 'portable', 'Category'),
+('b1a87d19-1819-458a-acd7-ae4749182665', 'd1e7baa1-7ce6-4720-9530-30b84eb97c31', 'b5def30b-0648-4c0c-8602-2a8d4363b36b', '2026-03-31 15:09:05.033', '2026-04-06 01:51:58.180', 'Portable', 'portable', 'Category'),
 ('b22db062-23df-4fdc-a17f-dddcff0d8d2d', '4dc849b5-3796-4ba4-8878-c194953a9fa3', '705cbf21-1e44-4f8f-ae0e-39d568369e8a', '2026-03-31 15:04:57.800', '2026-03-31 16:02:58.494', 'PA Series', 'pa-series', 'Sub Category'),
-('b28762f9-9c58-434e-915c-d283d09d5fef', '95a8386d-0151-4ef5-9b7a-23f2988ffbd8', '059516df-7497-420c-9ba6-6fb9d04d0ee4', '2026-03-31 15:19:20.277', '2026-03-31 15:19:20.277', 'Powered Stereo', 'powered-stereo', 'Category'),
+('b28762f9-9c58-434e-915c-d283d09d5fef', '95a8386d-0151-4ef5-9b7a-23f2988ffbd8', '059516df-7497-420c-9ba6-6fb9d04d0ee4', '2026-03-31 15:19:20.277', '2026-04-06 01:52:06.823', 'Powered Stereo', 'powered-stereo', 'Category'),
 ('b6600cd3-919d-478b-b24d-ac17c98939b0', '9a390596-9761-4552-b9aa-71904a27803b', '4f4f59f5-1904-4ba3-bac6-149a991a4c64', '2026-03-31 15:13:23.825', '2026-03-31 15:13:23.825', 'Bass Series', 'bass-series', 'Sub Category'),
 ('b8946dce-3179-4ebc-8239-b1e925a247e6', '8403ceac-7570-475d-81df-82586ff41921', '4f4f59f5-1904-4ba3-bac6-149a991a4c64', '2026-03-31 15:17:02.899', '2026-03-31 15:17:02.899', 'Bass Series', 'bass-series', 'Sub Category'),
-('b939eec7-da35-4db0-9994-051a967f86fb', '5826462f-b495-4df7-a21f-bbf19b981a48', '0625a69d-efa3-4d80-a69e-a42aaeb4ecbd', '2026-03-31 15:12:02.366', '2026-03-31 15:12:02.366', 'Powered Tower', 'powered-tower', 'Category'),
+('b939eec7-da35-4db0-9994-051a967f86fb', '5826462f-b495-4df7-a21f-bbf19b981a48', '0625a69d-efa3-4d80-a69e-a42aaeb4ecbd', '2026-03-31 15:12:02.366', '2026-04-06 01:51:49.148', 'Powered Tower', 'powered-tower', 'Category'),
 ('bbfb6bba-cab5-4651-95ac-feafe3fad2c3', 'd1e7baa1-7ce6-4720-9530-30b84eb97c31', '49abbb86-f7a6-4d61-a57e-278991a31f30', '2026-03-31 15:09:05.036', '2026-03-31 15:09:05.036', 'Party Series', 'party-series', 'Sub Category'),
-('c930d01c-797a-4136-8907-858a781dc064', '9a390596-9761-4552-b9aa-71904a27803b', '059516df-7497-420c-9ba6-6fb9d04d0ee4', '2026-03-31 15:13:23.823', '2026-03-31 15:13:23.823', 'Powered Stereo', 'powered-stereo', 'Category'),
-('d14c9344-0ca8-4d4f-a01f-3a8a431667f4', 'cd34c76d-1738-4a80-be66-0e51d7da6693', 'b5def30b-0648-4c0c-8602-2a8d4363b36b', '2026-03-31 15:29:10.355', '2026-03-31 15:29:10.355', 'Portable', 'portable', 'Category'),
-('d2c8f337-8794-42e6-87b5-55afd769efd1', '83d4e98c-e184-4c24-978e-0f6d0aafffbc', 'b5def30b-0648-4c0c-8602-2a8d4363b36b', '2026-03-31 15:05:41.665', '2026-03-31 15:05:41.665', 'Portable', 'portable', 'Category'),
-('e13d5fb9-8c77-4eff-81ec-8f7a1e4958a3', '57777133-51e7-4ae8-b0de-fee20edce0cc', '059516df-7497-420c-9ba6-6fb9d04d0ee4', '2026-03-31 15:19:50.782', '2026-03-31 15:19:50.782', 'Powered Stereo', 'powered-stereo', 'Category'),
+('c930d01c-797a-4136-8907-858a781dc064', '9a390596-9761-4552-b9aa-71904a27803b', '059516df-7497-420c-9ba6-6fb9d04d0ee4', '2026-03-31 15:13:23.823', '2026-04-06 01:52:06.823', 'Powered Stereo', 'powered-stereo', 'Category'),
+('d14c9344-0ca8-4d4f-a01f-3a8a431667f4', 'cd34c76d-1738-4a80-be66-0e51d7da6693', 'b5def30b-0648-4c0c-8602-2a8d4363b36b', '2026-03-31 15:29:10.355', '2026-04-06 01:51:58.180', 'Portable', 'portable', 'Category'),
+('d2c8f337-8794-42e6-87b5-55afd769efd1', '83d4e98c-e184-4c24-978e-0f6d0aafffbc', 'b5def30b-0648-4c0c-8602-2a8d4363b36b', '2026-03-31 15:05:41.665', '2026-04-06 01:51:58.180', 'Portable', 'portable', 'Category'),
+('e13d5fb9-8c77-4eff-81ec-8f7a1e4958a3', '57777133-51e7-4ae8-b0de-fee20edce0cc', '059516df-7497-420c-9ba6-6fb9d04d0ee4', '2026-03-31 15:19:50.782', '2026-04-06 01:52:06.823', 'Powered Stereo', 'powered-stereo', 'Category'),
 ('e4877eea-23ac-43c5-b69e-7021379b7722', '0fc1bf44-b61d-4991-9403-0b0ecef8c791', '49abbb86-f7a6-4d61-a57e-278991a31f30', '2026-03-31 15:09:54.640', '2026-03-31 15:09:54.640', 'Party Series', 'party-series', 'Sub Category'),
-('f740e82d-f7c3-488f-aa43-3526b71a1478', '5a4b4994-bb7c-4ef5-9f7f-0764fde8cbe1', 'b5def30b-0648-4c0c-8602-2a8d4363b36b', '2026-03-31 15:10:57.068', '2026-03-31 15:10:57.068', 'Portable', 'portable', 'Category'),
+('f740e82d-f7c3-488f-aa43-3526b71a1478', '5a4b4994-bb7c-4ef5-9f7f-0764fde8cbe1', 'b5def30b-0648-4c0c-8602-2a8d4363b36b', '2026-03-31 15:10:57.068', '2026-04-06 01:51:58.180', 'Portable', 'portable', 'Category'),
 ('fa8cf262-1527-4db2-b079-a4de0baa9f84', '9be101d2-1c34-450b-a0dd-01cf009c560e', '4f4f59f5-1904-4ba3-bac6-149a991a4c64', '2026-03-31 15:13:03.723', '2026-03-31 15:13:03.723', 'Bass Series', 'bass-series', 'Sub Category');
 
 -- --------------------------------------------------------
