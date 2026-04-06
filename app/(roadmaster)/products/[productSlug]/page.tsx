@@ -133,7 +133,7 @@ export default async function ProductPage({
         {/* Breadcrumb */}
         <div className="pt-24 px-4 sm:px-6 lg:px-8">
           <div className="max-w-6xl mx-auto">
-            <div className="flex items-center gap-2 text-sm text-foreground/70 mb-8">
+            <div className="flex items-center gap-2 text-sm text-foreground">
               <Link href="/" className="hover:text-accent">Home</Link>
               <span>/</span>
               <Link href="/category" className="hover:text-accent">Products</Link>
@@ -144,7 +144,7 @@ export default async function ProductPage({
         </div>
 
         {/* Product Details Section */}
-        <section className="px-4 sm:px-6 lg:px-8 bg-white">
+        <section className="px-4 sm:px-6 lg:px-8 py-8">
           <div className="max-w-6xl mx-auto">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
               {/* Product Image */}
@@ -177,7 +177,7 @@ export default async function ProductPage({
         </section>
 
 
-        <div className='bg-background'>
+        <div className='bg-foreground/5'>
           <div className="md:py-20 py-10 px-4 sm:px-6 lg:px-8 ">
             <div className="max-w-6xl mx-auto">
               {specsCombined && specsCombined.length > 0 &&
