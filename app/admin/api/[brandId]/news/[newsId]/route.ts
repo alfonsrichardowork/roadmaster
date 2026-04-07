@@ -64,7 +64,7 @@ export async function PATCH(
 
     const body = await req.json();
 
-    const { news_img, event_date, title, description } = body;
+    const { news_img, event_date, title, description, title_eng, description_eng } = body;
 
     if (!params.newsId) {
       return new NextResponse("News id is required", { status: 400 });
@@ -111,6 +111,9 @@ export async function PATCH(
           title,
           slug: slugify(title),
           description,
+          title_eng,
+          slug_eng: slugify(title_eng),
+          description_eng,
           updatedAt: new Date(),
           updatedBy: session.name ?? '',
         },
@@ -126,6 +129,9 @@ export async function PATCH(
           news_img,
           slug: slugify(title),
           description,
+          title_eng,
+          slug_eng: slugify(title_eng),
+          description_eng,
           updatedAt: new Date(),
           createdAt: new Date(),
           updatedBy: session.name ?? '',

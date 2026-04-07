@@ -27,7 +27,7 @@ export async function POST(req: Request) {
 
     const body = await req.json();
 
-    const { name, unit } = body;
+    const { name, name_eng, unit } = body;
 
     if (!name) {
       return new NextResponse("Name is required", { status: 400 });
@@ -36,6 +36,7 @@ export async function POST(req: Request) {
     const duplicates = await prismadb.dynamicspecification.findFirst({
       where:{
         name,
+        name_eng
       }
     })
 
@@ -47,6 +48,8 @@ export async function POST(req: Request) {
       data: {
         name,
         slug: slugify(name),
+        name_eng,
+        slug_eng: slugify(name_eng),
         unit,
         priority: '999',
         updatedBy: session.name ?? '',

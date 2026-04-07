@@ -55,7 +55,7 @@ export async function PATCH(
 
     const body = await req.json();
 
-    const { featured_img, isFeatured, featuredDesc } = body;
+    const { featured_img, isFeatured, featuredDesc, featuredDesc_eng } = body;
 
     if (!params.featuredProductId) {
       return new NextResponse("Product id is required", { status: 400 });
@@ -104,6 +104,7 @@ export async function PATCH(
       data: {
         isFeatured,
         featuredDesc,
+        featuredDesc_eng,
         featured_img,
         updatedAt: new Date(),
         updatedBy: session.name,

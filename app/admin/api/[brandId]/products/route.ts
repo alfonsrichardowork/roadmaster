@@ -23,7 +23,7 @@ export async function POST(req: Request, props: { params: Promise<{ brandId: str
 
     const body = await req.json();
 
-    const { name, description, cover_img } = body;
+    const { name, description, description_eng, cover_img } = body;
 
     if (!name) {
       return new NextResponse("Name is required", { status: 400 });
@@ -52,10 +52,12 @@ export async function POST(req: Request, props: { params: Promise<{ brandId: str
       data: {
         name,
         description,
+        description_eng,
         brandId: params.brandId,
         slug: slugify(name),
         cover_img,
         featuredDesc: '',
+        featuredDesc_eng: '',
         createdAt: new Date(),
         updatedAt: new Date(),
         updatedBy: session.name ?? '',

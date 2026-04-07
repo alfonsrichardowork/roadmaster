@@ -46,6 +46,7 @@ const formSchema = z.object({
   name: z.string().min(1),
   new_product: z.boolean().optional(),
   description: z.string().min(0).optional(),
+  description_eng: z.string().min(0).optional(),
   isArchived: z.boolean().optional(),
   isFeatured: z.boolean().optional(),
   cover_img: z.string().optional()
@@ -81,6 +82,7 @@ export const ProductForm: React.FC<ProductFormProps> = ({
       isArchived: false,
       isFeatured: false,
       description: '',
+      description_eng: '',
       cover_img: ''
     }
   });
@@ -137,7 +139,13 @@ export const ProductForm: React.FC<ProductFormProps> = ({
     return '';
   }
 
-const editor = useEditor({
+const cleanHTML = initialData?.description
+    ?.replace(/<pre><code>/gi, '<p>')
+    ?.replace(/<\/code><\/pre>/gi, '</p>')
+    ?.replace(/<pre>/gi, '<p>')
+    ?.replace(/<\/pre>/gi, '</p>')
+  
+  const editor = useEditor({
     immediatelyRender: false,
     extensions: [
       StarterKit,
@@ -215,7 +223,96 @@ const editor = useEditor({
         class: 'prose prose-sm sm:prose-base lg:prose-lg xl:prose-2xl m-5 focus:outline-hidden',
       },
     },
-    content: initialData?.description ? initialData.description : '<p></p>',
+    content: cleanHTML ? cleanHTML : '<p></p>',
+  });
+
+
+
+  const cleanHTMLEnglish = initialData?.description_eng
+    ?.replace(/<pre><code>/gi, '<p>')
+    ?.replace(/<\/code><\/pre>/gi, '</p>')
+    ?.replace(/<pre>/gi, '<p>')
+    ?.replace(/<\/pre>/gi, '</p>')
+
+  const editorEnglish = useEditor({
+    immediatelyRender: false,
+    extensions: [
+      StarterKit,
+      HeadingTiptap.configure({
+        levels: [1, 2, 3, 4, 5, 6],
+      }),
+      ImageTiptap,
+      BulletList,
+      OrderedList,
+      LinkTiptap.configure({
+        openOnClick: false,
+        autolink: true,
+        defaultProtocol: 'https',
+        protocols: ['http', 'https'],
+        isAllowedUri: (url: string, ctx:any) => {
+          try {
+            // construct URL
+            const parsedUrl = url.includes(':') ? new URL(url) : new URL(`${ctx.defaultProtocol}://${url}`)
+
+            // use default validation
+            if (!ctx.defaultValidate(parsedUrl.href)) {
+              return false
+            }
+
+            // disallowed protocols
+            const disallowedProtocols = ['ftp', 'file', 'mailto']
+            const protocol = parsedUrl.protocol.replace(':', '')
+
+            if (disallowedProtocols.includes(protocol)) {
+              return false
+            }
+
+            // only allow protocols specified in ctx.protocols
+            const allowedProtocols = ctx.protocols.map((p: string | { scheme: string }) => (typeof p === 'string' ? p : p.scheme))
+
+            if (!allowedProtocols.includes(protocol)) {
+              return false
+            }
+
+            // disallowed domains
+            const disallowedDomains = ['example-phishing.com', 'malicious-site.net']
+            const domain = parsedUrl.hostname
+
+            if (disallowedDomains.includes(domain)) {
+              return false
+            }
+
+            // all checks have passed
+            return true
+          } catch (error) {
+            return false
+          }
+        },
+        shouldAutoLink: url => {
+          try {
+            // construct URL
+            const parsedUrl = url.includes(':') ? new URL(url) : new URL(`https://${url}`)
+
+            // only auto-link if the domain is not in the disallowed list
+            const disallowedDomains = ['example-no-autolink.com', 'another-no-autolink.com']
+            const domain = parsedUrl.hostname
+
+            return !disallowedDomains.includes(domain)
+          } catch (error) {
+            return false
+          }
+        },
+
+      }),
+      Text,
+      TextStyle,
+    ],
+    editorProps: {
+      attributes: {
+        class: 'prose prose-sm sm:prose-base lg:prose-lg xl:prose-2xl m-5 focus:outline-hidden',
+      },
+    },
+    content: cleanHTMLEnglish ? cleanHTMLEnglish : '<p></p>',
   });
 
   const onSubmit = async (data: ProductFormValues) => {
@@ -234,6 +331,13 @@ const editor = useEditor({
       }
       else {
         data.description = '<p></p>'
+      }
+      
+      if (editorEnglish && editorEnglish.getHTML() && editorEnglish.getHTML() !== '<p></p>') {
+        data.description_eng = editorEnglish.getHTML();
+      }
+      else {
+        data.description_eng = '<p></p>'
       }
 
       let response: AxiosResponse;
@@ -298,7 +402,23 @@ const editor = useEditor({
     editor.chain().focus().extendMarkRange('link').setLink({ href: url }).run()
   }, [editor])
 
-  if (!editor) return null
+  const setLinkEnglish = useCallback(() => {
+    if (!editorEnglish) return
+
+    const previousUrl = editorEnglish.getAttributes('link').href
+    const url = window.prompt('URL', previousUrl)
+
+    if (url === null) return
+
+    if (url === '') {
+      editorEnglish.chain().focus().extendMarkRange('link').unsetLink().run()
+      return
+    }
+
+    editorEnglish.chain().focus().extendMarkRange('link').setLink({ href: url }).run()
+  }, [editorEnglish])
+
+  if (!editor || !editorEnglish) return null
 
   return (
     <>
@@ -438,6 +558,94 @@ const editor = useEditor({
                           /> */}
 
                         <EditorContent editor={editor} className="border p-4"/>
+                        </div>
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="description_eng"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel className="text-left font-bold text-base">Description (English)</FormLabel>
+                    <FormDescription></FormDescription>
+                    <FormControl>
+                      {/* <Textarea disabled={loading} placeholder="Product description" {...field} /> */}
+                      <div className="border-2 rounded-lg p-2">
+                        <div className="flex gap-2 mb-4 flex-wrap">
+                          <Toggle
+                            pressed={editorEnglish.isActive('bold')}
+                            onClick={() => editorEnglish.chain().focus().toggleBold().run()}
+                          >
+                            <Bold className="w-4 h-4" />
+                          </Toggle>
+                          <Toggle
+                            pressed={editorEnglish.isActive('italic')}
+                            onClick={() => editorEnglish.chain().focus().toggleItalic().run()}
+                          >
+                            <Italic className="w-4 h-4" />
+                          </Toggle>
+                          <Toggle
+                            pressed={editorEnglish.isActive('strike')}
+                            onClick={() => editorEnglish.chain().focus().toggleStrike().run()}
+                          >
+                            <Strikethrough className="w-4 h-4" />
+                          </Toggle>
+                          <Toggle
+                            pressed={editorEnglish.isActive('bulletList')}
+                            onClick={() => editorEnglish.chain().focus().toggleBulletList().run()}
+                          >
+                            <List className="w-4 h-4" />
+                          </Toggle>
+                          <Toggle
+                            pressed={editorEnglish.isActive('orderedList')}
+                            onClick={() => editorEnglish.chain().focus().toggleOrderedList().run()}
+                          >
+                            <ListOrdered className="w-4 h-4" />
+                          </Toggle>
+                          {[1, 2, 3, 4, 5, 6].map((level) => (
+                            <Toggle
+                              key={level}
+                              pressed={editorEnglish.isActive('heading', { level })}
+                              onClick={() => editorEnglish.chain().focus().toggleHeading({ level: level as 1 | 2 | 3 | 4 | 5 | 6 }).run()}
+                            >
+                              {level === 1 && <Heading1 className="w-4 h-4" />}
+                              {level === 2 && <Heading2 className="w-4 h-4" />}
+                              {level === 3 && <Heading3 className="w-4 h-4" />}
+                              {level === 4 && <Heading4 className="w-4 h-4" />}
+                              {level === 5 && <Heading5 className="w-4 h-4" />}
+                              {level === 6 && <Heading6 className="w-4 h-4" />}
+                            </Toggle>
+                          ))}
+                          
+                          <Toggle
+                            pressed={editorEnglish.isActive('link')}
+                            onClick={setLinkEnglish}
+                          >
+                              <LucideLink className="w-4 h-4" />
+                          </Toggle>
+                          <Toggle
+                            pressed={!editorEnglish.isActive('link')}
+                            onClick={() => editorEnglish.chain().focus().unsetLink().run()}
+                          >
+                              <LucideUnlink className="w-4 h-4" />
+                          </Toggle>
+                        </div>
+                          
+                          {/* <Input  
+                            id={`file`}
+                            type="file"
+                            accept="image/*"
+                            name="file"
+                            onChange={(e) =>
+                              e.target.files && handleFileChangeTiptap(e)
+                            }
+                            className="border border-gray-300 p-2 rounded-md"
+                          /> */}
+
+                        <EditorContent editor={editorEnglish} className="border p-4"/>
                         </div>
                     </FormControl>
                     <FormMessage />

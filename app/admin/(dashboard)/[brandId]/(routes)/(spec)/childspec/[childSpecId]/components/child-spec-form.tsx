@@ -18,6 +18,7 @@ import { Button } from "@/components/ui/button"
 
 const formSchema = z.object({
   name: z.string().min(1),
+  name_eng: z.string().min(1),
   unit: z.string().optional(),
 });
 
@@ -43,6 +44,7 @@ export const ChildSpecForm: React.FC<ChildSpecFormProps> = ({
     ...initialData,
   } : {
     name: '',
+    name_eng: '',
     unit: '',
   }
 
@@ -116,6 +118,21 @@ export const ChildSpecForm: React.FC<ChildSpecFormProps> = ({
                     <FormLabel className="font-bold text-base">Name</FormLabel>
                     <FormControl>
                       <Input disabled={loading} placeholder="Child Specification name" className="border-foreground" {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            </div>
+            <div className="pb-2">
+              <FormField
+                control={form.control}
+                name="name_eng"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel className="font-bold text-base">Name (English)</FormLabel>
+                    <FormControl>
+                      <Input disabled={loading} placeholder="Child Specification name (English)" className="border-foreground" {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>

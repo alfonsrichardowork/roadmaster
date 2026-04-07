@@ -35,14 +35,11 @@ export async function POST(
     for (const item of body) {
       const { 
         id,
-        brandId,
         type,
         name,
         slug,
-        description,
-        thumbnail_url,
-        createdAt,
-        updatedAt
+        name_eng,
+        slug_eng,
       } = item;
     
       const allproductcategory = await prismadb.allproductcategory.create({
@@ -52,6 +49,8 @@ export async function POST(
           type,
           name,
           slug,
+          name_eng,
+          slug_eng,
           createdAt: new Date(),
           updatedAt: new Date(),
         }
@@ -210,14 +209,11 @@ export async function PATCH(
     for (const item of body) {
       const { 
         id,
-        brandId,
         type,
         name,
         slug,
-        description,
-        thumbnail_url,
-        createdAt,
-        updatedAt
+        name_eng,
+        slug_eng,
       } = item;
       const allproductcategory = await prismadb.allproductcategory.create({
         data: {
@@ -226,6 +222,8 @@ export async function PATCH(
           type,
           name,
           slug,
+          name_eng,
+          slug_eng,
           createdAt: new Date(),
           updatedAt: new Date()
         }

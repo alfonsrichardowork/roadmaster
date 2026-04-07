@@ -17,6 +17,7 @@ import { Button } from "@/components/ui/button"
 
 const formSchema = z.object({
   name: z.string().min(1),
+  name_eng: z.string().min(1),
 });
 
 type SubParentSpecFormValues = z.infer<typeof formSchema>
@@ -41,6 +42,7 @@ export const SubParentSpecForm: React.FC<SubParentSpecFormProps> = ({
     ...initialData,
   } : {
     name: '',
+    name_eng: '',
   }
 
 
@@ -113,6 +115,21 @@ export const SubParentSpecForm: React.FC<SubParentSpecFormProps> = ({
                     <FormLabel className="font-bold text-base">Name</FormLabel>
                     <FormControl>
                       <Input disabled={loading} placeholder="Sub Parent Specification name" className="border-foreground" {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            </div>
+            <div className="pb-2">
+              <FormField
+                control={form.control}
+                name="name_eng"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel className="font-bold text-base">Name (English)</FormLabel>
+                    <FormControl>
+                      <Input disabled={loading} placeholder="Sub Parent Specification name (English)" className="border-foreground" {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>

@@ -118,10 +118,14 @@ export async function PATCH(
 
     const body = await req.json();
 
-    const { type, name, description, thumbnail_url } = body;
+    const { type, name, description, name_eng, description_eng, thumbnail_url } = body;
 
     if (!name) {
       return new NextResponse("Name is required", { status: 400 });
+    }
+
+    if (!name_eng) {
+      return new NextResponse("English Name is required", { status: 400 });
     }
 
     if (!params.subCategoryId) {
@@ -139,6 +143,7 @@ export async function PATCH(
       },
       select:{
         name: true,
+        name_eng: true,
         thumbnail_url: true
       }
     })
@@ -154,7 +159,7 @@ export async function PATCH(
         }
       }
 
-      if(initial.name ===  name){
+      if(initial.name ===  name || initial.name_eng === name_eng){
 
         await prismadb.allcategory.update({
           where: {
@@ -165,6 +170,9 @@ export async function PATCH(
             name,
             slug: slugify(name),
             description,
+            name_eng,
+            slug_eng: slugify(name_eng),
+            description_eng,
             thumbnail_url,
             updatedAt: new Date(),
             updatedBy: session.name ?? '',
@@ -179,7 +187,9 @@ export async function PATCH(
           data:{
             name,
             updatedAt: new Date(),
-            slug: slugify(name)
+            slug: slugify(name),
+            name_eng,
+            slug_eng: slugify(name_eng)
           }
         })
         return NextResponse.json("same")
@@ -189,6 +199,7 @@ export async function PATCH(
     const duplicates = await prismadb.allcategory.findFirst({
       where:{
         name,
+        name_eng,
         type,
         brandId: params.brandId
       }
@@ -207,6 +218,9 @@ export async function PATCH(
         name,
         slug: slugify(name),
         description,
+        name_eng,
+        slug_eng: slugify(name_eng),
+        description_eng,
         thumbnail_url,
         updatedAt: new Date(),
         updatedBy: session.name ?? '',
@@ -220,7 +234,9 @@ export async function PATCH(
       data:{
         name,
         updatedAt: new Date(),
-        slug: slugify(name)
+        slug: slugify(name),
+        name_eng,
+        slug_eng: slugify(name_eng)
       }
     })
   

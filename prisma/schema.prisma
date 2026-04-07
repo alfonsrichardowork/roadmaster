@@ -50,8 +50,10 @@ model product {
   name        String    @db.Text
   slug        String    @db.Text
   description String    @db.Text
+  description_eng String    @db.Text @default("")
   cover_img   String    @db.Text
   featuredDesc  String  @db.Text  
+  featuredDesc_eng  String  @db.Text  @default("")
   new_product  Boolean   @default(false)
   isFeatured  Boolean   @default(false)
   isArchived  Boolean   @default(false)
@@ -71,8 +73,11 @@ model news {
   brandId     String    // Foreign Key to Brand
   brand       brand     @relation("BrandToNews", fields: [brandId], references: [id])
   title       String    @db.Text
+  title_eng       String    @db.Text @default("")
   slug        String    @db.Text
+  slug_eng        String    @db.Text @default("")
   description String    @db.Text
+  description_eng String    @db.Text @default("")
   news_img    String    @db.Text  @default("")
   event_date  DateTime  @default(now())
   updatedBy   String    
@@ -90,6 +95,9 @@ model allcategory {
   name        String    @db.Text
   slug        String    @db.Text
   description String    @db.Text
+  name_eng        String    @db.Text @default("")
+  slug_eng        String    @db.Text @default("")
+  description_eng String    @db.Text @default("")
   thumbnail_url String  @db.Text
   updatedBy   String    
   // products    Product[] // Relation to Product model
@@ -108,6 +116,8 @@ model allproductcategory {
   type        String    //Category, Sub Category, Sub Sub Category
   name        String    @db.Text
   slug        String    @db.Text
+  name_eng        String    @db.Text @default("")
+  slug_eng        String    @db.Text @default("")
   createdAt   DateTime  @default(now())
   updatedAt   DateTime  @updatedAt
   
@@ -131,6 +141,8 @@ model specificationconnector {
   dynamicspecification     dynamicspecification     @relation("DynamicSpecificationToConnectorSpecification", fields: [dynamicspecificationId], references: [id])
   notes   String    @db.Text
   value   String    @db.Text
+  notes_eng   String    @db.Text @default("")
+  value_eng   String    @db.Text @default("")
 
   @@index([brandId])
   @@index([productId])
@@ -143,6 +155,8 @@ model dynamicspecificationparent {
   id        String    @id @default(uuid())
   name      String    @db.Text
   slug      String    @db.Text
+  name_eng      String    @db.Text @default("")
+  slug_eng      String    @db.Text @default("")
   priority  String    
   updatedBy   String    @db.Text  
   createdAt   DateTime  @default(now())
@@ -154,6 +168,8 @@ model dynamicspecificationsubparent {
   id        String    @id @default(uuid())
   name      String    @db.Text
   slug      String    @db.Text
+  name_eng      String    @db.Text @default("")
+  slug_eng      String    @db.Text @default("")
   priority  String    
   updatedBy   String    @db.Text  
   createdAt   DateTime  @default(now())
@@ -165,6 +181,8 @@ model dynamicspecification {
   id        String    @id @default(uuid())
   name      String    @db.Text
   slug      String    @db.Text
+  name_eng      String    @db.Text @default("")
+  slug_eng      String    @db.Text @default("")
   unit      String    @db.Text
   priority  String    
   updatedBy   String    @db.Text  

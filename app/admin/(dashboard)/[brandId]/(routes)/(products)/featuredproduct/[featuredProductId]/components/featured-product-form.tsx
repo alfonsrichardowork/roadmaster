@@ -33,6 +33,7 @@ import { MAX_SIZE } from "@/app/admin/model/model"
 const formSchema = z.object({
   name: z.string().min(1),
   featuredDesc: z.string().optional(),
+  featuredDesc_eng: z.string().optional(),
   featured_img: z.string().optional(),
   isFeatured: z.boolean().default(false).optional(),
 });
@@ -64,6 +65,7 @@ export const FeaturedProductForm: React.FC<FeaturedProductFormProps> = ({
   } : {
     name: '',
     featuredDesc: '',
+    featuredDesc_eng: '',
     featured_img: '',
     isFeatured: false,
   }
@@ -214,19 +216,34 @@ export const FeaturedProductForm: React.FC<FeaturedProductFormProps> = ({
             
             <div className=" rounded-lg p-4 shadow-lg bg-white/50 gap-4">
               <div className="pb-4">
-              <FormField
-                control={form.control}
-                name="featuredDesc"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel className="font-bold text-base">Featured Description</FormLabel>
-                    <FormControl>
-                      <Input disabled={loading} placeholder="Featured Products Descriptions" {...field} className="bg-white text-black"/>
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
+                <FormField
+                  control={form.control}
+                  name="featuredDesc"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel className="font-bold text-base">Featured Description (Indo)</FormLabel>
+                      <FormControl>
+                        <Input disabled={loading} placeholder="Featured Products Descriptions Indo" {...field} className="bg-white text-black"/>
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              </div>
+              <div className="pb-4">
+                <FormField
+                  control={form.control}
+                  name="featuredDesc_eng"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel className="font-bold text-base">Featured Description (English)</FormLabel>
+                      <FormControl>
+                        <Input disabled={loading} placeholder="Featured Products Descriptions English" {...field} className="bg-white text-black"/>
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
               </div>
               <FormField
                 control={form.control}

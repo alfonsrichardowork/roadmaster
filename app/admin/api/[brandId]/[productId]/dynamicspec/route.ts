@@ -38,14 +38,16 @@ export async function POST(
 
       const updatedconnector = await prismadb.specificationconnector.createMany({
         data: [
-          ...body.map((data: { dynamicspecificationParentId: string, dynamicspecificationSubParentId: string, dynamicspecificationId: string, value: string, notes: string }) => ({
+          ...body.map((data: { dynamicspecificationParentId: string, dynamicspecificationSubParentId: string, dynamicspecificationId: string, value: string, notes: string, value_eng: string, notes_eng: string }) => ({
             brandId: params.brandId,
             productId: params.productId,
             dynamicspecificationParentId: data.dynamicspecificationParentId,
             dynamicspecificationSubParentId: data.dynamicspecificationSubParentId ?? '',
             dynamicspecificationId: data.dynamicspecificationId,
             notes: data.notes ?? '',
-            value: data.value ?? ''
+            value: data.value ?? '',
+            notes_eng: data.notes_eng ?? '',
+            value_eng: data.value_eng ?? ''
           })),
         ],
       });

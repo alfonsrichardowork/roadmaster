@@ -97,7 +97,7 @@ export async function PATCH(
 
     const body = await req.json();
 
-    const { name } = body;
+    const { name, name_eng } = body;
 
     if (!params.subParentSpecId) {
       return new NextResponse("Sub Parent Specification id is required", { status: 400 });
@@ -107,6 +107,10 @@ export async function PATCH(
       return new NextResponse("Name is required", { status: 400 });
     }
 
+    if (!name_eng) {
+      return new NextResponse("English Name is required", { status: 400 });
+    }
+
     const initial = await prismadb.dynamicspecificationsubparent.findFirst({
       where:{
         id: params.subParentSpecId
@@ -114,7 +118,7 @@ export async function PATCH(
     })
 
     if(initial){
-      if(initial.name ===  name){
+      if(initial.name ===  name || initial.name_eng ===  name_eng){
         await prismadb.dynamicspecificationsubparent.update({
           where: {
             id: params.subParentSpecId
@@ -122,6 +126,8 @@ export async function PATCH(
           data: {
             name,
             slug: slugify(name),
+            name_eng,
+            slug_eng: slugify(name_eng),
             updatedAt: new Date(),
             updatedBy: session.name ?? '',
           },
@@ -133,7 +139,8 @@ export async function PATCH(
 
     const duplicates = await prismadb.dynamicspecificationsubparent.findFirst({
       where:{
-        name
+        name,
+        name_eng
       }
     })
 
@@ -149,6 +156,8 @@ export async function PATCH(
       data: {
         name,
         slug: slugify(name),
+        name_eng,
+        slug_eng: slugify(name_eng),
         updatedAt: new Date(),
         updatedBy: session.name ?? ''
       },

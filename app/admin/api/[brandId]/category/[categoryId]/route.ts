@@ -134,10 +134,13 @@ export async function PATCH(
 
     const body = await req.json();
 
-    const { type, name, description, thumbnail_url } = body;
+    const { type, name, description, name_eng, description_eng, thumbnail_url } = body;
 
     if (!name) {
       return new NextResponse("Name is required", { status: 400 });
+    }
+    if (!name_eng) {
+      return new NextResponse("English Name is required", { status: 400 });
     }
 
     if (!params.categoryId) {
@@ -183,6 +186,9 @@ export async function PATCH(
           name,
           slug: slugify(name),
           description,
+          name_eng,
+          slug_eng: slugify(name_eng),
+          description_eng,
           thumbnail_url,
           updatedAt: new Date(),
           updatedBy: session.name ?? '',
@@ -208,6 +214,9 @@ export async function PATCH(
           brandId: params.brandId,
           type,
           slug: slugify(name),
+          name_eng,
+          slug_eng: slugify(name_eng),
+          description_eng,
           thumbnail_url,
           updatedAt: new Date(),
           createdAt: new Date(),
@@ -222,7 +231,9 @@ export async function PATCH(
         data:{
           name,
           updatedAt: new Date(),
-          slug: slugify(name)
+          slug: slugify(name),
+          name_eng,
+          slug_eng: slugify(name_eng),
         }
       })
     }

@@ -29,6 +29,8 @@ import { MAX_SIZE } from "@/app/admin/model/model"
 const formSchema = z.object({
   name: z.string().min(1),
   description: z.string().min(1),
+  name_eng: z.string().min(1),
+  description_eng: z.string().min(1),
   type: z.string().min(1),
   thumbnail_url: z.string().optional()
 });
@@ -60,6 +62,8 @@ export const CategoryForm: React.FC<CategoryFormProps> = ({
     defaultValues: initialData || {
       name: '',
       description: '',
+      name_eng: '',
+      description_eng: '',
       type: 'Category',
       thumbnail_url: ''
     }
@@ -218,7 +222,7 @@ export const CategoryForm: React.FC<CategoryFormProps> = ({
                 name="name"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel className="font-bold text-base"> Name</FormLabel>
+                    <FormLabel className="font-bold text-base">Name (Indo)</FormLabel>
                     <FormControl>
                       <Input disabled={loading} placeholder="Category name" {...field} className="bg-white text-black"/>
                     </FormControl>
@@ -231,9 +235,39 @@ export const CategoryForm: React.FC<CategoryFormProps> = ({
                 name="description"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel className="font-bold text-base">Description</FormLabel>
+                    <FormLabel className="font-bold text-base">Description (Indo)</FormLabel>
                     <FormControl>
                       <Input disabled={loading} placeholder="Category description" {...field} className="bg-white text-black"/>
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            </div>
+
+
+            <div className="flex flex-col w-full justify-center rounded-lg p-4 bg-white/50 gap-4">
+              <FormField
+                control={form.control}
+                name="name_eng"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel className="font-bold text-base">Name (English)</FormLabel>
+                    <FormControl>
+                      <Input disabled={loading} placeholder="Category name english" {...field} className="bg-white text-black"/>
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="description_eng"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel className="font-bold text-base">Description (English)</FormLabel>
+                    <FormControl>
+                      <Input disabled={loading} placeholder="Category description english" {...field} className="bg-white text-black"/>
                     </FormControl>
                     <FormMessage />
                   </FormItem>

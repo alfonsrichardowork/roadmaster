@@ -132,7 +132,7 @@ export async function PATCH(
 
     const body = await req.json();
 
-    const { name, description, cover_img, new_product, isArchived, isFeatured } = body;
+    const { name, description, description_eng, cover_img, new_product, isArchived, isFeatured } = body;
 
     if (!name) {
       return new NextResponse("Name is required", { status: 400 });
@@ -173,6 +173,7 @@ export async function PATCH(
           name,
           slug: slugify(name),
           description,
+          description_eng,
           cover_img,
           new_product,
           isArchived,
@@ -187,6 +188,7 @@ export async function PATCH(
         data: {
           name,
           description,
+          description_eng,
           featuredDesc: '',
           brandId: params.brandId,
           slug: slugify(name),

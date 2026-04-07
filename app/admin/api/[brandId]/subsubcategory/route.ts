@@ -24,10 +24,13 @@ export async function POST(req: Request, props: { params: Promise<{ brandId: str
 
     const body = await req.json();
 
-    const { name, description, type } = body;
+    const { name, description, name_eng, description_eng, type } = body;
 
     if (!name) {
       return new NextResponse("Name is required", { status: 400 });
+    }
+    if (name_eng) {
+      return new NextResponse("English Name is required", { status: 400 });
     }
 
     if (!params.brandId) {
@@ -42,6 +45,7 @@ export async function POST(req: Request, props: { params: Promise<{ brandId: str
       where:{
         brandId: params.brandId,
         name,
+        name_eng,
         type
       }
     })
@@ -52,11 +56,14 @@ export async function POST(req: Request, props: { params: Promise<{ brandId: str
 
     await prismadb.allcategory.create({
       data: {
-        name: name,
-        description: description,
-        brandId: params.brandId,
-        type: type,
+        name,
         slug: slugify(name),
+        description,
+        name_eng,
+        slug_eng: slugify(name_eng),
+        description_eng,
+        brandId: params.brandId,
+        type,
         thumbnail_url:"",
         createdAt: new Date(),
         updatedAt: new Date(),

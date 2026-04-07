@@ -19,6 +19,8 @@ type SpecRow = {
   dynamicspecificationSubParentId?: string
   value: string
   notes: string
+  value_eng: string
+  notes_eng: string
 }
 
 type ParentGroup = {
@@ -29,7 +31,7 @@ type ParentGroup = {
 }
 
 function newSpecRow(): SpecRow {
-  return { id: crypto.randomUUID(), dynamicspecificationId: "", dynamicspecificationSubParentId: undefined, value: "", notes: "" }
+  return { id: crypto.randomUUID(), dynamicspecificationId: "", dynamicspecificationSubParentId: undefined, value: "", notes: "", value_eng: "", notes_eng: "" }
 }
 
 function newParentGroup(): ParentGroup {
@@ -77,6 +79,8 @@ export const SpecForm: React.FC<SBAudienceCompressionDimensionSpecFormProps> = (
             dynamicspecificationSubParentId: val.dynamicspecificationSubParentId ?? undefined,
             value: val.value,
             notes: val.notes,
+            value_eng: val.value_eng,
+            notes_eng: val.notes_eng,
           }
 
           const existingGroup = tempFinal.find(
@@ -131,7 +135,7 @@ export const SpecForm: React.FC<SBAudienceCompressionDimensionSpecFormProps> = (
   function updateSpecRow(
     groupKey: string,
     rowId: string,
-    patch: Partial<Pick<SpecRow, "dynamicspecificationId" | "dynamicspecificationSubParentId" | "value" | "notes">>,
+    patch: Partial<Pick<SpecRow, "dynamicspecificationId" | "dynamicspecificationSubParentId" | "value" | "notes" | "value_eng" | "notes_eng">>,
   ) {
     setGroups((prev) =>
       prev.map((g) =>
@@ -165,6 +169,7 @@ export const SpecForm: React.FC<SBAudienceCompressionDimensionSpecFormProps> = (
         g.specs.forEach((r, j) => {
           if (!r.dynamicspecificationId) errors.push(`Group ${i + 1}, Spec ${j + 1}: Specification is required.`)
           if (!r.value) errors.push(`Group ${i + 1}, Spec ${j + 1}: Value is required.`)
+          if (!r.value_eng) errors.push(`Group ${i + 1}, Spec ${j + 1}: English Value is required.`)
         })
       }
     }
@@ -188,6 +193,8 @@ export const SpecForm: React.FC<SBAudienceCompressionDimensionSpecFormProps> = (
         dynamicspecificationId: r.dynamicspecificationId,
         value: r.value,
         notes: r.notes,
+        value_eng: r.value_eng,
+        notes_eng: r.notes_eng,
       })),
     )
     try {
@@ -418,7 +425,17 @@ export const SpecForm: React.FC<SBAudienceCompressionDimensionSpecFormProps> = (
                               required
                               value={row.value}
                               onChange={(e) => updateSpecRow(group.key, row.id, { value: e.target.value })}
-                              placeholder="Value"
+                              placeholder="Value (Indo)"
+                              className="h-10 rounded-md border border-input bg-background px-3 text-sm outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                            />
+                          </div>
+                          <div className="grid gap-2 col-span-2">
+                            <Input
+                              id={`value-eng-${group.key}-${row.id}`}
+                              required
+                              value={row.value_eng}
+                              onChange={(e) => updateSpecRow(group.key, row.id, { value_eng: e.target.value })}
+                              placeholder="Value (English)"
                               className="h-10 rounded-md border border-input bg-background px-3 text-sm outline-none focus-visible:ring-2 focus-visible:ring-ring"
                             />
                           </div>
@@ -433,6 +450,15 @@ export const SpecForm: React.FC<SBAudienceCompressionDimensionSpecFormProps> = (
                               value={row.notes}
                               onChange={(e) => updateSpecRow(group.key, row.id, { notes: e.target.value })}
                               placeholder="Notes (optional)"
+                              className="rounded-md border border-input bg-background px-3 py-2 text-sm outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                            />
+                          </div>
+                          <div className="grid gap-2 col-span-3">
+                            <Input
+                              id={`notes-eng-${group.key}-${row.id}`}
+                              value={row.notes_eng}
+                              onChange={(e) => updateSpecRow(group.key, row.id, { notes_eng: e.target.value })}
+                              placeholder="Notes (English) (optional)"
                               className="rounded-md border border-input bg-background px-3 py-2 text-sm outline-none focus-visible:ring-2 focus-visible:ring-ring"
                             />
                           </div>
