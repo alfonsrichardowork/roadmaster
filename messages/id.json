@@ -1,0 +1,19 @@
+{
+  "Navbar Footer": {
+    "products": "Produk",
+    "about": "Tentang Kami",
+    "contact" : "Kontak",
+    "support" : "Bantuan",
+    "company": "Perusahaan",
+    "catalog" : "Katalog",
+    "social-media" : "Media Sosial"
+  },
+  "Homepage New Products": {
+    "title": "Koleksi Terbaru",
+    "button-view-all": "Lihat Semua Produk"
+  },
+  "Homepage Latest News": {
+    "title": "Berita Terbaru",
+    "button-view-all": "Lihat Semua Berita"
+  }
+}

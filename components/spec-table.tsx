@@ -1,4 +1,4 @@
-import { ChildSpecificationProp, SpecificationProp } from "@/app/(roadmaster)/products/[productSlug]/page";
+import { ChildSpecificationProp, SpecificationProp } from "@/app/[locale]/products/[productSlug]/page";
 import { Table, TableBody, TableCell, TableRow } from "./ui/table";
 import React from "react";
 

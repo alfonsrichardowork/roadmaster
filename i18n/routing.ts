@@ -1,0 +1,34 @@
+import {defineRouting} from 'next-intl/routing';
+ 
+export const routing = defineRouting({
+  // A list of all locales that are supported
+  locales: ['id', 'en'],
+ 
+  // Used when no locale matches
+  defaultLocale: 'id',
+
+  localePrefix: 'as-needed',
+  alternateLinks: true,
+  pathnames: {
+    "/": {
+      id: "/",
+      en: "/"
+    },
+    "/products": {
+      id: "/produk",
+      en: "/products"
+    },
+    "/about": {
+      id: "/tentang",
+      en: "/about"
+    },
+    "/contact": {
+      id: "/kontak",
+      en: "/contact"
+    },
+    "/category": {
+      id: "/kategori",
+      en: "/category"
+    }
+  }
+});

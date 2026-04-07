@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import prismadb from '@/lib/prismadb'
+import { getTranslations } from 'next-intl/server'
 
 export async function Footer() {
   const categories = await prismadb.allcategory.findMany({
@@ -16,6 +17,7 @@ export async function Footer() {
       slug: true
     }
   })
+  const t_footer = await getTranslations("Navbar Footer")
   return (
     <footer className="bg-primary text-primary-foreground">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-12 pb-8">
@@ -74,9 +76,8 @@ export async function Footer() {
             </div> */}
           </div>
 
-          {/* Products */}
           <div>
-            <h4 className="font-semibold mb-4">Products</h4>
+            <h4 className="font-semibold mb-4">{t_footer('products')}</h4>
             <ul className="space-y-3 text-sm">
               {categories && categories.length > 0 && categories.map((category, index) => 
                 <li key={index}>
@@ -90,11 +91,11 @@ export async function Footer() {
 
           {/* Company */}
           <div>
-            <h4 className="font-semibold mb-4">Company</h4>
+            <h4 className="font-semibold mb-4">{t_footer('company')}</h4>
             <ul className="space-y-3 text-sm">
               <li>
                 <Link href="/about" className="text-primary-foreground/80 hover:text-primary-foreground transition-colors">
-                  About Us
+                  {t_footer('about')}
                 </Link>
               </li>
               {/* <li>
@@ -109,12 +110,12 @@ export async function Footer() {
               </li> */}
               <li>
                 <Link href="/contact" className="text-primary-foreground/80 hover:text-primary-foreground transition-colors">
-                  Contact
+                  {t_footer('contact')}
                 </Link>
               </li>
               <li>
                 <Link href="#" className="text-primary-foreground/80 hover:text-primary-foreground transition-colors">
-                  Catalog
+                  {t_footer('catalog')}
                 </Link>
               </li>
             </ul>
@@ -150,7 +151,7 @@ export async function Footer() {
 
           {/* Social Media */}
           <div>
-              <h4 className="font-semibold mb-4">Social Media</h4>
+              <h4 className="font-semibold mb-4">{t_footer('social-media')}</h4>
               <div className="flex gap-4 space-y-3">
                 <Link
                   href="https://www.instagram.com/roadmasterspeaker"

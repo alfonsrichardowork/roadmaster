@@ -1,6 +1,7 @@
 import { Button } from '@/components/ui/button'
 import prismadb from '@/lib/prismadb'
 import { Calendar } from 'lucide-react'
+import { getTranslations } from 'next-intl/server';
 import Image from 'next/image'
 
  const formatDate = (isoDate: string): string => {
@@ -29,6 +30,7 @@ export async function NewsEvents() {
       event_date: 'desc'
     }
   })
+  const t = await getTranslations("Homepage Latest News")
   return (
     <section className="py-14 px-4 sm:px-6 lg:px-8 bg-linear-to-b from-background to-secondary relative overflow-hidden">
       {/* Background decorative elements */}
@@ -38,7 +40,7 @@ export async function NewsEvents() {
       <div className="max-w-6xl mx-auto relative z-10">
         <div className="fade-in-down text-center space-y-6 mb-14">
           <h2 className="text-4xl lg:text-5xl font-bold text-primary">
-            Latest News & Events
+            {t('title')}
           </h2>
           {/* <p className="text-lg text-foreground/60 max-w-2xl mx-auto">
             Stay updated with new product launches, exciting events, and exclusive promotions
@@ -92,7 +94,7 @@ export async function NewsEvents() {
         {/* View All Link */}
         <div className="text-center mt-14 fade-in-up">
           <Button variant="outline" className="border-primary text-primary hover:bg-primary/5 transition-all duration-300 hover:scale-105">
-            View All News & Events
+            {t('button-view-all')}
           </Button>
         </div>
       </div>

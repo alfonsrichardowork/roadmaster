@@ -1,7 +1,8 @@
 import { Button } from '@/components/ui/button'
 import prismadb from '@/lib/prismadb'
-import Link from 'next/link'
+import {Link} from "@/i18n/navigation";
 import { ProductCard } from './productCard'
+import { getTranslations } from 'next-intl/server'
 
 export async function NewProducts() {
   const newproductdata = await prismadb.product.findMany({
@@ -21,6 +22,7 @@ export async function NewProducts() {
       updatedAt: 'desc'
     }
   })
+  const t = await getTranslations("Homepage New Products")
   return (
     <section id="products" className="pt-24 px-4 sm:px-6 lg:px-8 bg-linear-to-b from-foreground to-foreground/30 relative overflow-hidden">
       {/* Background decorative elements */}
@@ -30,7 +32,7 @@ export async function NewProducts() {
       <div className="max-w-7xl mx-auto relative z-10">
         <div className="text-center space-y-4 mb-14 fade-in-down">
           <h2 className="text-4xl lg:text-5xl font-bold text-background">
-            Our Newest Collections
+            {t('title')}
           </h2>
           {/* <p className="text-lg text-foreground/60 max-w-2xl mx-auto">
             Handpicked speakers engineered for exceptional audio performance
@@ -46,7 +48,7 @@ export async function NewProducts() {
         <div className="text-center mt-14 fade-in-up">
           <Button size="lg" variant="outline" className="text-primary hover:bg-primary-foreground/50 hover:text-accent hover:border-none transition-all duration-300 hover:scale-105" asChild>
             <Link href={`/category`}>
-              View All Products
+              {t('button-view-all')}
             </Link>
           </Button>
         </div>

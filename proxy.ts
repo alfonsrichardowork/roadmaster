@@ -1,5 +1,7 @@
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
+import createMiddleware from "next-intl/middleware";
+import { routing } from './i18n/routing';
 
 const superadminOnlyRoutes = ['/createuser', '/customapi', '/settings', '/usersettings']
 
@@ -11,11 +13,20 @@ function isSuperAdminOnlyRoute(url: string): boolean {
   return superadminOnlyRoutes.some(route => url.endsWith(route));
 }
 
-export async function proxy(req: NextRequest) {
+const intlMiddleware = createMiddleware({
+  ...routing,
+  localeDetection: false,
+});
+
+export function proxy(req: NextRequest) {
   const url = req.nextUrl.clone()
 
   if(!isAdminRoute(url.pathname)){
-    return NextResponse.next()
+    if(url.pathname.startsWith('/_next') || url.pathname.startsWith('/api')) {
+      return NextResponse.next();
+    }
+
+    return intlMiddleware(req);
   }
 
   const session = req.cookies.get("loginSession"); // ✅ Edge-compatible

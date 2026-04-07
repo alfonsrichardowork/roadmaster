@@ -1,0 +1,19 @@
+{
+  "Navbar Footer": {
+    "products": "Products",
+    "about": "About Us",
+    "contact" : "Contact",
+    "support" : "Support",
+    "company": "Company",
+    "catalog" : "Catalogue",
+    "social-media" : "Social Media"
+  },
+  "Homepage New Products": {
+    "title": "Our Newest Collections",
+    "button-view-all": "View All Products"
+  },
+  "Homepage Latest News": {
+    "title": "Latest News & Events",
+    "button-view-all": "View All News & Events"
+  }
+}
