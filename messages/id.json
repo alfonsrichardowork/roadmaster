@@ -24,5 +24,8 @@
     "not-found-title": "Produk Tidak Ditemukan",
     "not-found-button": "Kembali ke Semua Produk",
     "product-breadcrumb": "Produk"
+  },
+  "Product Card": {
+    "button": "Lihat Detail"
   }
 }

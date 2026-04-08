@@ -59,7 +59,6 @@ export async function DELETE(
     const stillused = await prismadb.allproductcategory.findMany({
       where:{
         categoryId: params.subSubCategoryId,
-        type: "Sub Sub Category"
       }
     })
 
@@ -181,14 +180,9 @@ export async function PATCH(
         await prismadb.allproductcategory.updateMany({
           where: {
             categoryId: params.subSubCategoryId,
-            type
           },
           data:{
-            name,
             updatedAt: new Date(),
-            slug: slugify(name),
-            name_eng,
-            slug_eng: slugify(name_eng)
           }
         })
         return NextResponse.json("same")
@@ -228,30 +222,25 @@ export async function PATCH(
     await prismadb.allproductcategory.updateMany({
       where: {
         categoryId: params.subSubCategoryId,
-        type
       },
       data:{
-        name,
         updatedAt: new Date(),
-        slug: slugify(name),
-        name_eng,
-        slug_eng: slugify(name_eng)
       }
     })
 
-    if( type === "Sub Category" ){
-      revalidatePath(`/drivers/${slugify(name)}`);
-    }
-    else if( type === "Sub Sub Category" ){ 
-      const allSub = await prismadb.allproductcategory.findMany({
-        where:{
-          type: "Sub Category",
-        }
-      })
-      allSub && allSub.length > 0 && allSub.forEach(sub => {
-        revalidatePath(`/drivers/${sub.slug}/${slugify(name)}`);
-      });
-    }
+    // if( type === "Sub Category" ){
+    //   revalidatePath(`/drivers/${slugify(name)}`);
+    // }
+    // else if( type === "Sub Sub Category" ){ 
+    //   const allSub = await prismadb.allproductcategory.findMany({
+    //     where:{
+    //       type: "Sub Category",
+    //     }
+    //   })
+    //   allSub && allSub.length > 0 && allSub.forEach(sub => {
+    //     revalidatePath(`/drivers/${sub.slug}/${slugify(name)}`);
+    //   });
+    // }
   
     return NextResponse.json("success");
   } catch (error) {

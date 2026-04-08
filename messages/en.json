@@ -24,5 +24,8 @@
     "not-found-title": "Product Not Found",
     "not-found-button": "Back to Products",
     "product-breadcrumb": "Products"
+  },
+  "Product Card": {
+    "button": "View Details"
   }
 }

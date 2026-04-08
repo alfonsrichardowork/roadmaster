@@ -169,7 +169,7 @@ export default async function ProductPage({
                   <p className="text-sm text-accent font-semibold uppercase tracking-wider mb-2">
                     {product.allCat && product.allCat.length > 0
                       ? product.allCat
-                          .sort((a, b) => (order[a.type] ?? 99) - (order[b.type] ?? 99))
+                          .sort((a, b) => (order[a.category.type] ?? 99) - (order[b.category.type] ?? 99))
                           .map((cat) => locale === 'en' ? cat.category.name_eng : cat.category.name)
                           .join(" - ")
                       : ""}

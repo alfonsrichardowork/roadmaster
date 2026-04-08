@@ -64,7 +64,11 @@ export default async function ProductsPage({ params }: ProductsPageProps) {
       cover_img: true,
       name: true,
       slug: true,
-      allCat: true
+      allCat: {
+        include: {
+          category: true
+        }
+      }
     },
     orderBy: {
       updatedAt: "desc"

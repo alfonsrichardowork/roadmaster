@@ -35,22 +35,12 @@ export async function POST(
     for (const item of body) {
       const { 
         id,
-        type,
-        name,
-        slug,
-        name_eng,
-        slug_eng,
       } = item;
     
       const allproductcategory = await prismadb.allproductcategory.create({
         data: {
           productId: params.productId,
           categoryId: id,
-          type,
-          name,
-          slug,
-          name_eng,
-          slug_eng,
           createdAt: new Date(),
           updatedAt: new Date(),
         }
@@ -69,18 +59,18 @@ export async function POST(
       }
     });
 
-    const productSlug = updatedProduct.slug;
-    revalidatePath(`/products/${productSlug}`);
-    if( allResults && allResults.length > 0 ) {
-      const subCategories = allResults.filter(item => item.type === 'Sub Category') || [];
-      const subSubCategories = allResults.filter(item => item.type === 'Sub Sub Category') || [];
-      subCategories.forEach(sub => {
-        revalidatePath(`/drivers/${sub.slug}`);
-        subSubCategories.forEach(subsub => {
-          revalidatePath(`/drivers/${sub.slug}/${subsub.slug}`);
-        });
-      });
-    }
+    // const productSlug = updatedProduct.slug;
+    // revalidatePath(`/products/${productSlug}`);
+    // if( allResults && allResults.length > 0 ) {
+    //   const subCategories = allResults.filter(item => item.type === 'Sub Category') || [];
+    //   const subSubCategories = allResults.filter(item => item.type === 'Sub Sub Category') || [];
+    //   subCategories.forEach(sub => {
+    //     revalidatePath(`/drivers/${sub.slug}`);
+    //     subSubCategories.forEach(subsub => {
+    //       revalidatePath(`/drivers/${sub.slug}/${subsub.slug}`);
+    //     });
+    //   });
+    // }
 
     return NextResponse.json("success");
   } catch (error) {
@@ -209,21 +199,11 @@ export async function PATCH(
     for (const item of body) {
       const { 
         id,
-        type,
-        name,
-        slug,
-        name_eng,
-        slug_eng,
       } = item;
       const allproductcategory = await prismadb.allproductcategory.create({
         data: {
           productId: params.productId,
           categoryId: id,
-          type,
-          name,
-          slug,
-          name_eng,
-          slug_eng,
           createdAt: new Date(),
           updatedAt: new Date()
         }
@@ -241,18 +221,18 @@ export async function PATCH(
       }
     });
     
-    const productSlug = updatedproduct.slug;
-    revalidatePath(`/products/${productSlug}`);
-    if( allResults && allResults.length > 0 ) {
-      const subCategories = allResults.filter(item => item.type === 'Sub Category') || [];
-      const subSubCategories = allResults.filter(item => item.type === 'Sub Sub Category') || [];
-      subCategories.forEach(sub => {
-        revalidatePath(`/drivers/${sub.slug}`);
-        subSubCategories.forEach(subsub => {
-          revalidatePath(`/drivers/${sub.slug}/${subsub.slug}`);
-        });
-      });
-    }
+    // const productSlug = updatedproduct.slug;
+    // revalidatePath(`/products/${productSlug}`);
+    // if( allResults && allResults.length > 0 ) {
+    //   const subCategories = allResults.filter(item => item.type === 'Sub Category') || [];
+    //   const subSubCategories = allResults.filter(item => item.type === 'Sub Sub Category') || [];
+    //   subCategories.forEach(sub => {
+    //     revalidatePath(`/drivers/${sub.slug}`);
+    //     subSubCategories.forEach(subsub => {
+    //       revalidatePath(`/drivers/${sub.slug}/${subsub.slug}`);
+    //     });
+    //   });
+    // }
   
     const responseData = {
       deletedCount: deleteOldCategories.count,

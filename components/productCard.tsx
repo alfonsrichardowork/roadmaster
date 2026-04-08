@@ -1,7 +1,8 @@
 import { ProductCardData } from "@/lib/type";
 import Image from "next/image";
 import { Button } from "./ui/button";
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
+import { getLocale, getTranslations } from "next-intl/server";
 
 const order: Record<string, number> = {
   "Category": 0,
@@ -14,13 +15,15 @@ type ProductCardProps = {
   index: number
 }
 
-export function ProductCard({ product, index }: ProductCardProps) {
-  return (
+export async function ProductCard({ product, index }: ProductCardProps) {
+    const locale = await getLocale()
+    const t = await getTranslations('Product Card')
+    return (
         <div
             className={`fade-in-up stagger-${(index % 4) + 1} group relative`}
         >
             <div className="absolute -inset-0.5 bg-gradient-to-br from-accent/30 to-transparent opacity-0 group-hover:opacity-100 rounded-lg transition-opacity duration-300 blur-sm"></div>
-            <Link href={`/products/${product.slug}`} className="relative bg-white rounded-lg shadow-md hover:shadow-2xl transition-all duration-500 overflow-hidden flex flex-col h-full group-hover:translate-y-[-8px] block">
+            <Link href={`/products/${product.slug}` as any} className="relative bg-white rounded-lg shadow-md hover:shadow-2xl transition-all duration-500 overflow-hidden flex flex-col h-full group-hover:translate-y-[-8px] block">
                 {/* Product Image Area */}
                 <div className="relative bg-white flex items-center justify-center overflow-hidden">
                     <div className="relative z-10 transition-transform duration-500">
@@ -33,8 +36,8 @@ export function ProductCard({ product, index }: ProductCardProps) {
                     <p className="text-sm text-accent font-semibold uppercase tracking-wider mb-2 min-h-10">
                     {product.allCat && product.allCat.length > 0
                         ? product.allCat
-                            .sort((a, b) => (order[a.type] ?? 99) - (order[b.type] ?? 99))
-                            .map((cat) => cat.name)
+                            .sort((a, b) => (order[a.category.type] ?? 99) - (order[b.category.type] ?? 99))
+                            .map((cat) => locale === 'en' ? cat.category.name_eng : cat.category.name)
                             .join(" - ")
                         : ""}
                     </p>
@@ -43,7 +46,7 @@ export function ProductCard({ product, index }: ProductCardProps) {
                     {product.name}
                     </h3>
                     <Button className="w-full bg-primary text-primary-foreground hover:bg-primary/90 transition-all duration-300 transform hover:scale-105 active:scale-95">
-                    View Details
+                        {t('button')}
                     </Button>
                 </div>
             </Link>
