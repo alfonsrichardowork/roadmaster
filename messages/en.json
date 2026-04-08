@@ -19,5 +19,10 @@
   "Homepage Latest News": {
     "title": "Latest News & Events",
     "button-view-all": "View All News & Events"
+  },
+  "Single Product Page": {
+    "not-found-title": "Product Not Found",
+    "not-found-button": "Back to Products",
+    "product-breadcrumb": "Products"
   }
 }

@@ -17,7 +17,7 @@ export function Navigation() {
     const [navbarBg, setNavbarBg] = useState(false);
     useEffect(() => {
         const updateNavbarBg = () => {
-            if (pathname.includes('/products')) {
+            if (pathname.includes('/products') || pathname.includes('/produk')) {
             setNavbarBg(true);
             return;
             }
@@ -30,7 +30,7 @@ export function Navigation() {
             setNavbarBg(window.scrollY > 0);
         };
 
-        updateNavbarBg(); // run once on mount / pathname change
+        updateNavbarBg();
 
         window.addEventListener('scroll', updateNavbarBg);
 

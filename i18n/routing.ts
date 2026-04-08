@@ -18,6 +18,10 @@ export const routing = defineRouting({
       id: "/produk",
       en: "/products"
     },
+    "/products/[productSlug]": {
+      id: "/produk/[productSlug]",
+      en: "/products/[productSlug]"
+    },
     "/about": {
       id: "/tentang",
       en: "/about"

@@ -2,10 +2,11 @@
 import DompurifyContent from '@/components/dompurifyText'
 import SpecificationTable from '@/components/spec-table'
 import { Button } from '@/components/ui/button'
+import { Link } from '@/i18n/navigation'
 import prismadb from '@/lib/prismadb'
 import { Star, ShoppingCart, Heart, Share2, Check } from 'lucide-react'
+import { getLocale, getTranslations } from 'next-intl/server'
 import Image from 'next/image'
-import Link from 'next/link'
 
 export interface SpecificationProp {
   parentname: string
@@ -32,13 +33,18 @@ export default async function ProductPage({
 }: {
   params: Promise<{ productSlug: string }>
 }) {
+  const locale = await getLocale();
   const { productSlug } = await params;
   const product = await prismadb.product.findFirst({
     where: {
       slug: productSlug
     },
     include: {
-      allCat: true,
+      allCat: {
+        include: {
+          category: true
+        }
+      },
       connectorSpecifications: {
         include: {
           dynamicspecification: true,
@@ -51,14 +57,14 @@ export default async function ProductPage({
 
   const specsCombined = (product?.connectorSpecifications ?? []).reduce<SpecificationProp[]>(
     (acc, connector) => {
-      const parentname = connector.dynamicspecificationParent?.name ?? "";
-      const subparentname = connector.dynamicspecificationSubParent?.name ?? "";
+      const parentname = locale === 'en' ? connector.dynamicspecificationParent?.name_eng : connector.dynamicspecificationParent?.name ?? "";
+      const subparentname = locale === 'en' ? connector.dynamicspecificationSubParent?.name_eng : connector.dynamicspecificationSubParent?.name ?? "";
 
       const child: ChildSpecificationProp = {
-        childname: connector.dynamicspecification?.name ?? "",
-        value: connector.value ?? "",
-        notes: connector.notes ?? "",
-        slug: connector.dynamicspecification?.slug ?? "",
+        childname: locale === 'en' ? connector.dynamicspecification?.name_eng : connector.dynamicspecification?.name ?? "",
+        value: locale === 'en' ? connector.value_eng : connector.value ?? "",
+        notes: locale === 'en' ? connector.notes_eng : connector.notes ?? "",
+        slug: locale === 'en' ? connector.dynamicspecification?.slug_eng : connector.dynamicspecification?.slug ?? "",
         unit: connector.dynamicspecification?.unit ?? "",
         subParentName: subparentname ?? ''
       };
@@ -82,14 +88,14 @@ export default async function ProductPage({
   // ✅ Build lookup maps for faster access
   const parentPriorityMap = new Map(
     product?.connectorSpecifications.map((c) => [
-      c.dynamicspecificationParent?.name ?? "",
+      locale === 'en' ? c.dynamicspecificationParent?.name_eng : c.dynamicspecificationParent?.name ?? "",
       c.dynamicspecificationParent?.priority ?? 0,
     ])
   );
 
   const childPriorityMap = new Map(
     product?.connectorSpecifications.map((c) => [
-      c.dynamicspecification?.name ?? "",
+      locale === 'en' ? c.dynamicspecification?.name_eng : c.dynamicspecification?.name ?? "",
       c.dynamicspecification?.priority ?? 0,
     ])
   );
@@ -113,21 +119,22 @@ export default async function ProductPage({
     });
   });
 
+  const t = await getTranslations('Single Product Page')
+
   if (!product) {
     return (
       <>
         <main className="pt-32 pb-20 px-4">
           <div className="max-w-6xl mx-auto text-center">
-            <h1 className="text-4xl font-bold text-primary mb-4">Product Not Found</h1>
+            <h1 className="text-4xl font-bold text-primary mb-4">{t('not-found-title')}</h1>
             <Button asChild>
-              <Link href="/products">Back to Products</Link>
+              <Link href="/category">{t('not-found-button')}</Link>
             </Button>
           </div>
         </main>
       </>
     )
   }
-
   return (
     <>
         {/* Breadcrumb */}
@@ -136,7 +143,7 @@ export default async function ProductPage({
             <div className="flex items-center gap-2 text-sm text-foreground">
               <Link href="/" className="hover:text-accent">Home</Link>
               <span>/</span>
-              <Link href="/category" className="hover:text-accent">Products</Link>
+              <Link href="/category" className="hover:text-accent">{t('product-breadcrumb')}</Link>
               <span>/</span>
               <span className="text-primary font-semibold">{product.name}</span>
             </div>
@@ -163,14 +170,14 @@ export default async function ProductPage({
                     {product.allCat && product.allCat.length > 0
                       ? product.allCat
                           .sort((a, b) => (order[a.type] ?? 99) - (order[b.type] ?? 99))
-                          .map((cat) => cat.name)
+                          .map((cat) => locale === 'en' ? cat.category.name_eng : cat.category.name)
                           .join(" - ")
                       : ""}
                   </p>
                   <h1 className="text-4xl lg:text-5xl font-bold text-primary mb-4">
                     {product.name}
                   </h1>
-                    <DompurifyContent text={product.description || ""} />
+                    <DompurifyContent text={locale === 'en' ? product.description_eng : product.description || ""} />
                 </div>
             </div>
           </div>

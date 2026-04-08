@@ -19,5 +19,10 @@
   "Homepage Latest News": {
     "title": "Berita Terbaru",
     "button-view-all": "Lihat Semua Berita"
+  },
+  "Single Product Page": {
+    "not-found-title": "Produk Tidak Ditemukan",
+    "not-found-button": "Kembali ke Semua Produk",
+    "product-breadcrumb": "Produk"
   }
 }
