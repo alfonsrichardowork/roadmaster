@@ -1,7 +1,7 @@
 "use client"
 
 import { dynamicspecification, dynamicspecificationparent, dynamicspecificationsubparent, specificationconnector } from "@prisma/client"
-import { CirclePlus, Trash } from "lucide-react"
+import { ChevronsUpDown, CirclePlus, Trash } from "lucide-react"
 import { useEffect, useState } from "react"
 import axios, { AxiosResponse } from "axios"
 import { useParams, useRouter } from "next/navigation"
@@ -12,6 +12,10 @@ import { Separator } from "@/components/ui/separator"
 import { Button } from "@/components/ui/button"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/app/admin/components/ui/select"
 import { Input } from "@/components/ui/input"
+import { Label } from "@/app/admin/components/ui/label"
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover"
+import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList } from "@/app/admin/components/ui/command"
+import { cn } from "@/lib/utils"
 
 type SpecRow = {
   id: string
@@ -261,7 +265,6 @@ export const SpecForm: React.FC<SBAudienceCompressionDimensionSpecFormProps> = (
             >
               <CirclePlus width={20} height={20} />Add Parent Group
             </Button>
-          {/* Parent Groups */}
           <div className="space-y-6">
             {groups.map((group, groupIndex) => (
               <section
@@ -301,36 +304,6 @@ export const SpecForm: React.FC<SBAudienceCompressionDimensionSpecFormProps> = (
                         </SelectContent>
                       </Select>
                   </div>
-                  {/* <div className="grid gap-2 col-span-5">
-                    <label htmlFor={`subparent-${group.key}`} className="text-sm font-medium">
-                      Specification Sub-Parent (optional)
-                    </label>
-                    <Select
-                      name={`subparent-${group.key}`}
-                      value={group.dynamicspecificationSubParentId ?? "-"}
-                      onValueChange={(val) => 
-                        updateGroup(group.key, "dynamicspecificationSubParentId", val)
-                      }
-                    >
-                      <SelectTrigger
-                        id={`subparent-${group.key}`}
-                        aria-required="true"
-                        className="h-10 rounded-md border border-input bg-background px-3 text-sm outline-none focus-visible:ring-2 focus-visible:ring-ring"
-                      >
-                      <SelectValue placeholder="Select a sub parent specification" />
-                      </SelectTrigger>
-                        <SelectContent className="max-h-[300px] overflow-y-scroll">
-                          <SelectItem value={'-'}>
-                            -
-                          </SelectItem>
-                        {allSubParentSpec.map((p) => (
-                          <SelectItem key={p.id} value={String(p.id)}>
-                            {p.name}
-                          </SelectItem>
-                        ))}
-                        </SelectContent>
-                      </Select>
-                  </div> */}
                   <div className="grid gap-2 col-span-2">
                     <label htmlFor={`subparent-${group.key}`} className="text-sm font-medium">
                       Delete All?
@@ -346,7 +319,6 @@ export const SpecForm: React.FC<SBAudienceCompressionDimensionSpecFormProps> = (
                   </div>
                 </div>
 
-                {/* Specs list for this group */}
                 <div className="space-y-4 rounded-md p-4 border-black border-2">
                   <div className="flex items-center justify-start">
                     <div
@@ -361,65 +333,92 @@ export const SpecForm: React.FC<SBAudienceCompressionDimensionSpecFormProps> = (
                     const unit = specUnit(row.dynamicspecificationId)
                     return (
                       <div key={row.id} className="">
-                        <div className="grid gap-3 md:grid-cols-12 items-end">
+                        <div className="grid gap-3 md:grid-cols-12 items-end p-2 border border-foreground shadow-md rounded-md">
                           <div className="grid gap-2 col-span-3">
                             <div className="flex gap-2 items-center">
                             {rowIndex + 1}.
-                            <Select
-                              value={row.dynamicspecificationId ? String(row.dynamicspecificationId) : ""}
-                              onValueChange={(val) =>
-                                updateSpecRow(group.key, row.id, { dynamicspecificationId: val })
-                              }
-                              name={`spec-${group.key}-${row.id}`}
-                            >
-                              <SelectTrigger
-                                id={`spec-${group.key}-${row.id}`}
-                                aria-required="true"
-                                className="h-10 rounded-md border border-input bg-background px-3 text-sm outline-none focus-visible:ring-2 focus-visible:ring-ring"
-                              >
-                                <SelectValue placeholder="Select a specification" />
-                              </SelectTrigger>
-                              <SelectContent className="max-h-[300px] overflow-y-scroll">
-                                {allChildSpec.map((ds) => (
-                                  <SelectItem key={ds.id} value={String(ds.id)}>
-                                    {ds.name}
-                                  </SelectItem>
-                                ))}
-                              </SelectContent>
-                            </Select>
+                              <Popover>
+                                <PopoverTrigger asChild>
+                                  <Button
+                                    variant="outline"
+                                    size="sm"
+                                    role="combobox"
+                                    aria-label="Select a specification"
+                                    className={cn("w-[200px] justify-between", !row.dynamicspecificationId && "text-muted-foreground")}
+                                  >
+                                    {row.dynamicspecificationId 
+                                      ? allChildSpec.find(ds => String(ds.id) === String(row.dynamicspecificationId))?.name 
+                                      : "Select a specification"}
+                                    <ChevronsUpDown className="ml-auto h-4 w-4 shrink-0 opacity-50" />
+                                  </Button>
+                                </PopoverTrigger>
+                                <PopoverContent className="w-[200px] p-0">
+                                  <Command shouldFilter={true}>
+                                    <CommandInput placeholder="Search specification..." />
+                                    <CommandList>
+                                      <CommandEmpty>No specification found.</CommandEmpty>
+                                      <CommandGroup>
+                                        {allChildSpec.map((ds) => (
+                                          <CommandItem
+                                            key={ds.id}
+                                            value={ds.name}
+                                            onSelect={() => {
+                                              updateSpecRow(group.key, row.id, { dynamicspecificationId: String(ds.id) });
+                                            }}
+                                          >
+                                            {ds.name}
+                                          </CommandItem>
+                                        ))}
+                                      </CommandGroup>
+                                    </CommandList>
+                                  </Command>
+                                </PopoverContent>
+                              </Popover>
                             </div>
                           </div>
-                          <div className="grid gap-2 col-span-2">
-                            {/* <label htmlFor={`subparent-${group.key}`} className="text-sm font-medium">
-                              Sub-Parent (optional)
-                            </label> */}
-                            <Select
-                              name={`subparent-${group.key}`}
-                              value={row.dynamicspecificationSubParentId ?? "-"}
-                              onValueChange={(val) => 
-                                updateSpecRow(group.key, row.id, { dynamicspecificationSubParentId: val })
-                              }
-                            >
-                              <SelectTrigger
-                                id={`subparent-${group.key}`}
-                                aria-required="true"
-                                className="h-10 rounded-md border border-input bg-background px-3 text-sm outline-none focus-visible:ring-2 focus-visible:ring-ring data-[placeholder]:text-black/50"
-                              >
-                              <SelectValue placeholder="Subparent (optional)" />
-                              </SelectTrigger>
-                                <SelectContent className="max-h-[300px] overflow-y-scroll">
-                                  <SelectItem value={'-'}>
-                                    -
-                                  </SelectItem>
-                                {allSubParentSpec.map((p) => (
-                                  <SelectItem key={p.id} value={String(p.id)}>
-                                    {p.name}
-                                  </SelectItem>
-                                ))}
-                                </SelectContent>
-                              </Select>
+                          <div className="grid gap-2 col-span-3">
+                              <Popover>
+                                <PopoverTrigger asChild>
+                                  <Button
+                                    variant="outline"
+                                    size="sm"
+                                    role="combobox"
+                                    aria-label="Select a sub specification"
+                                    className={cn("w-[200px] justify-between", !row.dynamicspecificationSubParentId && "text-muted-foreground")}
+                                  >
+                                    {row.dynamicspecificationSubParentId 
+                                      ? allSubParentSpec.find(ds => String(ds.id) === String(row.dynamicspecificationSubParentId))?.name 
+                                      : "Select a sub specification"}
+                                    <ChevronsUpDown className="ml-auto h-4 w-4 shrink-0 opacity-50" />
+                                  </Button>
+                                </PopoverTrigger>
+                                <PopoverContent className="w-full p-0">
+                                  <Command shouldFilter={true}>
+                                    <CommandInput placeholder="Search sub specification..." />
+                                    <CommandList>
+                                      <CommandEmpty>No sub specification found.</CommandEmpty>
+                                      <CommandGroup>
+                                        {allSubParentSpec.map((ds) => (
+                                          <CommandItem
+                                            key={ds.id}
+                                            value={ds.name}
+                                            onSelect={() => {
+                                              updateSpecRow(group.key, row.id, { dynamicspecificationSubParentId: String(ds.id) });
+                                            }}
+                                          >
+                                            {ds.name}
+                                          </CommandItem>
+                                        ))}
+                                      </CommandGroup>
+                                    </CommandList>
+                                  </Command>
+                                </PopoverContent>
+                              </Popover>
                           </div>
-                          <div className="grid gap-2 col-span-2">
+                          <div className="grid gap-2 col-span-3">
+                            <Label>
+                              Value (Indo)
+                            </Label>
                             <Input
                               id={`value-${group.key}-${row.id}`}
                               required
@@ -429,7 +428,39 @@ export const SpecForm: React.FC<SBAudienceCompressionDimensionSpecFormProps> = (
                               className="h-10 rounded-md border border-input bg-background px-3 text-sm outline-none focus-visible:ring-2 focus-visible:ring-ring"
                             />
                           </div>
+                          <div className="grid gap-2 col-span-1 justify-center pb-3">
+                            <div className="text-sm font-medium">
+                              {unit && unit}
+                            </div>
+                          </div>
                           <div className="grid gap-2 col-span-2">
+                            <Label>
+                              Notes (Indo) (Optional)
+                            </Label>
+                            <Input
+                              id={`notes-${group.key}-${row.id}`}
+                              value={row.notes}
+                              onChange={(e) => updateSpecRow(group.key, row.id, { notes: e.target.value })}
+                              placeholder="Notes (optional)"
+                              className="rounded-md border border-input bg-background px-3 py-2 text-sm outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                            />
+                          </div>
+
+                          <div className="grid gap-2 col-span-1">
+                            <Button
+                              variant={"destructive"}
+                              onClick={() => removeSpecRowFromGroup(group.key, row.id)}
+                              aria-label={`Remove specification ${rowIndex + 1}`}
+                              className="text-background"
+                            >
+                              <Trash width={20} height={20} />
+                            </Button>
+                          </div>
+                          <div className="grid gap-2 col-span-5"/>
+                          <div className="grid gap-2 col-span-3">
+                            <Label>
+                              Value (English)
+                            </Label>
                             <Input
                               id={`value-eng-${group.key}-${row.id}`}
                               required
@@ -444,16 +475,10 @@ export const SpecForm: React.FC<SBAudienceCompressionDimensionSpecFormProps> = (
                               {unit && unit}
                             </div>
                           </div>
-                          <div className="grid gap-2 col-span-3">
-                            <Input
-                              id={`notes-${group.key}-${row.id}`}
-                              value={row.notes}
-                              onChange={(e) => updateSpecRow(group.key, row.id, { notes: e.target.value })}
-                              placeholder="Notes (optional)"
-                              className="rounded-md border border-input bg-background px-3 py-2 text-sm outline-none focus-visible:ring-2 focus-visible:ring-ring"
-                            />
-                          </div>
-                          <div className="grid gap-2 col-span-3">
+                          <div className="grid gap-2 col-span-2">
+                            <Label>
+                              Notes (English) (Optional)
+                            </Label>
                             <Input
                               id={`notes-eng-${group.key}-${row.id}`}
                               value={row.notes_eng}
@@ -461,16 +486,6 @@ export const SpecForm: React.FC<SBAudienceCompressionDimensionSpecFormProps> = (
                               placeholder="Notes (English) (optional)"
                               className="rounded-md border border-input bg-background px-3 py-2 text-sm outline-none focus-visible:ring-2 focus-visible:ring-ring"
                             />
-                          </div>
-                          <div className="grid gap-2 col-span-1">
-                            <Button
-                              variant={"destructive"}
-                              onClick={() => removeSpecRowFromGroup(group.key, row.id)}
-                              aria-label={`Remove specification ${rowIndex + 1}`}
-                              className="text-background"
-                            >
-                              <Trash width={20} height={20} />
-                            </Button>
                           </div>
                         </div>
 
