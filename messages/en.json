@@ -8,6 +8,10 @@
     "catalog" : "Catalogue",
     "social-media" : "Social Media"
   },
+  "All Category Page": {
+    "title": "Our Product Collection",
+    "desc": "Discover the perfect speaker for every moment, from portable to powered."
+  },
   "Homepage New Products": {
     "title": "Our Newest Collections",
     "button-view-all": "View All Products"

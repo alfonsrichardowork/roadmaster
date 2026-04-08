@@ -32,7 +32,7 @@ export function LanguageSwitcher() {
                 className="w-fit min-w-0 p-1 bg-background/50 border-none"
             >
                 {languages.map((lang) => ( 
-                    <Link key={lang.locale} href={pathname} locale={lang.locale} className={`flex items-center gap-2 rounded px-2 py-1 ${ locale === lang.locale ? "bg-accent" : "" }`} >
+                    <Link key={lang.locale} href={pathname as any} locale={lang.locale} className={`flex items-center gap-2 rounded px-2 py-1 ${ locale === lang.locale ? "bg-accent" : "" }`} >
                         <Image src={lang.flag} width={30} height={30} alt={lang.locale} className="shadow-lg border"/>
                     </Link>
                 ))} 

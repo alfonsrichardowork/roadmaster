@@ -8,6 +8,10 @@
     "catalog" : "Katalog",
     "social-media" : "Media Sosial"
   },
+  "All Category Page": {
+    "title": "Semua Koleksi Produk",
+    "desc": "Temukan speaker yang sempurna untuk setiap momen, mulai dari portabel hingga speaker aktif."
+  },
   "Homepage New Products": {
     "title": "Koleksi Terbaru",
     "button-view-all": "Lihat Semua Produk"

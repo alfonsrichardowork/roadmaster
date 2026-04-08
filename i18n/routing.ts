@@ -29,6 +29,14 @@ export const routing = defineRouting({
     "/category": {
       id: "/kategori",
       en: "/category"
+    },
+    "/catalogue": {
+      id: "/katalog",
+      en: "/catalogue"
+    },
+    "/category/[...slug]": {
+      id: "/kategori/[...slug]",
+      en: "/category/[...slug]"
     }
   }
 });

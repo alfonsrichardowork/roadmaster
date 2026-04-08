@@ -1,10 +1,10 @@
 import { Button } from '@/components/ui/button'
 import prismadb from '@/lib/prismadb'
 import { Calendar } from 'lucide-react'
-import { getTranslations } from 'next-intl/server';
+import { getLocale, getTranslations } from 'next-intl/server';
 import Image from 'next/image'
 
- const formatDate = (isoDate: string): string => {
+ const formatDate = (isoDate: string, locale: string): string => {
     const date = new Date(isoDate);
     const options: Intl.DateTimeFormatOptions = {
       weekday: "long",
@@ -12,16 +12,20 @@ import Image from 'next/image'
       month: "long",
       year: "numeric",
     };
-    return date.toLocaleDateString('id-ID', options);
+    return date.toLocaleDateString(locale === 'id' ? 'id-ID' : 'en-EN', options);
   };
 
 export async function NewsEvents() {
+  const locale = await getLocale();
   const newsData = await prismadb.news.findMany({
     select: {
       id: true,
       title: true,
       slug: true,
       description: true,
+      title_eng: true,
+      slug_eng: true,
+      description_eng: true,
       event_date: true,
       news_img: true
     },
@@ -62,7 +66,7 @@ export async function NewsEvents() {
                   {/* Card Header with emoji background */}
                   <div className="h-40 bg-gradient-to-br from-accent/20 to-accent/5 flex items-center justify-center relative overflow-hidden">
                     <div className="absolute inset-0 bg-gradient-to-t from-accent/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                    <Image src={process.env.NEXT_PUBLIC_ROOT_URL + item.news_img} alt={item.title} width={300} height={300} className='max-h-fit w-full'/>
+                    <Image src={process.env.NEXT_PUBLIC_ROOT_URL + item.news_img} alt={locale === 'id' ? item.title: item.title_eng} width={300} height={300} className='max-h-fit w-full'/>
                   </div>
 
                   {/* Card Body */}
@@ -77,12 +81,12 @@ export async function NewsEvents() {
                     </div> */}
 
                     <h3 className="text-lg font-bold text-primary mb-3 group-hover:text-accent transition-colors line-clamp-2">
-                      {item.title}
+                      {locale === 'id' ? item.title: item.title_eng}
                     </h3>
 
                     <div className="flex items-center gap-2 text-sm text-foreground/60 border-t border-border pt-4">
                       <Calendar className="w-4 h-4" />
-                      {formatDate(item.event_date.toString())}
+                      {formatDate(item.event_date.toString(), locale)}
                     </div>
                   </div>
                 </div>
