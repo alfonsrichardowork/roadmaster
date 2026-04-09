@@ -11,7 +11,9 @@
   },
   "All Category Page": {
     "title": "Semua Koleksi Produk",
-    "desc": "Temukan speaker yang sempurna untuk setiap momen, mulai dari portabel hingga speaker aktif."
+    "desc": "Temukan speaker yang sempurna untuk setiap momen, mulai dari portabel hingga speaker aktif.",
+    "all-product" : "Semua Produk",
+    "all-product-dynamic" : "Semua"
   },
   "Homepage Hero": {
     "title": "Home Audio Dengan Suara Berkualitas & Desain Elegan",

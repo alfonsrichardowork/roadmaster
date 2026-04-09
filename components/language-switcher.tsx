@@ -6,6 +6,7 @@ DropdownMenuContent,
 DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Link, usePathname as usePathnameIntl } from "@/i18n/navigation";
+import { allcategory } from "@prisma/client";
 import { useLocale } from "next-intl";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
@@ -15,7 +16,11 @@ const languages: { locale: string; flag: string }[] = [
 { locale: "en", flag: "/images/roadmaster/united-kingdom-flag-icon.svg" },
 ];
 
-export function LanguageSwitcher() {
+interface LanguageSwitcherProps {
+  categories: allcategory[]
+}
+
+export function LanguageSwitcher({ categories } : LanguageSwitcherProps) {
     const locale = useLocale();
     const pathnameIntl = usePathnameIntl();
     const pathname = usePathname()
@@ -26,7 +31,17 @@ export function LanguageSwitcher() {
     finalIntlPathname.map((path: string, index) => {
         if(path != ''){
             if (path[0] === '[' && path[path.length - 1] === ']') {
-                finalLinkRoute = finalLinkRoute.concat('/' + finalPathname[index])
+                if(finalPathname[index - 1] === 'category' || finalPathname[index - 1] === 'kategori') {
+                    finalPathname.map((val, idx) => {
+                        if(idx > index - 1) {
+                            let temp = categories.find((valCat) => (locale === 'en' ? valCat.slug_eng : valCat.slug) === val)
+                            finalLinkRoute = finalLinkRoute.concat('/' + (locale === 'en' ? temp?.slug : temp?.slug_eng))
+                        }
+                    })
+                }
+                else{
+                    finalLinkRoute = finalLinkRoute.concat('/' + finalPathname[index])
+                }
             }
             else{
                 finalLinkRoute = finalLinkRoute.concat('/' + path)

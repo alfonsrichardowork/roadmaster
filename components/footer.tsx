@@ -35,6 +35,7 @@ export async function Footer({ categories }: FooterProps) {
             <h4 className="font-semibold mb-4">{t_footer('products')}</h4>
             <ul className="space-y-3 text-sm">
               {categories && categories.length > 0 && categories.map((category, index) => 
+                category.type === 'Category' &&
                 <li key={index}>
                   <IntlLink href={{pathname: "/category/[...slug]", params: { slug: [locale === 'id' ? category.slug : category.slug_eng] }}} className="text-primary-foreground/80 hover:text-primary-foreground transition-colors">
                     {locale === 'id' ? category.name : category.name_eng}

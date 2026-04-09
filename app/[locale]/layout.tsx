@@ -84,8 +84,7 @@ export default async function HomeLayout({
       where: {
       productCategories: {
           some: {}
-      },
-      type: "Category"
+      }
       }
     })
     return (

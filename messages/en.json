@@ -11,7 +11,9 @@
   },
   "All Category Page": {
     "title": "Our Product Collection",
-    "desc": "Discover the perfect speaker for every moment, from portable to powered."
+    "desc": "Discover the perfect speaker for every moment, from portable to powered.",
+    "all-product" : "All Products",
+    "all-product-dynamic" : "All"
   },
   "Homepage Hero": {
     "title": "Home Audio with High-Quality Sound & Elegant Design",

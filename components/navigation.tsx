@@ -90,14 +90,14 @@ export function Navigation({ categories }: NavigationProps) {
             </div>
           
             <div className="w-1/3 hidden md:flex items-center justify-end gap-4">
-                <LanguageSwitcher />
+                <LanguageSwitcher categories={categories}/>
                 <Button className="bg-accent text-accent-foreground hover:bg-accent/90">
                 {t_navbar('support')}
                 </Button>
             </div>
 
             <div className='md:hidden w-1/3 flex justify-end gap-2 h-full items-center'>
-                <LanguageSwitcher />
+                <LanguageSwitcher categories={categories}/>
                 <Button
                     onClick={() => setIsOpen(!isOpen)}
                     className={`md:hidden p-0 text-primary bg-transparent hover:bg-transparent hover:text-accent w-fit`}
@@ -125,6 +125,7 @@ export function Navigation({ categories }: NavigationProps) {
             <div className="md:grid hidden md:grid-cols-3 gap-8">
                 {categories.length > 0 ? (
                     categories.map((val, index) => (
+                        val.type === 'Category' &&
                         <Link
                             key={index}
                             href={{
@@ -172,6 +173,7 @@ export function Navigation({ categories }: NavigationProps) {
                                 <div className="flex gap-6 w-max p-4">
                                     {categories.length > 0 ? (
                                     categories.map((val, index) => (
+                                        val.type === 'Category' &&
                                         <Link
                                         key={index}
                                         href={{
