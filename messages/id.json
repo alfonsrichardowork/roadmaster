@@ -12,6 +12,12 @@
     "title": "Semua Koleksi Produk",
     "desc": "Temukan speaker yang sempurna untuk setiap momen, mulai dari portabel hingga speaker aktif."
   },
+  "Homepage Hero": {
+    "title": "Home Audio Dengan Suara Berkualitas & Desain Elegan",
+    "desc": "Rasakan kejernihan dan kekuatan suara Roadmaster, menghadirkan pengalaman audio luar biasa di setiap ruang!",
+    "button": "Lihat Produk",
+    "demo": "Tonton Demo"
+  },
   "Homepage New Products": {
     "title": "Koleksi Terbaru",
     "button-view-all": "Lihat Semua Produk"

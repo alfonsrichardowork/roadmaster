@@ -26,13 +26,13 @@ export async function generateMetadata(): Promise<Metadata> {
       siteName: 'Roadmaster',
       images: [
         {
-          url: `${baseUrl}/images/roadmaster/logo_roadmaster.webp`,
+          url: `${baseUrl}/images/roadmaster/logo_roadmaster_white.webp`,
           width: 1200,
           height: 630,
           alt: 'Roadmaster Logo',
         },
         {
-          url: `${baseUrl}/images/roadmaster/logo_roadmaster.webp`,
+          url: `${baseUrl}/images/roadmaster/logo_roadmaster_white.webp`,
           width: 800,
           height: 800,
           alt: 'Roadmaster Logo',
@@ -47,7 +47,7 @@ export async function generateMetadata(): Promise<Metadata> {
       description: 'Roadmaster menawarkan perangkat audio dengan kualitas suara luar biasa. Nikmati musik, film, dan hiburan lainnya di mana saja dengan desain elegan dan kemudahan penggunaan. Temukan pilihan yang sesuai dengan kebutuhan Anda di Roadmaster.',
       images: [
         {
-          url: `${baseUrl}/images/roadmaster/logo_roadmaster.webp`,
+          url: `${baseUrl}/images/roadmaster/logo_roadmaster_white.webp`,
           width: 800,
           height: 800,
           alt: 'Roadmaster Logo',

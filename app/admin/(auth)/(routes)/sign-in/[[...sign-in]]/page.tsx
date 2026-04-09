@@ -53,7 +53,7 @@ export default function Page () {
           <div className="space-y-2">
           <Card className="mx-auto w-1/2 bg-transparent border-none">
             <CardHeader className="flex flex-col items-center justify-center space-y-2 w-full pb-4">
-              <Image src={'/images/admin/logo_roadmaster.webp'} alt="Logo Roadmaster" width={200} height={100}/>
+              <Image src={'/images/admin/logo_roadmaster_white.webp'} alt="Logo Roadmaster" width={200} height={100}/>
               <CardTitle className="md:text-xl text-base text-center text-background">Welcome to Roadmaster Admin Page!</CardTitle>
             </CardHeader>
             <CardContent>

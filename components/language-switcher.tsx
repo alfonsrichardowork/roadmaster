@@ -38,16 +38,17 @@ export function LanguageSwitcher() {
     return (
         selectedLanguage && 
         <DropdownMenu>
-            <DropdownMenuTrigger asChild className="shadow-lg border">
-                <Image src={selectedLanguage.flag} width={30} height={30} alt={selectedLanguage.locale} />
+            <DropdownMenuTrigger asChild className="h-fit">
+                <Image src={selectedLanguage.flag} width={30} height={30} alt={selectedLanguage.locale} className="border border-background rounded-sm shadow-lg"/>
             </DropdownMenuTrigger>
             <DropdownMenuContent
                 align="center"
-                className="w-fit min-w-0 p-1 bg-background/50 border-none"
+                className="w-fit min-w-0 p-1 bg-background/95 border shadow-xl"
             >
                 {languages.map((lang) => ( 
                     <Link key={lang.locale} href={pathnameIntl === '/' ? pathnameIntl : finalLinkRoute as any} locale={lang.locale} className={`flex items-center gap-2 rounded px-2 py-1 ${ locale === lang.locale ? "bg-accent" : "" }`} >
                         <Image src={lang.flag} width={30} height={30} alt={lang.locale} className="shadow-lg border"/>
+                        {lang.locale.toUpperCase()}
                     </Link>
                 ))} 
             </DropdownMenuContent>

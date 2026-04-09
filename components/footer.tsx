@@ -31,8 +31,8 @@ export async function Footer() {
           <div>
             <IntlLink href="/" className="flex items-center">
               <Image 
-                src="/images/roadmaster/logo_roadmaster.webp"
-                alt="Roadmaster Logo"
+                src="/images/roadmaster/logo_only_roadmaster_white.webp"
+                alt="Roadmaster Only Logo"
                 width={180}
                 height={60}
                 priority
