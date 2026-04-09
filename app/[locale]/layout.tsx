@@ -8,6 +8,7 @@ import Head from "next/head";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { GoogleAnalytics } from '@next/third-parties/google'
+import prismadb from "@/lib/prismadb";
 const font = Inter({ subsets: ['latin'] })
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -79,6 +80,14 @@ export default async function HomeLayout({
     if (!hasLocale(routing.locales, locale)) {
       notFound();
     }
+    const categoriesData = await prismadb.allcategory.findMany({
+      where: {
+      productCategories: {
+          some: {}
+      },
+      type: "Category"
+      }
+    })
     return (
         <html lang={locale}>
         <Head>
@@ -91,9 +100,9 @@ export default async function HomeLayout({
         <body className={`${font.className || ''} overflow-x-hidden`}>
             <NextIntlClientProvider>
                 <main className="min-h-screen bg-background">
-                    <Navigation />
-                        {children}
-                    <Footer />
+                  <Navigation categories={categoriesData} />
+                  {children}
+                  <Footer categories={categoriesData} />
                 </main>
             </NextIntlClientProvider>
         </body>

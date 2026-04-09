@@ -3,24 +3,14 @@ import prismadb from '@/lib/prismadb'
 import { getLocale, getTranslations } from 'next-intl/server'
 import Link from 'next/link';
 import { Link as IntlLink } from '@/i18n/navigation';
+import { allcategory } from '@prisma/client';
 
-export async function Footer() {
+interface FooterProps {
+  categories: allcategory[]
+}
+
+export async function Footer({ categories }: FooterProps) {
   const locale = await getLocale();
-  const categories = await prismadb.allcategory.findMany({
-    where: {
-      productCategories: {
-        some: {}
-      },
-      type: "Category"
-    },
-    select: {
-      id: true,
-      name: true,
-      slug: true,
-      name_eng: true,
-      slug_eng: true
-    }
-  })
   const t_footer = await getTranslations("Navbar Footer")
   return (
     <footer className="bg-primary text-primary-foreground">
@@ -46,7 +36,7 @@ export async function Footer() {
             <ul className="space-y-3 text-sm">
               {categories && categories.length > 0 && categories.map((category, index) => 
                 <li key={index}>
-                  <IntlLink   href={{pathname: "/category/[...slug]", params: { slug: [locale === 'id' ? category.slug : category.slug_eng] }}} className="text-primary-foreground/80 hover:text-primary-foreground transition-colors">
+                  <IntlLink href={{pathname: "/category/[...slug]", params: { slug: [locale === 'id' ? category.slug : category.slug_eng] }}} className="text-primary-foreground/80 hover:text-primary-foreground transition-colors">
                     {locale === 'id' ? category.name : category.name_eng}
                   </IntlLink>
                 </li>

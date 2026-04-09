@@ -3,7 +3,7 @@ import { Button } from "./ui/button";
 
 export function Promo() {
   return (
-    <section className="pt-20 px-4 sm:px-6 lg:px-8 bg-linear-to-b from-foreground/30 to-background relative overflow-hidden">
+    <section className="pt-20 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
       {/* Background decorative elements */}
       <div className="absolute -top-40 -right-40 w-80 h-80 bg-accent/5 rounded-full blur-3xl opacity-50"></div>
       <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-accent/5 rounded-full blur-3xl opacity-40"></div>

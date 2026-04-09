@@ -6,26 +6,27 @@ import { getTranslations } from 'next-intl/server'
 export async function Hero() {
   const t = await getTranslations("Homepage Hero")
   return (
-    <>
     <section className="relative min-h-[80vh] flex items-center justify-center px-4 sm:px-6 lg:px-8 overflow-hidden pt-20">
       {/* Background with overlay */}
-      <div 
-        className="absolute inset-0 z-0"
-        style={{
-          backgroundImage: 'url(/images/roadmaster/hero-bg.webp)',
-          backgroundSize: 'cover',
-          backgroundPosition: 'top',
-          backgroundAttachment: 'fixed',
-        }}
+      <div className="absolute inset-0 z-0 overflow-hidden">
+
+      {/* Background Video */}
+      <video
+        className="absolute inset-0 w-full h-full object-cover"
+        autoPlay
+        muted
+        loop
+        playsInline
+        preload="metadata"
       >
-        {/* Gradient overlay */}
-        <div className="absolute inset-0 bg-linear-to-r from-foreground/50 to-foreground/30"></div>
-        <div className="absolute inset-0 bg-linear-to-b from-transparent via-foreground/30 to-foreground"></div>
-        
-        {/* Animated gradient accent */}
-        <div className="absolute top-0 right-0 w-96 h-96 bg-accent/20 rounded-full blur-3xl opacity-40 animate-pulse"></div>
-        <div className="absolute bottom-20 left-10 w-72 h-72 bg-accent/10 rounded-full blur-3xl opacity-30"></div>
-      </div>
+        <source src="/images/roadmaster/hero.webm" type="video/webm" />
+      </video>
+
+      {/* Gradient overlay */}
+      <div className="absolute inset-0 bg-gradient-to-r from-foreground/50 to-foreground/30"></div>
+      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-foreground/30 to-foreground/50"></div>
+
+    </div>
 
       {/* Content */}
       <div className="max-w-7xl mx-auto w-full relative z-10">
@@ -124,8 +125,5 @@ export async function Hero() {
         </div>
       </div>
     </section>
-    <section className="relative min-h-[10vh] flex items-center justify-center overflow-hidden bg-foreground">
-    </section>
-    </>
   )
 }

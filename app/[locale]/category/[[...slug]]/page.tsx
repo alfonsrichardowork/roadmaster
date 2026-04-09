@@ -20,6 +20,9 @@ export default async function ProductsPage({ params }: ProductsPageProps) {
   let heroTtile = t('title')
   let heroDesc = t('desc')
   
+  const slugField = locale === "en" ? "slug_eng" : "slug";
+  const slugValue = slug[slug.length - 1];
+
   const categories = await prismadb.allcategory.findMany({
     where: {
       productCategories: {
@@ -39,6 +42,27 @@ export default async function ProductsPage({ params }: ProductsPageProps) {
     }
   })
 
+  const subcategories = await prismadb.allcategory.findMany({
+    where: {
+      type: "Sub Category",
+      productCategories: {
+        some: {
+          product: {
+            allCat: {
+              some: {
+                category: {
+                  [slugField]: slugValue,
+                  type: "Category"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    distinct: ["id"]
+  })
+
   if(slug.length > 0) {
     backgroundImage = categories.find((cat) => cat.slug === slug[slug.length - 1])?.thumbnail_url || backgroundImage
     heroTtile = locale === 'en' ? categories.find((cat) => cat.slug_eng === slug[slug.length - 1])?.name_eng || heroTtile : categories.find((cat) => cat.slug === slug[slug.length - 1])?.name || heroTtile
@@ -46,15 +70,15 @@ export default async function ProductsPage({ params }: ProductsPageProps) {
   }
   
 
-  const slugField = locale === "en" ? "slug_eng" : "slug";
-  const slugValue = slug[slug.length - 1];
 
   const allProducts = await prismadb.product.findMany({
     where: slug.length > 0
       ? {
           allCat: {
             some: {
-              [slugField]: slugValue
+              category: {
+                [slugField]: slugValue
+              }
             }
           }
         }
@@ -108,7 +132,7 @@ export default async function ProductsPage({ params }: ProductsPageProps) {
             {/* <p className="text-foreground/70">Find the perfect speaker for your needs</p> */}
           </div>
           <Separator className='w-full fade-in-down' />
-          <div className='pt-4 pb-8'>
+          <div className={`${slug.length === 0 ? 'block' : 'hidden'} pt-4 pb-8`}>
             <ScrollArea className="w-full whitespace-nowrap border-none">
               <div className="flex justify-center items-center fade-in-down">
                 <Button asChild key={'all products'} variant="link" className={`${slug.length === 0 && 'underline font-bold'}`}>
@@ -117,6 +141,21 @@ export default async function ProductsPage({ params }: ProductsPageProps) {
                     </Link>
                   </Button>
                 {categories.map((cat) => (
+                  <Button asChild key={cat.id} variant="link" className={`${slug.length > 0 && slug[slug.length - 1] === cat.slug && 'underline font-bold'}`}>
+                    <Link href={`/category/${cat.slug}`}>
+                      {cat.name}
+                    </Link>
+                  </Button>
+                ))}
+              </div>
+              <ScrollBar orientation="horizontal" />
+            </ScrollArea>
+          </div>
+
+          <div className={`${slug.length === 0 ? 'hidden' : 'block'} pt-4 pb-8`}>
+            <ScrollArea className="w-full whitespace-nowrap border-none">
+              <div className="flex justify-center items-center fade-in-down">
+                {subcategories.map((cat) => (
                   <Button asChild key={cat.id} variant="link" className={`${slug.length > 0 && slug[slug.length - 1] === cat.slug && 'underline font-bold'}`}>
                     <Link href={`/category/${cat.slug}`}>
                       {cat.name}
