@@ -28,7 +28,7 @@ export function Navigation({ categories }: NavigationProps) {
 
     useEffect(() => {
         const updateNavbarBg = () => {
-            if (pathname.includes('/products') || pathname.includes('/produk')) {
+            if (pathname.includes('/products') || pathname.includes('/produk')|| pathname.includes('/tentang')|| pathname.includes('/about')) {
             setNavbarBg(true);
             return;
             }
@@ -216,12 +216,12 @@ export function Navigation({ categories }: NavigationProps) {
                     </Accordion>
                 </div>
                 <div className='pb-4'>
-                    <Link href="/about" className='hover:cursor-pointer hover:underline'>
+                    <Link href="/about" className='hover:cursor-pointer hover:underline' onClick={() => setIsOpen(false)}>
                         {t_navbar('about')}
                     </Link>
                 </div>
                 <div>
-                    <Link href="/contact" className='hover:cursor-pointer hover:underline'>
+                    <Link href="/contact" className='hover:cursor-pointer hover:underline' onClick={() => setIsOpen(false)}>
                         {t_navbar('contact')}
                     </Link>
                 </div>

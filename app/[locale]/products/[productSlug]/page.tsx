@@ -4,7 +4,6 @@ import SpecificationTable from '@/components/spec-table'
 import { Button } from '@/components/ui/button'
 import { Link } from '@/i18n/navigation'
 import prismadb from '@/lib/prismadb'
-import { Star, ShoppingCart, Heart, Share2, Check } from 'lucide-react'
 import { getLocale, getTranslations } from 'next-intl/server'
 import Image from 'next/image'
 

@@ -9,21 +9,24 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { GoogleAnalytics } from '@next/third-parties/google'
 import prismadb from "@/lib/prismadb";
+import { getLocale, getTranslations } from "next-intl/server";
 const font = Inter({ subsets: ['latin'] })
 
 export async function generateMetadata(): Promise<Metadata> {
   const baseUrl = process.env.NEXT_PUBLIC_ROOT_URL ?? 'http://localhost:3003';
+  const t = await getTranslations('Metadata homepage')
+  const locale = await getLocale()
   return {
     title: {
       template: '%s | Roadmaster',
-      default: 'Roadmaster | Audio Berkualitas Tinggi untuk Hiburan Anda',
+      default: t('tagline'),
     },
-    description: 'Roadmaster menawarkan perangkat audio dengan kualitas suara luar biasa. Nikmati musik, film, dan hiburan lainnya di mana saja dengan desain elegan dan kemudahan penggunaan. Temukan pilihan yang sesuai dengan kebutuhan Anda di Roadmaster.',
-    keywords: 'audio, hiburan, kualitas suara, roadmaster, speaker party',
+    description: t('desc'),
+    keywords: [t('keywords')],
     openGraph: {
-      title: 'Roadmaster | Audio Berkualitas Tinggi untuk Hiburan Anda',
-      description: 'Roadmaster menawarkan perangkat audio dengan kualitas suara luar biasa. Nikmati musik, film, dan hiburan lainnya di mana saja dengan desain elegan dan kemudahan penggunaan. Temukan pilihan yang sesuai dengan kebutuhan Anda di Roadmaster.',
-      url: `${baseUrl}`,
+      title: t('tagline'),
+      description: t('desc'),
+      url: locale === 'id' ? `${baseUrl}` : `${baseUrl}/${locale}`,
       siteName: 'Roadmaster',
       images: [
         {
@@ -39,13 +42,13 @@ export async function generateMetadata(): Promise<Metadata> {
           alt: 'Roadmaster Logo',
         },
       ],
-      locale: 'id_ID',
+      locale: locale === 'id' ? 'id_ID' : 'en_US',
       type: 'website',
     },
     twitter: {
       card: 'summary_large_image',
-      title: 'Roadmaster | Audio Berkualitas Tinggi untuk Hiburan Anda',
-      description: 'Roadmaster menawarkan perangkat audio dengan kualitas suara luar biasa. Nikmati musik, film, dan hiburan lainnya di mana saja dengan desain elegan dan kemudahan penggunaan. Temukan pilihan yang sesuai dengan kebutuhan Anda di Roadmaster.',
+      title: t('tagline'),
+      description: t('desc'),
       images: [
         {
           url: `${baseUrl}/images/roadmaster/logo_roadmaster_white.webp`,
@@ -56,7 +59,11 @@ export async function generateMetadata(): Promise<Metadata> {
       ],
     },
     alternates: {
-      canonical: `${baseUrl}`,
+      canonical: locale === 'id' ? `${baseUrl}` : `${baseUrl}/${locale}`,
+      languages: {
+        'id': `${baseUrl}`,
+        'en': `${baseUrl}/en`,
+      },
     },
     robots: {
       index: true,
@@ -65,6 +72,10 @@ export async function generateMetadata(): Promise<Metadata> {
         index: true,
         follow: true,
       },
+    },
+    icons: {
+      icon: `${baseUrl}/favicon.ico`,
+      shortcut: `${baseUrl}/favicon.ico`,
     },
   }
 }

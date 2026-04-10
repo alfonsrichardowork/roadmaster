@@ -36,5 +36,65 @@
   },
   "Product Card": {
     "button": "Lihat Detail"
+  },
+  "About Us Page": {
+    "title": "Tentang Kami",
+    "tagline": "ROADMASTER – MENEMBUS BATAS, GETARKAN JIWA",
+    "desc-1": "Selama lebih dari dua dekade, Roadmaster Speaker telah menjadi bagian dari perjalanan audio di Indonesia—bertransformasi dari produk head Unit Car Audio menjadi brand speaker aktif yang menghadirkan suara besar, tenaga kuat, dan performa yang bisa diandalkan.",
+    "desc-2": "Kami percaya bahwa suara bukan sekadar didengar—suara harus dirasakan. Itulah mengapa setiap produk Roadmaster dirancang untuk memberikan impact, baik untuk kebutuhan hiburan, maupun penggunaan semi-professional.",
+    "desc-3": "Kepercayaan pasar bukan hanya datang dari pengguna, tetapi juga dari institusi, termasuk kolaborasi dengan pemerintah dalam penyediaan sistem audio untuk kebutuhan publik.",
+    "desc-4": "Hari ini, Roadmaster bukan sekadar brand speaker. Kami adalah simbol kekuatan suara, inovasi, dan evolusi tanpa henti.",
+    "milestones-desc": [
+      [
+        "1998 — The Beginning",
+        "Roadmaster lahir dengan produk pertamanya berupa <b>Head Unit Car Audio</b>, menjadi fondasi awal dalam industri audio."
+      ],
+      [
+        "2001 — Expanding the Line",
+        "Mulai memproduksi <b>bookshelf speaker</b>, memperluas portofolio dengan kualitas yang semakin berkembang."
+      ],
+      [
+        "2008 — Entering Active Speaker Era",
+        "Roadmaster resmi memasuki pasar <b>speaker aktif</b> dengan menghadirkan <b>Basso Series</b>. Dan berhasil menjadi salah satu Top Best Selling Speaker Aktif di Indonesia"
+      ],
+      [
+        "2012 — Semi Professional Innovation",
+        "Kesuksesan <b>KD Pro Series</b>, speaker aktif berukuran lebih besar dengan konsep <b>semi professional</b> dan built-in mixer yang menjadi fitur andalan. Dan berhasil lagi menjadi Top Best Selling Speaker Aktif di Indonesia"
+      ],
+      [
+        "2018 — Stylish Evolution",
+        "Menghadirkan <b>Monster Series</b>, speaker aktif dengan desain lebih <b>ramping, stylish, dan eksklusif</b>, menyasar pasar urban modern.  Menjadi Icon Speaker Roadmaster Product hingga saat ini dengan varian Reborn."
+      ],
+      [
+        "2023 — Trust & Expansion",
+        "Berpartisipasi dalam salah satu program Pemerintah Daerah untuk pengadaan Produk perangkat pengeras suara menggunakan salah satu model dari Roadmaster PA Series."
+      ]
+    ]
+  },
+  "Metadata homepage": {
+    "tagline": "Roadmaster | Menembus Batas, Getarkan Jiwa",
+    "desc": "Rasakan kejernihan dan kekuatan suara Roadmaster, menghadirkan pengalaman audio luar biasa di setiap ruang!",
+    "keywords": "audio, hiburan, kualitas suara, roadmaster, speaker party, sound horeg"
+  },
+  "Metadata single product": {
+    "title-no-product": "Produk Tidak Ditemukan",
+    "desc-no-product": "Kembali ke semua produk",
+    "desc": "Kenali spesifikasi dan fitur terbaik dari"
+  },
+  "Metadata about page": {
+    "title": "Tentang Kami",
+    "desc": "Pelajari tentang Roadmaster, merek audio terpercaya yang menghadirkan speaker bertenaga, suara jernih, dan performa andal untuk hiburan dan berbagai acara.",
+    "keywords": "tentang roadmaster, pelajari lebih lanjut tentang histori roadmaster"
+  },
+  "Metadata contact page": {
+    "title": "Kontak Kami",
+    "desc": "Hubungi Roadmaster untuk pertanyaan, informasi produk speaker, atau dukungan pelanggan. Tim kami siap membantu Anda.",
+    "keywords": "kontak roadmaster, whatsapp roadmaster, telpon roadmaster, tanya roadmaster"
+  },
+  "Metadata category page": {
+    "title": "Semua Kategori",
+    "desc": "Jelajahi semua kategori produk Roadmaster dan temukan berbagai speaker serta solusi audio yang sesuai dengan kebutuhan Anda.",
+    "keywords": "produk roadmaster, kategori roadmaster, semua produk roadmaster, semua kategori roadmaster",
+    "desc-with-category": "Jelajahi semua"
   }
 }

@@ -5,6 +5,7 @@ import prismadb from '@/lib/prismadb'
 import { ProductCard } from '@/components/productCard'
 import { getLocale, getTranslations } from 'next-intl/server'
 import { Link } from '@/i18n/navigation'
+import { Prisma } from '@prisma/client'
 
 interface ProductsPageProps {
   params: Promise<{
@@ -77,18 +78,21 @@ export default async function ProductsPage({ params }: ProductsPageProps) {
   allSpeakerDynamic = locale === 'en' ? categories.find((cat) => cat.slug_eng === slug[0])?.name_eng || heroTitle : categories.find((cat) => cat.slug === slug[0])?.name || heroTitle
 
 
-  const allProducts = await prismadb.product.findMany({
-    where: slug.length > 0
-      ? {
-          allCat: {
-            some: {
-              category: {
-                [slugField]: slugValue
-              }
-            }
+  const where: Prisma.productWhereInput = {
+    isArchived: false,
+    ...(slug.length > 0 && {
+      allCat: {
+        some: {
+          category: {
+            [slugField]: slugValue
           }
         }
-      : undefined,
+      }
+    })
+  };
+
+  const allProducts = await prismadb.product.findMany({
+    where,
     select: {
       id: true,
       cover_img: true,
