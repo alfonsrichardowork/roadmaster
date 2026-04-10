@@ -96,5 +96,19 @@
     "desc": "Jelajahi semua kategori produk Roadmaster dan temukan berbagai speaker serta solusi audio yang sesuai dengan kebutuhan Anda.",
     "keywords": "produk roadmaster, kategori roadmaster, semua produk roadmaster, semua kategori roadmaster",
     "desc-with-category": "Jelajahi semua"
+  },
+  "Metadata all news page": {
+    "title": "Semua Berita",
+    "desc": "Jelajahi semua berita dan event dari Roadmaster",
+    "keywords": "berita roadmaster, event roadmaster, semua event roadmaster, semua berita roadmaster"
+  },
+  "Metadata single news page": {
+    "title-no-news": "Tidak Ada Berita",
+    "desc-no-news": "Silahkan kembali ke halaman semua berita"
+  },
+  "single news page": {
+    "breadcrumb": "Berita",
+    "title-no-news": "Tidak Ada Berita",
+    "button-no-news": "Kembali ke Semua Berita"
   }
 }

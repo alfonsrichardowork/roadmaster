@@ -1,4 +1,5 @@
 import { Button } from '@/components/ui/button'
+import { Link } from '@/i18n/navigation';
 import prismadb from '@/lib/prismadb'
 import { Calendar } from 'lucide-react'
 import { getLocale, getTranslations } from 'next-intl/server';
@@ -55,8 +56,9 @@ export async function NewsEvents() {
         {/* News Cards Grid */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {newsData.map((item, index) => (
-            <div
+            <Link
               key={item.id}
+              href={{pathname: "/news/[newsSlug]", params: { newsSlug: locale === 'id' ? item.slug : item.slug_eng }}} 
               className={`fade-in-up stagger-${(index % 3) + 1} group cursor-pointer`}
             >
               <div className="relative h-full">
@@ -91,7 +93,7 @@ export async function NewsEvents() {
                   </div>
                 </div>
               </div>
-            </div>
+            </Link>
           ))}
         </div>
 

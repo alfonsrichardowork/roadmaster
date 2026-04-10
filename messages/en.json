@@ -96,5 +96,19 @@
     "desc": "Explore all Roadmaster product categories and discover a range of speakers and audio solutions that fit your needs.",
     "keywords": "roadmaster products, roadmaster categories, all roadmaster products, all roadmaster categories",
     "desc-with-category": "Explore all"
+  },
+  "Metadata all news page": {
+    "title": "All News",
+    "desc": "Explore all Roadmaster News & Events",
+    "keywords": "roadmaster news, roadmaster events, all roadmaster events, all roadmaster news"
+  },
+  "Metadata single news page": {
+    "title-no-news": "No News",
+    "desc-no-news": "Please go back to all news page"
+  },
+  "single news page": {
+    "breadcrumb": "News",
+    "title-no-news": "No News",
+    "button-no-news": "Back to All News Page"
   }
 }
