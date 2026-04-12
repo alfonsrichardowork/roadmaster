@@ -98,6 +98,12 @@ export default async function HomeLayout({
       }
       }
     })
+    const newsData = await prismadb.news.findMany({
+      select: {
+        slug: true,
+        slug_eng: true
+      }
+    })
     return (
         <html lang={locale}>
         <Head>
@@ -110,7 +116,7 @@ export default async function HomeLayout({
         <body className={`${font.className || ''} overflow-x-hidden`}>
             <NextIntlClientProvider>
                 <main className="min-h-screen bg-background">
-                  <Navigation categories={categoriesData} />
+                  <Navigation categories={categoriesData} allnews={newsData}/>
                   {children}
                   <Footer categories={categoriesData} />
                 </main>

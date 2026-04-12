@@ -8,7 +8,7 @@ import { Link } from '@/i18n/navigation';
 import Image from 'next/image';
 import { Button } from './ui/button';
 import { LanguageSwitcher } from './language-switcher';
-import { allcategory } from '@prisma/client';
+import { allcategory, news } from '@prisma/client';
 import prismadb from '@/lib/prismadb';
 import { Separator } from './ui/separator';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from './ui/accordion';
@@ -16,9 +16,10 @@ import { ScrollArea, ScrollBar } from './ui/scroll-area';
 
 interface NavigationProps {
   categories: allcategory[]
+  allnews: { slug: string; slug_eng: string; }[]
 }
 
-export function Navigation({ categories }: NavigationProps) {
+export function Navigation({ categories, allnews }: NavigationProps) {
     const t_navbar = useTranslations("Navbar Footer")
     const pathname = usePathname();
     const [isOpen, setIsOpen] = useState(false)
@@ -28,7 +29,7 @@ export function Navigation({ categories }: NavigationProps) {
 
     useEffect(() => {
         const updateNavbarBg = () => {
-            if (pathname.includes('/products') || pathname.includes('/produk')|| pathname.includes('/tentang')|| pathname.includes('/about')) {
+            if (pathname.includes('/products') || pathname.includes('/produk') || pathname.includes('/tentang')|| pathname.includes('/about') || pathname.includes('berita')|| pathname.includes('/news')) {
             setNavbarBg(true);
             return;
             }
@@ -90,14 +91,14 @@ export function Navigation({ categories }: NavigationProps) {
             </div>
           
             <div className="w-1/3 hidden md:flex items-center justify-end gap-4">
-                <LanguageSwitcher categories={categories}/>
+                <LanguageSwitcher categories={categories} news={allnews}/>
                 <Button className="bg-accent text-accent-foreground hover:bg-accent/90">
                 {t_navbar('support')}
                 </Button>
             </div>
 
             <div className='md:hidden w-1/3 flex justify-end gap-2 h-full items-center'>
-                <LanguageSwitcher categories={categories}/>
+                <LanguageSwitcher categories={categories} news={allnews}/>
                 <Button
                     onClick={() => setIsOpen(!isOpen)}
                     className={`md:hidden p-0 text-primary bg-transparent hover:bg-transparent hover:text-accent w-fit`}

@@ -99,8 +99,10 @@ export async function NewsEvents() {
 
         {/* View All Link */}
         <div className="text-center mt-14 fade-in-up">
-          <Button variant="outline" className="border-primary text-primary hover:bg-primary/5 transition-all duration-300 hover:scale-105">
-            {t('button-view-all')}
+          <Button variant="outline" className="text-primary hover:bg-primary/5 transition-all duration-300 hover:scale-105 hover:text-foreground" asChild>
+            <Link href={'/news'}>
+              {t('button-view-all')}
+            </Link>
           </Button>
         </div>
       </div>

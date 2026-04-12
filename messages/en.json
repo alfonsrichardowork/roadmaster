@@ -110,5 +110,8 @@
     "breadcrumb": "News",
     "title-no-news": "No News",
     "button-no-news": "Back to All News Page"
+  },
+  "All News Page": {
+    "title": "All Roadmaster News & Events"
   }
 }

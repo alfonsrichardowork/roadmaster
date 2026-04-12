@@ -6,7 +6,7 @@ DropdownMenuContent,
 DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Link, usePathname as usePathnameIntl } from "@/i18n/navigation";
-import { allcategory } from "@prisma/client";
+import { allcategory, news } from "@prisma/client";
 import { useLocale } from "next-intl";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
@@ -18,9 +18,10 @@ const languages: { locale: string; flag: string }[] = [
 
 interface LanguageSwitcherProps {
   categories: allcategory[]
+  news: { slug: string; slug_eng: string; }[]
 }
 
-export function LanguageSwitcher({ categories } : LanguageSwitcherProps) {
+export function LanguageSwitcher({ categories, news } : LanguageSwitcherProps) {
     const locale = useLocale();
     const pathnameIntl = usePathnameIntl();
     const pathname = usePathname()
@@ -35,6 +36,14 @@ export function LanguageSwitcher({ categories } : LanguageSwitcherProps) {
                     finalPathname.map((val, idx) => {
                         if(idx > index - 1) {
                             let temp = categories.find((valCat) => (locale === 'en' ? valCat.slug_eng : valCat.slug) === val)
+                            finalLinkRoute = finalLinkRoute.concat('/' + (locale === 'en' ? temp?.slug : temp?.slug_eng))
+                        }
+                    })
+                }
+                else if(finalPathname[index - 1] === 'news' || finalPathname[index - 1] === 'berita') {
+                    finalPathname.map((val, idx) => {
+                        if(idx > index - 1) {
+                            let temp = news.find((valnews) => (locale === 'en' ? valnews.slug_eng : valnews.slug) === val)
                             finalLinkRoute = finalLinkRoute.concat('/' + (locale === 'en' ? temp?.slug : temp?.slug_eng))
                         }
                     })

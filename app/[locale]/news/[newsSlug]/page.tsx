@@ -50,40 +50,38 @@ export default async function SingleNewsPage({
     )
   }
   return (
-    <>
-        {/* Breadcrumb */}
-        <div className="pt-24 px-4 sm:px-6 lg:px-8">
-          <div className="max-w-6xl mx-auto">
-            <div className="flex items-center gap-2 text-sm text-foreground">
-              <Link href="/" className="hover:text-accent">Home</Link>
-              <span>/</span>
-              <Link href="/news" className="hover:text-accent">{t('breadcrumb')}</Link>
-              <span>/</span>
-              <span className="text-primary font-semibold">{locale === 'en' ? singlenews.title_eng.length > 10 ? `${singlenews.title_eng.slice(0, 10)}...` : singlenews.title_eng : singlenews.title.length > 10 ? `${singlenews.title.slice(0, 10)}...` : singlenews.title}</span>
-            </div>
-          </div>
-        </div>
+    <div className='bg-white w-full h-full '>
+      <div className="pt-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+          {/* Breadcrumb */}
+              <div className="flex items-center gap-2 text-sm text-foreground">
+                <Link href="/" className="hover:text-accent">Home</Link>
+                <span>/</span>
+                <Link href="/news" className="hover:text-accent">{t('breadcrumb')}</Link>
+                <span>/</span>
+                <span className="text-primary font-semibold">{locale === 'en' ? singlenews.title_eng.length > 10 ? `${singlenews.title_eng.slice(0, 10)}...` : singlenews.title_eng : singlenews.title.length > 10 ? `${singlenews.title.slice(0, 10)}...` : singlenews.title}</span>
+              </div>
 
-       <div className="w-full">
-            <div className="flex items-center h-fit md:w-1/2 w-full py-4">
-              <Image 
-              src={singlenews.news_img.startsWith('/uploads/') ? `${process.env.NEXT_PUBLIC_ROOT_URL}${singlenews.news_img}` : singlenews.news_img} 
-              alt={locale === 'en' ? singlenews.title_eng : singlenews.title}
-              width={500}
-              height={500}
-              className="w-full h-fit"
-              loading='lazy'/>
+          <div>
+              <div className="flex items-center h-fit md:w-1/2 w-full py-4">
+                <Image 
+                src={singlenews.news_img.startsWith('/uploads/') ? `${process.env.NEXT_PUBLIC_ROOT_URL}${singlenews.news_img}` : singlenews.news_img} 
+                alt={locale === 'en' ? singlenews.title_eng : singlenews.title}
+                width={500}
+                height={500}
+                className="w-full h-fit"
+                loading='lazy'/>
+              </div>
+              <h1 className="lg:text-3xl text-xl text-black font-bold py-2">
+                {locale === 'en' ? singlenews.title_eng: singlenews.title}
+              </h1>
+              <h2 className="lg:text-base text-sm text-gray-500 pb-8">
+                {formatDate(singlenews.event_date.toString())}
+              </h2>
+              <div className="text-base text-black pb-8">
+                <DompurifyContent text={locale === 'en' ? singlenews.description_eng : singlenews.description} />
+              </div>
             </div>
-            <h1 className="lg:text-3xl text-xl text-black font-bold py-2">
-              {locale === 'en' ? singlenews.title_eng: singlenews.title}
-            </h1>
-            <h2 className="lg:text-base text-sm text-gray-500 pb-8">
-              {formatDate(singlenews.event_date.toString())}
-            </h2>
-            <div className="text-base text-black pb-8">
-              <DompurifyContent text={locale === 'en' ? singlenews.description_eng : singlenews.description} />
-            </div>
-          </div>
-    </>
+      </div>
+    </div>
   )
 }
