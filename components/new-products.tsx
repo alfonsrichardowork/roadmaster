@@ -15,11 +15,11 @@ export async function NewProducts() {
       cover_img: true,
       name: true,
       slug: true,
-      allCat: {
-        include: {
-          category: true
-        }
-      }
+      // allCat: {
+      //   include: {
+      //     category: true
+      //   }
+      // }
     },
     take: 4,
     orderBy: {

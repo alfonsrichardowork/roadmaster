@@ -2,11 +2,16 @@
   "Navbar Footer": {
     "products": "Produk",
     "about": "Tentang Kami",
+    "about-desktop": "Tentang",
     "contact" : "Kontak",
     "support" : "Bantuan",
     "company": "Perusahaan",
     "catalog" : "Katalog",
+    "manual" : "Manual",
     "social-media" : "Media Sosial",
+    "download" : "Unduh",
+    "service" : "Servis & Garansi",
+    "service-desktop" : "Servis",
     "view-all-product": "Lihat Semua Produk"
   },
   "All Category Page": {
@@ -39,7 +44,6 @@
   },
   "About Us Page": {
     "title": "Tentang Kami",
-    "tagline": "ROADMASTER – MENEMBUS BATAS, GETARKAN JIWA",
     "desc-1": "Selama lebih dari dua dekade, Roadmaster Speaker telah menjadi bagian dari perjalanan audio di Indonesia—bertransformasi dari produk head Unit Car Audio menjadi brand speaker aktif yang menghadirkan suara besar, tenaga kuat, dan performa yang bisa diandalkan.",
     "desc-2": "Kami percaya bahwa suara bukan sekadar didengar—suara harus dirasakan. Itulah mengapa setiap produk Roadmaster dirancang untuk memberikan impact, baik untuk kebutuhan hiburan, maupun penggunaan semi-professional.",
     "desc-3": "Kepercayaan pasar bukan hanya datang dari pengguna, tetapi juga dari institusi, termasuk kolaborasi dengan pemerintah dalam penyediaan sistem audio untuk kebutuhan publik.",
@@ -90,6 +94,16 @@
     "title": "Kontak Kami",
     "desc": "Hubungi Roadmaster untuk pertanyaan, informasi produk speaker, atau dukungan pelanggan. Tim kami siap membantu Anda.",
     "keywords": "kontak roadmaster, whatsapp roadmaster, telpon roadmaster, tanya roadmaster"
+  },
+  "Metadata download page": {
+    "title": "Unduh",
+    "desc": "Akses dan unduh manual serta katalog produk roadmaster",
+    "keywords": "unduh roadmaster, manual produk, katalog produk, manual roadmaster, katalog roadmaster"
+  },
+  "Metadata service page": {
+    "title": "Layanan & Garansi",
+    "desc": "Temukan informasi mengenai layanan produk, cakupan garansi, dan dukungan untuk produk Roadmaster",
+    "keywords": "layanan roadmaster, garansi roadmaster, dukungan produk, layanan perbaikan, informasi garansi"
   },
   "Metadata category page": {
     "title": "Semua Kategori",

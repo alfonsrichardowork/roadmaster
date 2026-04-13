@@ -3,8 +3,7 @@
 import { useEffect, useState } from 'react'
 import { ChevronDown, Menu, X } from 'lucide-react'
 import { useLocale, useTranslations } from 'next-intl';
-import { usePathname } from 'next/navigation';
-import { Link } from '@/i18n/navigation';
+import { Link, usePathname } from '@/i18n/navigation';
 import Image from 'next/image';
 import { Button } from './ui/button';
 import { LanguageSwitcher } from './language-switcher';
@@ -26,10 +25,10 @@ export function Navigation({ categories, allnews }: NavigationProps) {
     const [navbarBg, setNavbarBg] = useState(false);
     const locale = useLocale()
 
-
     useEffect(() => {
         const updateNavbarBg = () => {
-            if (pathname.includes('/products') || pathname.includes('/produk') || pathname.includes('/tentang')|| pathname.includes('/about') || pathname.includes('berita')|| pathname.includes('/news')) {
+            // if (pathname.includes('/products') || pathname.includes('/produk') || pathname.includes('/tentang')|| pathname.includes('/about') || pathname.includes('berita')|| pathname.includes('/news')) {
+            if (pathname != '/' && pathname != '/category' && pathname != '/category/[...slug]') {
             setNavbarBg(true);
             return;
             }
@@ -83,10 +82,16 @@ export function Navigation({ categories, allnews }: NavigationProps) {
                     </div>
                 </div>
                 <Link href="/about" className='hover:cursor-pointer'>
-                    {t_navbar('about')}
+                    {t_navbar('about-desktop')}
                 </Link>
                 <Link href="/contact" className='hover:cursor-pointer'>
                     {t_navbar('contact')}
+                </Link>
+                <Link href="/download" className='hover:cursor-pointer'>
+                    {t_navbar('download')}
+                </Link>
+                <Link href="/service" className='hover:cursor-pointer'>
+                    {t_navbar('service-desktop')}
                 </Link>
             </div>
           
@@ -209,9 +214,9 @@ export function Navigation({ categories, allnews }: NavigationProps) {
 
                                 <ScrollBar orientation="horizontal" />
                                 </ScrollArea>
-                                <Link href={'/category'} className='w-full flex items-center justify-center text-sm font-semibold mt-2 mb-4' onClick={() => setIsOpen(false)}>
+                                {/* <Link href={'/category'} className='w-full flex items-center justify-center text-sm font-semibold mt-2 mb-4' onClick={() => setIsOpen(false)}>
                                     {t_navbar('view-all-product')}
-                                </Link>
+                                </Link> */}
                             </AccordionContent>
                         </AccordionItem>
                     </Accordion>
@@ -221,18 +226,28 @@ export function Navigation({ categories, allnews }: NavigationProps) {
                         {t_navbar('about')}
                     </Link>
                 </div>
-                <div>
+                <div className='pb-4'>
                     <Link href="/contact" className='hover:cursor-pointer hover:underline' onClick={() => setIsOpen(false)}>
                         {t_navbar('contact')}
                     </Link>
                 </div>
+                <div className='pb-4'>
+                    <Link href="/download" className='hover:cursor-pointer hover:underline' onClick={() => setIsOpen(false)}>
+                        {t_navbar('download')}
+                    </Link>
+                </div>
+                <div>
+                    <Link href="/service" className='hover:cursor-pointer hover:underline' onClick={() => setIsOpen(false)}>
+                        {t_navbar('service')}
+                    </Link>
+                </div>
             </div>
-            <div className='md:block hidden'>
+            {/* <div className='md:block hidden'>
                 <Separator className='my-6'/>
                 <Link href={'/category'} className='w-full flex items-center justify-center text-base font-semibold hover:scale-105 hover:underline' onClick={() => setIsOpen(false)}>
                     {t_navbar('view-all-product')}
                 </Link>
-            </div>
+            </div> */}
         </div>
       </div>
 

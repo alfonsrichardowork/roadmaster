@@ -188,49 +188,6 @@ export default function ContactPage() {
           </div>
         </section>
 
-        {/* FAQ Section */}
-        <section className="py-24 px-4 sm:px-6 lg:px-8 bg-white">
-          <div className="max-w-4xl mx-auto">
-            <div className="fade-in-down text-center space-y-6 mb-20">
-              <h2 className="text-4xl font-bold text-primary">Frequently Asked Questions</h2>
-              <p className="text-lg text-foreground/70">
-                Find quick answers to common questions about our products and services.
-              </p>
-            </div>
-
-            <div className="space-y-4">
-              {[
-                {
-                  q: 'What is your return policy?',
-                  a: 'We offer a 30-day money-back guarantee on all products. If you&apos;re not satisfied, simply contact us for a full refund.',
-                },
-                {
-                  q: 'Do you offer international shipping?',
-                  a: 'Yes, we ship to over 50 countries worldwide. Shipping costs and delivery times vary by location.',
-                },
-                {
-                  q: 'What warranty coverage do you provide?',
-                  a: 'All Roadmaster products come with a 2-year limited warranty covering manufacturing defects.',
-                },
-                {
-                  q: 'How can I track my order?',
-                  a: 'Once your order ships, you&apos;ll receive a tracking number via email. You can use this to monitor your delivery.',
-                },
-              ].map((faq, index) => (
-                <div key={index} className={`fade-in-up stagger-${(index % 2) + 1} group`}>
-                  <div className="bg-secondary rounded-lg p-6 border border-border hover:border-accent transition-colors duration-300">
-                    <h3 className="text-lg font-bold text-primary mb-3 group-hover:text-accent transition-colors">
-                      {faq.q}
-                    </h3>
-                    <p className="text-foreground/70 leading-relaxed">
-                      {faq.a}
-                    </p>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
 
         {/* Support Resources */}
         <section className="py-24 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-secondary to-background">

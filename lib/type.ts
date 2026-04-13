@@ -6,10 +6,10 @@ export type ProductCardData = Prisma.productGetPayload<{
     cover_img: true
     name: true
     slug: true
-    allCat: {
-      include: {
-        category: true
-      }
-    },
+    // allCat: {
+    //   include: {
+    //     category: true
+    //   }
+    // },
   }
 }>

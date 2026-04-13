@@ -49,6 +49,14 @@ export const routing = defineRouting({
     "/news/[newsSlug]": {
       id: "/berita/[newsSlug]",
       en: "/news/[newsSlug]"
-    }
+    },
+    "/download": {
+      id: "/unduh",
+      en: "/download"
+    },
+    "/service": {
+      id: "/servis",
+      en: "/service"
+    },
   }
 });

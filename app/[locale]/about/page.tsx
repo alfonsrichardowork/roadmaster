@@ -43,7 +43,7 @@ export default async function AboutPage() {
 
               </div>
               <div className="fade-in-left space-y-8">
-                <Image src={'/images/roadmaster/tentang-kami.webp'} alt='About Us Image' width={500} height={500}/>
+                <Image src={'/images/roadmaster/tentang-kami.webp'} alt='About Us Image' width={500} height={500} className='lg:w-full sm:w-2/3 w-full h-full object-contain'/>
               </div>
             </div>
                     
@@ -86,8 +86,8 @@ export default async function AboutPage() {
                 </div>
               </div>
 
-              <div className='w-full flex text-center items-center justify-center my-12 font-bold text-xl'>
-                {t('tagline')}
+              <div className='w-full flex text-center items-center justify-center mb-12 mt-20 font-bold text-xl'>
+                <Image src={'/images/roadmaster/tagline_roadmaster_black.webp'} alt='Tagline Roadmaster' width={300} height={100} className='md:w-1/2 sm:w-2/3 w-full h-full object-contain flex items-center justify-center'/>
               </div>
           </div>
         </section>

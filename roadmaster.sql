@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 12, 2026 at 03:35 PM
--- Server version: 10.4.32-MariaDB
--- PHP Version: 8.2.12
+-- Generation Time: Apr 13, 2026 at 10:49 AM
+-- Server version: 10.4.28-MariaDB
+-- PHP Version: 8.2.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -48,8 +48,8 @@ CREATE TABLE `allcategory` (
 --
 
 INSERT INTO `allcategory` (`id`, `brandId`, `type`, `name`, `slug`, `description`, `thumbnail_url`, `createdAt`, `updatedAt`, `updatedBy`, `description_eng`, `name_eng`, `slug_eng`) VALUES
-('059516df-7497-420c-9ba6-6fb9d04d0ee4', '680c5eee-7ed7-41bc-b14b-4185f8a1c379', 'Category', 'Stereo Aktif', 'stereo-aktif', 'Speaker stereo dengan amplifier terintegrasi yang menghasilkan audio kiri dan kanan yang seimbang untuk pengalaman mendengarkan yang jernih dan imersif.', '/uploads/others/Cozy living room with speakers and turntable.webp', '2026-03-31 14:49:57.103', '2026-04-08 04:27:31.079', 'admin', 'Stereo speakers with integrated amplification that produce balanced left-right audio for clear and immersive listening.', 'Powered Stereo', 'powered-stereo'),
-('0625a69d-efa3-4d80-a69e-a42aaeb4ecbd', '680c5eee-7ed7-41bc-b14b-4185f8a1c379', 'Category', 'Tower Aktif', 'tower-aktif', 'Speaker tinggi dengan amplifier terintegrasi yang dirancang untuk menghasilkan suara kuat yang memenuhi ruangan, cocok untuk penggunaan di rumah maupun acara.', '/uploads/others/Modern living room with sleek speakers.webp', '2026-03-31 14:50:22.270', '2026-04-08 04:28:37.555', 'admin', 'Tall speakers with built-in amplifiers designed to deliver powerful, room-filling sound for home or event setups.', 'Powered Tower', 'powered-tower'),
+('059516df-7497-420c-9ba6-6fb9d04d0ee4', '680c5eee-7ed7-41bc-b14b-4185f8a1c379', 'Category', 'Powered Stereo', 'powered-stereo', 'Speaker stereo dengan amplifier terintegrasi yang menghasilkan audio kiri dan kanan yang seimbang untuk pengalaman mendengarkan yang jernih dan imersif.', '/uploads/others/Cozy living room with speakers and turntable.webp', '2026-03-31 14:49:57.103', '2026-04-13 00:51:31.522', 'admin', 'Stereo speakers with integrated amplification that produce balanced left-right audio for clear and immersive listening.', 'Powered Stereo', 'powered-stereo'),
+('0625a69d-efa3-4d80-a69e-a42aaeb4ecbd', '680c5eee-7ed7-41bc-b14b-4185f8a1c379', 'Category', 'Powered Tower', 'powered-tower', 'Speaker tinggi dengan amplifier terintegrasi yang dirancang untuk menghasilkan suara kuat yang memenuhi ruangan, cocok untuk penggunaan di rumah maupun acara.', '/uploads/others/Modern living room with sleek speakers.webp', '2026-03-31 14:50:22.270', '2026-04-13 00:51:17.835', 'admin', 'Tall speakers with built-in amplifiers designed to deliver powerful, room-filling sound for home or event setups.', 'Powered Tower', 'powered-tower'),
 ('3f7a7f28-0faf-40f2-b266-1528a4445b68', '680c5eee-7ed7-41bc-b14b-4185f8a1c379', 'Sub Category', 'Seri Monster', 'seri-monster', 'Speaker besar dan bertenaga yang dirancang untuk menghasilkan suara besar dengan bass mendalam, cocok untuk ruangan luas dan acara meriah.', '/uploads/others/ChatGPT Image Apr 8_ 2026_ 01_58_18 PM.webp', '2026-03-31 14:51:11.533', '2026-04-08 06:59:45.414', 'admin', 'Large and powerful speakers engineered to deliver massive sound and deep bass for big spaces and energetic events.', 'Monster Series', 'monster-series'),
 ('488f1247-3dc3-4071-9945-f3317236c1a1', '680c5eee-7ed7-41bc-b14b-4185f8a1c379', 'Sub Category', 'Seri KD Pro', 'seri-kd-pro', 'Speaker kelas profesional yang dirancang untuk proyeksi suara yang kuat dan performa andal untuk panggung maupun acara.', '/uploads/others/openart-image_1775629783828_9c55e25f_1775629783939_83caa1ba.webp', '2026-03-31 14:51:22.983', '2026-04-08 06:32:56.996', 'admin', 'Professional-grade speakers designed for powerful sound projection and dependable performance for stage and event use.', 'KD Pro Series', 'kd-pro-series'),
 ('49abbb86-f7a6-4d61-a57e-278991a31f30', '680c5eee-7ed7-41bc-b14b-4185f8a1c379', 'Sub Category', 'Seri Party', 'seri-party', 'Speaker pesta yang seru dan bertenaga dengan suara dinamis serta fitur menarik untuk meramaikan setiap acara.', '/uploads/others/Vibrant party vibes and a speaker.webp', '2026-03-31 14:51:59.131', '2026-04-08 06:21:55.520', 'admin', 'Fun and powerful party speakers with dynamic sound and exciting features to bring energy to any gathering.', 'Party Series', 'party-series'),
@@ -57,7 +57,7 @@ INSERT INTO `allcategory` (`id`, `brandId`, `type`, `name`, `slug`, `description
 ('705cbf21-1e44-4f8f-ae0e-39d568369e8a', '680c5eee-7ed7-41bc-b14b-4185f8a1c379', 'Sub Category', 'Seri PA', 'seri-pa', 'Speaker PA profesional yang dirancang untuk vokal yang jernih, daya yang kuat, dan performa andal untuk acara, presentasi, dan kebutuhan sound system.', '/uploads/others/Outdoor event with PA speaker.webp', '2026-03-31 14:51:43.808', '2026-04-08 06:20:27.513', 'admin', 'Professional PA speakers designed for clear vocals, powerful output, and reliable performance for events, presentations, and public speaking.', 'PA Series', 'pa-series'),
 ('821782fa-eede-4710-9d67-f803cc56be3b', '680c5eee-7ed7-41bc-b14b-4185f8a1c379', 'Sub Category', 'Minion', 'minion', 'Speaker ringkas dan portabel yang memberikan performa audio praktis untuk hiburan sehari-hari.', '/uploads/others/Minion speakers with vibrant lighting effects.webp', '2026-03-31 14:51:31.058', '2026-04-08 06:25:09.951', 'admin', 'Compact and portable speakers that offer convenient audio performance for everyday entertainment.', 'Minion', 'minion'),
 ('9945a47f-0755-4f8c-b421-434c7f733f66', '680c5eee-7ed7-41bc-b14b-4185f8a1c379', 'Sub Category', 'Seri Probeat', 'seri-probeat', 'Speaker berperforma tinggi yang menghasilkan bass kuat, mid yang jelas, dan treble tajam untuk pecinta musik maupun penggunaan profesional.', '/uploads/others/Sleek Bluetooth speaker on stage.webp', '2026-03-31 14:52:13.506', '2026-04-08 06:20:39.293', 'admin', 'High-performance speakers built to deliver strong bass, clear mids, and crisp highs for music enthusiasts and professional use.', 'Probeat Series', 'probeat-series'),
-('b5def30b-0648-4c0c-8602-2a8d4363b36b', '680c5eee-7ed7-41bc-b14b-4185f8a1c379', 'Category', 'Portabel', 'portabel', 'Speaker yang ringkas dan ringan, memberikan suara berkualitas tinggi yang praktis untuk mendengarkan musik di mana saja.', '/uploads/others/Beachside speaker and tropical vibes.webp', '2026-03-31 14:50:07.571', '2026-04-08 04:27:57.511', 'admin', 'Compact and lightweight speakers that provide convenient, high-quality sound for music anywhere you go.', 'Portable', 'portable');
+('b5def30b-0648-4c0c-8602-2a8d4363b36b', '680c5eee-7ed7-41bc-b14b-4185f8a1c379', 'Category', 'Portable', 'portable', 'Speaker yang ringkas dan ringan, memberikan suara berkualitas tinggi yang praktis untuk mendengarkan musik di mana saja.', '/uploads/others/Beachside speaker and tropical vibes.webp', '2026-03-31 14:50:07.571', '2026-04-13 00:51:24.956', 'admin', 'Compact and lightweight speakers that provide convenient, high-quality sound for music anywhere you go.', 'Portable', 'portable');
 
 -- --------------------------------------------------------
 
@@ -79,52 +79,52 @@ CREATE TABLE `allproductcategory` (
 
 INSERT INTO `allproductcategory` (`id`, `productId`, `categoryId`, `createdAt`, `updatedAt`) VALUES
 ('03d44fa5-9983-4c8d-8b98-15e5b623efd0', 'd96ca88f-1b20-437d-973e-4a5fc0655de1', '3f7a7f28-0faf-40f2-b266-1528a4445b68', '2026-03-31 15:21:22.552', '2026-04-08 06:59:45.432'),
-('0931f041-62e0-4eef-9088-4b2b1adc9140', 'd96ca88f-1b20-437d-973e-4a5fc0655de1', '059516df-7497-420c-9ba6-6fb9d04d0ee4', '2026-03-31 15:21:22.550', '2026-04-08 04:27:31.085'),
+('0931f041-62e0-4eef-9088-4b2b1adc9140', 'd96ca88f-1b20-437d-973e-4a5fc0655de1', '059516df-7497-420c-9ba6-6fb9d04d0ee4', '2026-03-31 15:21:22.550', '2026-04-13 00:51:31.529'),
 ('2461cc16-a397-4d7d-8f09-d95683303843', '5a4b4994-bb7c-4ef5-9f7f-0764fde8cbe1', '49abbb86-f7a6-4d61-a57e-278991a31f30', '2026-03-31 15:10:57.073', '2026-04-08 06:21:55.529'),
-('2e058330-4020-4a07-916b-8df1acb17e4f', 'f33a3fca-2a2c-4913-8ec9-9a98946ba7b1', 'b5def30b-0648-4c0c-8602-2a8d4363b36b', '2026-03-31 15:10:21.505', '2026-04-08 04:27:57.515'),
-('327ac585-4af2-4072-95a5-98b270af0c41', '15a9bc11-1dfb-49c5-8a06-8836d35f9921', '059516df-7497-420c-9ba6-6fb9d04d0ee4', '2026-03-31 15:27:04.617', '2026-04-08 04:27:31.085'),
-('38294b07-a629-483c-ad0b-bdd4cd238276', '0fc1bf44-b61d-4991-9403-0b0ecef8c791', 'b5def30b-0648-4c0c-8602-2a8d4363b36b', '2026-03-31 15:09:54.637', '2026-04-08 04:27:57.515'),
-('4092044f-df39-452f-a7b8-ae1648c78b6b', '8cf82b55-a985-4a5f-83ff-0484ffcdf5c5', '059516df-7497-420c-9ba6-6fb9d04d0ee4', '2026-03-31 15:18:31.589', '2026-04-08 04:27:31.085'),
+('2e058330-4020-4a07-916b-8df1acb17e4f', 'f33a3fca-2a2c-4913-8ec9-9a98946ba7b1', 'b5def30b-0648-4c0c-8602-2a8d4363b36b', '2026-03-31 15:10:21.505', '2026-04-13 00:51:24.964'),
+('327ac585-4af2-4072-95a5-98b270af0c41', '15a9bc11-1dfb-49c5-8a06-8836d35f9921', '059516df-7497-420c-9ba6-6fb9d04d0ee4', '2026-03-31 15:27:04.617', '2026-04-13 00:51:31.529'),
+('38294b07-a629-483c-ad0b-bdd4cd238276', '0fc1bf44-b61d-4991-9403-0b0ecef8c791', 'b5def30b-0648-4c0c-8602-2a8d4363b36b', '2026-03-31 15:09:54.637', '2026-04-13 00:51:24.964'),
+('4092044f-df39-452f-a7b8-ae1648c78b6b', '8cf82b55-a985-4a5f-83ff-0484ffcdf5c5', '059516df-7497-420c-9ba6-6fb9d04d0ee4', '2026-03-31 15:18:31.589', '2026-04-13 00:51:31.529'),
 ('4224f6fc-86ef-41c4-85e5-95b123bcf8ca', 'f33a3fca-2a2c-4913-8ec9-9a98946ba7b1', '49abbb86-f7a6-4d61-a57e-278991a31f30', '2026-03-31 15:10:21.507', '2026-04-08 06:21:55.529'),
 ('43236125-930a-427e-a915-71857d019e61', 'cd34c76d-1738-4a80-be66-0e51d7da6693', '49abbb86-f7a6-4d61-a57e-278991a31f30', '2026-03-31 15:29:10.357', '2026-04-08 06:21:55.529'),
-('47c94c2a-8ec9-45b2-8191-53a15a7fe7c2', '3c1f02e6-80d0-42e3-85e2-303261105341', '059516df-7497-420c-9ba6-6fb9d04d0ee4', '2026-03-31 15:13:35.315', '2026-04-08 04:27:31.085'),
+('47c94c2a-8ec9-45b2-8191-53a15a7fe7c2', '3c1f02e6-80d0-42e3-85e2-303261105341', '059516df-7497-420c-9ba6-6fb9d04d0ee4', '2026-03-31 15:13:35.315', '2026-04-13 00:51:31.529'),
 ('505e47dd-0ad1-4226-9c92-18c7a7350bd9', '3c1f02e6-80d0-42e3-85e2-303261105341', '4f4f59f5-1904-4ba3-bac6-149a991a4c64', '2026-03-31 15:13:35.318', '2026-04-08 07:03:22.012'),
 ('509078e9-cf83-4cb7-97a2-fc6b0b02a55f', '8cf82b55-a985-4a5f-83ff-0484ffcdf5c5', '4f4f59f5-1904-4ba3-bac6-149a991a4c64', '2026-03-31 15:18:31.591', '2026-04-08 07:03:22.012'),
 ('5b9d3c33-8342-4166-aa2d-fa54e4d530db', '6e7c0a0f-be33-4490-826c-814a59048eb5', '705cbf21-1e44-4f8f-ae0e-39d568369e8a', '2026-03-31 15:06:31.095', '2026-04-08 06:20:27.520'),
-('5d8a35a1-de80-4d66-8bc8-d4a71a8f5882', 'a8887af0-547d-42e1-8cca-779cf1841ed5', '059516df-7497-420c-9ba6-6fb9d04d0ee4', '2026-03-31 15:17:50.589', '2026-04-08 04:27:31.085'),
-('65156752-611d-482f-9333-966557ec5349', 'a4c4828a-80c1-4698-be71-892994e657df', '059516df-7497-420c-9ba6-6fb9d04d0ee4', '2026-03-31 15:13:16.242', '2026-04-08 04:27:31.085'),
+('5d8a35a1-de80-4d66-8bc8-d4a71a8f5882', 'a8887af0-547d-42e1-8cca-779cf1841ed5', '059516df-7497-420c-9ba6-6fb9d04d0ee4', '2026-03-31 15:17:50.589', '2026-04-13 00:51:31.529'),
+('65156752-611d-482f-9333-966557ec5349', 'a4c4828a-80c1-4698-be71-892994e657df', '059516df-7497-420c-9ba6-6fb9d04d0ee4', '2026-03-31 15:13:16.242', '2026-04-13 00:51:31.529'),
 ('78d5bc7b-7e68-4a4f-b552-1827d3a6122c', '3847c27a-f9f3-4c62-9213-8f4072e62117', '3f7a7f28-0faf-40f2-b266-1528a4445b68', '2026-03-31 15:21:46.462', '2026-04-08 06:59:45.432'),
 ('7c10230f-dc0e-4b6c-9edd-8bf52d25971e', 'a8887af0-547d-42e1-8cca-779cf1841ed5', '4f4f59f5-1904-4ba3-bac6-149a991a4c64', '2026-03-31 15:17:50.591', '2026-04-08 07:03:22.012'),
 ('7cdb0080-6866-4c6f-8881-cb038ece5fff', '8403ceac-7570-475d-81df-82586ff41921', '4f4f59f5-1904-4ba3-bac6-149a991a4c64', '2026-04-08 15:42:56.052', '2026-04-08 15:42:56.052'),
 ('7d69729f-bf91-4c9c-afd1-627006ef2133', 'a4c4828a-80c1-4698-be71-892994e657df', '4f4f59f5-1904-4ba3-bac6-149a991a4c64', '2026-03-31 15:13:16.245', '2026-04-08 07:03:22.012'),
-('7dc00797-9afb-4bc3-897c-af6b94df5e6b', '3847c27a-f9f3-4c62-9213-8f4072e62117', '059516df-7497-420c-9ba6-6fb9d04d0ee4', '2026-03-31 15:21:46.460', '2026-04-08 04:27:31.085'),
+('7dc00797-9afb-4bc3-897c-af6b94df5e6b', '3847c27a-f9f3-4c62-9213-8f4072e62117', '059516df-7497-420c-9ba6-6fb9d04d0ee4', '2026-03-31 15:21:46.460', '2026-04-13 00:51:31.529'),
 ('82532671-a297-4eb2-ae84-3f9784829bb2', '57777133-51e7-4ae8-b0de-fee20edce0cc', '488f1247-3dc3-4071-9945-f3317236c1a1', '2026-03-31 15:19:50.787', '2026-04-08 06:32:57.013'),
-('84881e8a-24f9-4ec7-a9a1-52ef9eb5ce85', '4e49b2aa-2eb2-4ae4-93af-7729e23fa404', 'b5def30b-0648-4c0c-8602-2a8d4363b36b', '2026-03-31 15:09:29.172', '2026-04-08 04:27:57.515'),
+('84881e8a-24f9-4ec7-a9a1-52ef9eb5ce85', '4e49b2aa-2eb2-4ae4-93af-7729e23fa404', 'b5def30b-0648-4c0c-8602-2a8d4363b36b', '2026-03-31 15:09:29.172', '2026-04-13 00:51:24.964'),
 ('8c899b10-4bee-441e-9cc3-8c5ac1ab47dc', '5826462f-b495-4df7-a21f-bbf19b981a48', '9945a47f-0755-4f8c-b421-434c7f733f66', '2026-03-31 15:12:02.370', '2026-04-08 06:20:39.298'),
-('8d312cc8-7225-4da4-b9e1-b4346c840c72', '9ab06c62-3e47-4751-abf9-9c2a96d70421', 'b5def30b-0648-4c0c-8602-2a8d4363b36b', '2026-03-31 15:03:57.014', '2026-04-08 04:27:57.515'),
+('8d312cc8-7225-4da4-b9e1-b4346c840c72', '9ab06c62-3e47-4751-abf9-9c2a96d70421', 'b5def30b-0648-4c0c-8602-2a8d4363b36b', '2026-03-31 15:03:57.014', '2026-04-13 00:51:24.964'),
 ('8f5795b6-ce32-41ef-9812-90676cd09619', '95a8386d-0151-4ef5-9b7a-23f2988ffbd8', '488f1247-3dc3-4071-9945-f3317236c1a1', '2026-03-31 15:19:20.279', '2026-04-08 06:32:57.013'),
 ('8fcdfcfb-bf79-4239-8fe4-23313461ecd3', '15a9bc11-1dfb-49c5-8a06-8836d35f9921', '821782fa-eede-4710-9d67-f803cc56be3b', '2026-03-31 15:27:04.621', '2026-04-08 06:25:09.958'),
 ('9391cbb2-1720-4d18-befd-58690402edfa', 'ee550140-1522-4320-8790-b868ce5b74f3', '9945a47f-0755-4f8c-b421-434c7f733f66', '2026-03-31 15:11:37.282', '2026-04-08 06:20:39.298'),
 ('95345109-bfe9-4665-a8a2-559adb8dc723', '9ab06c62-3e47-4751-abf9-9c2a96d70421', '705cbf21-1e44-4f8f-ae0e-39d568369e8a', '2026-03-31 15:03:57.017', '2026-04-08 06:20:27.520'),
 ('9b0d5fd4-8bc2-4da8-9824-b7b0a364c4c8', '83d4e98c-e184-4c24-978e-0f6d0aafffbc', '705cbf21-1e44-4f8f-ae0e-39d568369e8a', '2026-03-31 15:05:41.667', '2026-04-08 06:20:27.520'),
-('9c04946b-9b96-41c2-8499-43782daf5636', '9be101d2-1c34-450b-a0dd-01cf009c560e', '059516df-7497-420c-9ba6-6fb9d04d0ee4', '2026-03-31 15:13:03.721', '2026-04-08 04:27:31.085'),
+('9c04946b-9b96-41c2-8499-43782daf5636', '9be101d2-1c34-450b-a0dd-01cf009c560e', '059516df-7497-420c-9ba6-6fb9d04d0ee4', '2026-03-31 15:13:03.721', '2026-04-13 00:51:31.529'),
 ('9f1bacb8-056d-4dc9-ae09-c67b8f319705', '4e49b2aa-2eb2-4ae4-93af-7729e23fa404', '49abbb86-f7a6-4d61-a57e-278991a31f30', '2026-03-31 15:09:29.176', '2026-04-08 06:21:55.529'),
-('a0fdca77-1a33-42df-901b-8f188ef03ae1', 'ee550140-1522-4320-8790-b868ce5b74f3', '0625a69d-efa3-4d80-a69e-a42aaeb4ecbd', '2026-03-31 15:11:37.280', '2026-04-08 04:28:37.560'),
-('a6ccbad7-bb1c-4204-8449-8d5ad0575968', '6e7c0a0f-be33-4490-826c-814a59048eb5', 'b5def30b-0648-4c0c-8602-2a8d4363b36b', '2026-03-31 15:06:31.093', '2026-04-08 04:27:57.515'),
-('ab27574c-b6ea-4f5e-8e76-c357567ee614', '4dc849b5-3796-4ba4-8878-c194953a9fa3', 'b5def30b-0648-4c0c-8602-2a8d4363b36b', '2026-03-31 15:04:57.797', '2026-04-08 04:27:57.515'),
-('aeef5a3b-14bc-4977-b0f2-9808cb93dd2c', '8403ceac-7570-475d-81df-82586ff41921', '059516df-7497-420c-9ba6-6fb9d04d0ee4', '2026-04-08 15:42:56.050', '2026-04-08 15:42:56.050'),
-('b1a87d19-1819-458a-acd7-ae4749182665', 'd1e7baa1-7ce6-4720-9530-30b84eb97c31', 'b5def30b-0648-4c0c-8602-2a8d4363b36b', '2026-03-31 15:09:05.033', '2026-04-08 04:27:57.515'),
+('a0fdca77-1a33-42df-901b-8f188ef03ae1', 'ee550140-1522-4320-8790-b868ce5b74f3', '0625a69d-efa3-4d80-a69e-a42aaeb4ecbd', '2026-03-31 15:11:37.280', '2026-04-13 00:51:17.866'),
+('a6ccbad7-bb1c-4204-8449-8d5ad0575968', '6e7c0a0f-be33-4490-826c-814a59048eb5', 'b5def30b-0648-4c0c-8602-2a8d4363b36b', '2026-03-31 15:06:31.093', '2026-04-13 00:51:24.964'),
+('ab27574c-b6ea-4f5e-8e76-c357567ee614', '4dc849b5-3796-4ba4-8878-c194953a9fa3', 'b5def30b-0648-4c0c-8602-2a8d4363b36b', '2026-03-31 15:04:57.797', '2026-04-13 00:51:24.964'),
+('aeef5a3b-14bc-4977-b0f2-9808cb93dd2c', '8403ceac-7570-475d-81df-82586ff41921', '059516df-7497-420c-9ba6-6fb9d04d0ee4', '2026-04-08 15:42:56.050', '2026-04-13 00:51:31.529'),
+('b1a87d19-1819-458a-acd7-ae4749182665', 'd1e7baa1-7ce6-4720-9530-30b84eb97c31', 'b5def30b-0648-4c0c-8602-2a8d4363b36b', '2026-03-31 15:09:05.033', '2026-04-13 00:51:24.964'),
 ('b22db062-23df-4fdc-a17f-dddcff0d8d2d', '4dc849b5-3796-4ba4-8878-c194953a9fa3', '705cbf21-1e44-4f8f-ae0e-39d568369e8a', '2026-03-31 15:04:57.800', '2026-04-08 06:20:27.520'),
-('b28762f9-9c58-434e-915c-d283d09d5fef', '95a8386d-0151-4ef5-9b7a-23f2988ffbd8', '059516df-7497-420c-9ba6-6fb9d04d0ee4', '2026-03-31 15:19:20.277', '2026-04-08 04:27:31.085'),
+('b28762f9-9c58-434e-915c-d283d09d5fef', '95a8386d-0151-4ef5-9b7a-23f2988ffbd8', '059516df-7497-420c-9ba6-6fb9d04d0ee4', '2026-03-31 15:19:20.277', '2026-04-13 00:51:31.529'),
 ('b6600cd3-919d-478b-b24d-ac17c98939b0', '9a390596-9761-4552-b9aa-71904a27803b', '4f4f59f5-1904-4ba3-bac6-149a991a4c64', '2026-03-31 15:13:23.825', '2026-04-08 07:03:22.012'),
-('b939eec7-da35-4db0-9994-051a967f86fb', '5826462f-b495-4df7-a21f-bbf19b981a48', '0625a69d-efa3-4d80-a69e-a42aaeb4ecbd', '2026-03-31 15:12:02.366', '2026-04-08 04:28:37.560'),
+('b939eec7-da35-4db0-9994-051a967f86fb', '5826462f-b495-4df7-a21f-bbf19b981a48', '0625a69d-efa3-4d80-a69e-a42aaeb4ecbd', '2026-03-31 15:12:02.366', '2026-04-13 00:51:17.866'),
 ('bbfb6bba-cab5-4651-95ac-feafe3fad2c3', 'd1e7baa1-7ce6-4720-9530-30b84eb97c31', '49abbb86-f7a6-4d61-a57e-278991a31f30', '2026-03-31 15:09:05.036', '2026-04-08 06:21:55.529'),
-('c930d01c-797a-4136-8907-858a781dc064', '9a390596-9761-4552-b9aa-71904a27803b', '059516df-7497-420c-9ba6-6fb9d04d0ee4', '2026-03-31 15:13:23.823', '2026-04-08 04:27:31.085'),
-('d14c9344-0ca8-4d4f-a01f-3a8a431667f4', 'cd34c76d-1738-4a80-be66-0e51d7da6693', 'b5def30b-0648-4c0c-8602-2a8d4363b36b', '2026-03-31 15:29:10.355', '2026-04-08 04:27:57.515'),
-('d2c8f337-8794-42e6-87b5-55afd769efd1', '83d4e98c-e184-4c24-978e-0f6d0aafffbc', 'b5def30b-0648-4c0c-8602-2a8d4363b36b', '2026-03-31 15:05:41.665', '2026-04-08 04:27:57.515'),
-('e13d5fb9-8c77-4eff-81ec-8f7a1e4958a3', '57777133-51e7-4ae8-b0de-fee20edce0cc', '059516df-7497-420c-9ba6-6fb9d04d0ee4', '2026-03-31 15:19:50.782', '2026-04-08 04:27:31.085'),
+('c930d01c-797a-4136-8907-858a781dc064', '9a390596-9761-4552-b9aa-71904a27803b', '059516df-7497-420c-9ba6-6fb9d04d0ee4', '2026-03-31 15:13:23.823', '2026-04-13 00:51:31.529'),
+('d14c9344-0ca8-4d4f-a01f-3a8a431667f4', 'cd34c76d-1738-4a80-be66-0e51d7da6693', 'b5def30b-0648-4c0c-8602-2a8d4363b36b', '2026-03-31 15:29:10.355', '2026-04-13 00:51:24.964'),
+('d2c8f337-8794-42e6-87b5-55afd769efd1', '83d4e98c-e184-4c24-978e-0f6d0aafffbc', 'b5def30b-0648-4c0c-8602-2a8d4363b36b', '2026-03-31 15:05:41.665', '2026-04-13 00:51:24.964'),
+('e13d5fb9-8c77-4eff-81ec-8f7a1e4958a3', '57777133-51e7-4ae8-b0de-fee20edce0cc', '059516df-7497-420c-9ba6-6fb9d04d0ee4', '2026-03-31 15:19:50.782', '2026-04-13 00:51:31.529'),
 ('e4877eea-23ac-43c5-b69e-7021379b7722', '0fc1bf44-b61d-4991-9403-0b0ecef8c791', '49abbb86-f7a6-4d61-a57e-278991a31f30', '2026-03-31 15:09:54.640', '2026-04-08 06:21:55.529'),
-('f740e82d-f7c3-488f-aa43-3526b71a1478', '5a4b4994-bb7c-4ef5-9f7f-0764fde8cbe1', 'b5def30b-0648-4c0c-8602-2a8d4363b36b', '2026-03-31 15:10:57.068', '2026-04-08 04:27:57.515'),
+('f740e82d-f7c3-488f-aa43-3526b71a1478', '5a4b4994-bb7c-4ef5-9f7f-0764fde8cbe1', 'b5def30b-0648-4c0c-8602-2a8d4363b36b', '2026-03-31 15:10:57.068', '2026-04-13 00:51:24.964'),
 ('fa8cf262-1527-4db2-b079-a4de0baa9f84', '9be101d2-1c34-450b-a0dd-01cf009c560e', '4f4f59f5-1904-4ba3-bac6-149a991a4c64', '2026-03-31 15:13:03.723', '2026-04-08 07:03:22.012');
 
 -- --------------------------------------------------------

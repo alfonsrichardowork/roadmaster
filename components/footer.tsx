@@ -16,7 +16,7 @@ export async function Footer({ categories }: FooterProps) {
     <footer className="bg-primary text-primary-foreground">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-12 pb-8">
         {/* Main Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
+        <div className="grid grid-cols-1 md:grid-cols-5 gap-12 mb-12">
           {/* Brand */}
           <div>
             <IntlLink href="/" className="flex items-center">
@@ -54,24 +54,9 @@ export async function Footer({ categories }: FooterProps) {
                   {t_footer('about')}
                 </IntlLink>
               </li>
-              {/* <li>
-                <Link href="#" className="text-primary-foreground/80 hover:text-primary-foreground transition-colors">
-                  Blog
-                </Link>
-              </li>
-              <li>
-                <Link href="#" className="text-primary-foreground/80 hover:text-primary-foreground transition-colors">
-                  Careers
-                </Link>
-              </li> */}
               <li>
                 <IntlLink href="/contact" className="text-primary-foreground/80 hover:text-primary-foreground transition-colors">
                   {t_footer('contact')}
-                </IntlLink>
-              </li>
-              <li>
-                <IntlLink href="/catalogue" className="text-primary-foreground/80 hover:text-primary-foreground transition-colors">
-                  {t_footer('catalog')}
                 </IntlLink>
               </li>
             </ul>
@@ -144,6 +129,22 @@ export async function Footer({ categories }: FooterProps) {
                   </svg>
                 </Link>
               </div>
+
+          </div>
+          <div>
+            <h4 className="font-semibold mb-4">{t_footer('download')}</h4>
+            <ul className="space-y-3 text-sm">
+              <li>
+                <IntlLink href="/download" className="text-primary-foreground/80 hover:text-primary-foreground transition-colors">
+                  {t_footer('manual')}
+                </IntlLink>
+              </li>
+              <li>
+                <IntlLink href="/download" className="text-primary-foreground/80 hover:text-primary-foreground transition-colors">
+                  {t_footer('catalog')}
+                </IntlLink>
+              </li>
+            </ul>
           </div>
         </div>
 
