@@ -31,9 +31,8 @@ export async function NewsCard({ allnews, index }: NewsCardProps) {
             <div className="absolute -inset-0.5 bg-linear-to-br from-accent/30 to-transparent opacity-0 group-hover:opacity-100 rounded-lg transition-opacity duration-300 blur-lg"></div>
 
             <div className="relative bg-white rounded-lg overflow-hidden border border-border hover:shadow-2xl transition-all duration-500 h-full flex flex-col group-hover:translate-y-[-4px]">
-                <div className="h-40 bg-gradient-to-br from-accent/20 to-accent/5 flex items-center justify-center relative overflow-hidden">
-                <div className="absolute inset-0 bg-gradient-to-t from-accent/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                <Image src={process.env.NEXT_PUBLIC_ROOT_URL + allnews.news_img} alt={locale === 'id' ? allnews.title: allnews.title_eng} width={300} height={300} className='max-h-fit w-full'/>
+                <div className="max-h-full bg-gradient-to-br from-accent/20 to-accent/5 flex items-center justify-center relative overflow-hidden">
+                <Image src={process.env.NEXT_PUBLIC_ROOT_URL + allnews.news_img} alt={locale === 'id' ? allnews.title: allnews.title_eng} width={500} height={500} className='max-h-fit w-full'/>
                 </div>
 
                 <div className="p-6 flex flex-col flex-1">

@@ -61,7 +61,7 @@ export function Navigation({ categories, allnews }: NavigationProps) {
                 width={180}
                 height={60}
                 priority
-                className="max-h-8 w-auto"
+                className="max-h-10 w-auto"
                 />
             </Link>
 
@@ -97,9 +97,9 @@ export function Navigation({ categories, allnews }: NavigationProps) {
           
             <div className="w-1/3 hidden md:flex items-center justify-end gap-4">
                 <LanguageSwitcher categories={categories} news={allnews}/>
-                <Button className="bg-accent text-accent-foreground hover:bg-accent/90">
+                {/* <Button className="bg-accent text-accent-foreground hover:bg-accent/90">
                 {t_navbar('support')}
-                </Button>
+                </Button> */}
             </div>
 
             <div className='md:hidden w-1/3 flex justify-end gap-2 h-full items-center'>

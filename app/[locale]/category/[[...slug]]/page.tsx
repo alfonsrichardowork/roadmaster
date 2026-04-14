@@ -319,9 +319,11 @@ export default async function ProductsPage({ params }: ProductsPageProps) {
   });
 
 
+  console.log("slug.length: ", slug.length)
+
   return (
     <>
-        <section className="relative py-40 px-4 sm:px-6 lg:px-8 overflow-hidden">
+        <section className="relative pt-30 pb-20 px-4 sm:px-6 lg:px-8 overflow-hidden">
           <img 
             src={backgroundImage}
             alt="Product Page Background"
@@ -336,9 +338,11 @@ export default async function ProductsPage({ params }: ProductsPageProps) {
               <h1 className="text-3xl md:text-4xl font-bold text-background leading-tight">
                 {heroTitle}
               </h1>
-              <p className="text-md text-background/70 max-w-3xl">
-                {heroDesc}
-              </p>
+              {/* {slug.length > 1 &&
+                <p className="text-md text-background/70 max-w-3xl">
+                  {heroDesc}
+                </p>
+              } */}
             </div>
           </div>
         </section>
@@ -346,8 +350,8 @@ export default async function ProductsPage({ params }: ProductsPageProps) {
         <div className="max-w-7xl mx-auto relative z-10 pt-8 pb-20 px-4 sm:px-6 lg:px-8 ">
 
           <div className={`${slug.length === 0 ? 'block' : 'hidden'} pt-4`}>
-            <ScrollArea className="w-full whitespace-nowrap border-none">
-              <div className="flex justify-center items-center fade-in-down py-4">
+            {/* <ScrollArea className="w-full whitespace-nowrap border-none"> */}
+              <div className="md:grid md:grid-cols-2 block justify-center items-center fade-in-down gap-8">
                 {/* <Button asChild key={'all products'} variant="link" className={`${slug.length === 0 && 'underline font-bold'}`}>
                     <Link href={`/category`}>
                       {t('all-product')}
@@ -363,33 +367,37 @@ export default async function ProductsPage({ params }: ProductsPageProps) {
                   <Link
                     key={cat.id}
                     href={{pathname: "/category/[...slug]", params: { slug: [locale === 'en' ? cat.slug_eng : cat.slug] }}}
-                    className="col-span-1 block w-full hover:scale-105 duration-300 ease-in-out hover:underline"
+                    className="py-8 col-span-1 block w-full hover:scale-105 duration-300 ease-in-out hover:shadow-md rounded-lg p-4"
                     >
-                    <div className="flex items-center justify-center">
-                        <div className="w-[150px] h-[150px] rounded-full overflow-hidden">
-                        <Image
-                            src={process.env.NEXT_PUBLIC_ROOT_URL + cat.thumbnail_url}
-                            alt={locale === "en" ? cat.name_eng : cat.name}
-                            width={200}
-                            height={200}
-                            className="object-cover w-full h-full"
-                        />
+                    <div className="grid grid-cols-3 items-center justify-start">
+                        <div className="col-span-1 w-[150px] h-[150px] rounded-full overflow-hidden">
+                          <Image
+                              src={process.env.NEXT_PUBLIC_ROOT_URL + cat.thumbnail_url}
+                              alt={locale === "en" ? cat.name_eng : cat.name}
+                              width={200}
+                              height={200}
+                              className="object-cover w-full h-full"
+                          />
                         </div>
-                    </div>
-
-                    <div className="flex items-center justify-center text-base font-semibold mt-2">
-                      {locale === 'en' ? cat.name_eng : cat.name}
+                        <div className="col-span-2 items-start justify-start text-sm">
+                          <div className='font-semibold text-lg'>
+                            {locale === 'en' ? cat.name_eng : cat.name}
+                          </div>
+                          <div>
+                            {locale === 'en' ? cat.description_eng : cat.description}
+                          </div>
+                      </div>
                     </div>
                   </Link>
                 ))}
               </div>
-              <ScrollBar orientation="horizontal" />
-            </ScrollArea>
+              {/* <ScrollBar orientation="horizontal" />
+            </ScrollArea> */}
           </div>
 
           <div className={`${slug.length === 0 ? 'hidden' : 'block'} pt-4`}>
-            <ScrollArea className="w-full whitespace-nowrap border-none">
-              <div className="flex justify-center items-center fade-in-down py-4">
+            {/* <ScrollArea className="w-full whitespace-nowrap border-none"> */}
+              <div className="md:grid md:grid-cols-2 block justify-center items-center fade-in-down gap-8">
                   {/* <Button asChild key={'all products'} variant="link" className={`${slug.length === 1 && 'underline font-bold'}`}>
                     <Link href={{pathname: "/category/[...slug]", params: { slug: [slug[0] ?? ''] }}}>
                     {t('all-product-dynamic')} {allSpeakerDynamic}
@@ -404,28 +412,28 @@ export default async function ProductsPage({ params }: ProductsPageProps) {
                   <Link
                     key={cat.id}
                     href={{pathname: "/category/[...slug]", params: { slug: [slug[0]?? '', locale === 'en' ? cat.slug_eng : cat.slug] }}}
-                    className={`col-span-1 block w-full duration-300 ease-in-out hover:underline ${slug.length > 0 && slug[slug.length - 1] === (locale === 'en' ? cat.slug_eng : cat.slug) ? 'underline scale-110 text-accent' : 'hover:scale-105'}`}
+                    className={`py-8 col-span-1 block w-full duration-300 ease-in-out rounded-lg hover:shadow-md p-4 ${slug.length > 0 && slug[slug.length - 1] === (locale === 'en' ? cat.slug_eng : cat.slug) ? 'scale-110 text-accent' : 'hover:scale-105'}`}
                     >
-                    <div className="flex items-center justify-center">
-                        <div className={`w-[150px] h-[150px] rounded-full overflow-hidden ${slug.length > 0 && slug[slug.length - 1] === (locale === 'en' ? cat.slug_eng : cat.slug) && 'shadow-lg shadow-accent'}`}>
-                        <Image
-                            src={process.env.NEXT_PUBLIC_ROOT_URL + cat.thumbnail_url}
-                            alt={locale === "en" ? cat.name_eng : cat.name}
-                            width={200}
-                            height={200}
-                            className={`object-cover w-full h-full`}
-                        />
-                        </div>
-                    </div>
-
-                    <div className="flex items-center justify-center text-base font-semibold mt-2">
-                      {locale === 'en' ? cat.name_eng : cat.name}
+                    <div className="grid grid-cols-3 items-center justify-start">
+                      <div className={`col-span-1 w-[150px] h-[150px] rounded-full overflow-hidden ${slug.length > 0 && slug[slug.length - 1] === (locale === 'en' ? cat.slug_eng : cat.slug) && 'shadow-lg shadow-accent'}`}>
+                      <Image
+                          src={process.env.NEXT_PUBLIC_ROOT_URL + cat.thumbnail_url}
+                          alt={locale === "en" ? cat.name_eng : cat.name}
+                          width={200}
+                          height={200}
+                          className={`object-cover w-full h-full`}
+                      />
+                      </div>
+                      <div className="col-span-2 items-start justify-start text-sm">
+                        <div className='font-semibold text-lg'>{locale === 'en' ? cat.name_eng : cat.name}</div>
+                        <div>{locale === 'en' ? cat.description_eng : cat.description}</div>
+                      </div>
                     </div>
                   </Link>
                 ))}
               </div>
-              <ScrollBar orientation="horizontal" />
-            </ScrollArea>
+              {/* <ScrollBar orientation="horizontal" /> */}
+            {/* </ScrollArea> */}
           </div>
           <Separator className='w-full fade-in-down mt-4 mb-8' />
           {slug.length > 1 &&

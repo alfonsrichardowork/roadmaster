@@ -637,7 +637,7 @@ export const NewsForm: React.FC<NewsFormProps> = ({
                   {newsImage && newsImage !== '' && (
                     <Image alt={title} src={newsImage.startsWith('/uploads/') ? `${process.env.NEXT_PUBLIC_ROOT_URL}${newsImage}` : newsImage} width={200} height={200} className="w-52 h-fit" priority/>
                   )}
-                  {newsImage && newsImage === '' && (
+                  {!newsImage && (
                     <Input
                       id={`file`}
                       type="file"

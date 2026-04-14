@@ -187,50 +187,6 @@ export default function ContactPage() {
             </div>
           </div>
         </section>
-
-
-        {/* Support Resources */}
-        <section className="py-24 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-secondary to-background">
-          <div className="max-w-6xl mx-auto">
-            <div className="fade-in-down text-center space-y-6 mb-20">
-              <h2 className="text-4xl font-bold text-primary">Support Resources</h2>
-              <p className="text-lg text-foreground/70">
-                Access our comprehensive guides and documentation
-              </p>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              {[
-                {
-                  title: 'Product Manuals',
-                  description: 'Download detailed setup and usage guides for all Roadmaster products.',
-                },
-                {
-                  title: 'Troubleshooting Guide',
-                  description: 'Find solutions to common issues and technical problems.',
-                },
-                {
-                  title: 'Warranty Information',
-                  description: 'Learn about warranty coverage and how to file a claim.',
-                },
-              ].map((resource, index) => (
-                <div key={resource.title} className={`fade-in-up stagger-${index + 1} group`}>
-                  <div className="bg-white rounded-lg p-8 border border-border hover:shadow-lg transition-all duration-300 cursor-pointer group-hover:translate-y-[-4px]">
-                    <h3 className="text-xl font-bold text-primary mb-3 group-hover:text-accent transition-colors">
-                      {resource.title}
-                    </h3>
-                    <p className="text-foreground/70 mb-6">
-                      {resource.description}
-                    </p>
-                    <Button variant="ghost" className="text-accent p-0">
-                      Learn More →
-                    </Button>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
     </>
   )
 }

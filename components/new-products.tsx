@@ -49,13 +49,13 @@ export async function NewProducts() {
           ))}
         </div>
 
-        <div className="text-center mt-14 fade-in-up">
+        {/* <div className="text-center mt-14 fade-in-up">
           <Button size="lg" variant="default" asChild>
             <Link href={`/category`}>
               {t('button-view-all')}
             </Link>
           </Button>
-        </div>
+        </div> */}
       </div>
     </section>
   )

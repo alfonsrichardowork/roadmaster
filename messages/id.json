@@ -9,6 +9,7 @@
     "catalog" : "Katalog",
     "manual" : "Manual",
     "social-media" : "Media Sosial",
+    "available-on" : "Tersedia di",
     "download" : "Unduh",
     "service" : "Servis & Garansi",
     "service-desktop" : "Servis",
@@ -98,7 +99,9 @@
   "Metadata download page": {
     "title": "Unduh",
     "desc": "Akses dan unduh manual serta katalog produk roadmaster",
-    "keywords": "unduh roadmaster, manual produk, katalog produk, manual roadmaster, katalog roadmaster"
+    "keywords": "unduh roadmaster, manual produk, katalog produk, manual roadmaster, katalog roadmaster",
+    "manual": "Manual",
+    "catalogue": "Katalog"
   },
   "Metadata service page": {
     "title": "Layanan & Garansi",

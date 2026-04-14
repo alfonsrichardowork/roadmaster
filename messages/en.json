@@ -9,6 +9,7 @@
     "catalog" : "Catalogue",
     "manual" : "Manual",
     "social-media" : "Social Media",
+    "available-on" : "Available on",
     "download" : "Download",
     "service" : "Service & Warranty",
     "service-desktop" : "Service",
@@ -76,7 +77,7 @@
     ]
   },
   "Metadata homepage": {
-    "tagline": "Roadmaster | Break the Limits, Feel the Vibration",
+    "tagline": "Roadmaster | Menembus Batas, Getarkan Jiwa",
     "desc": "Experience the clarity and power of Roadmaster sound, delivering an extraordinary audio experience in every space!",
     "keywords": "audio, entertainment, sound quality, roadmaster, party speaker, horeg sound system"
   },
@@ -98,7 +99,9 @@
   "Metadata download page": {
     "title": "Download",
     "desc": "Access and download Roadmaster manuals and catalogues",
-    "keywords": "roadmaster downloads, product manuals, product catalogues, roadmaster resources"
+    "keywords": "roadmaster downloads, product manuals, product catalogues, roadmaster resources",
+    "manual": "Manual",
+    "catalogue": "Catalogue"
   },
   "Metadata service page": {
     "title": "Service & Warranty",

@@ -113,23 +113,77 @@ export async function Footer({ categories }: FooterProps) {
                   </svg>
                 </Link>
                 <Link
-                  href="https://www.facebook.com/roadmasterspeaker"
+                  href="https://www.tiktok.com/@officialroadmaster?_r=1&_t=ZS-95WYvtoE7vQ"
                   target="blank"
                   className="text-primary-foreground/80 hover:text-primary-foreground transition-colors"
                 >
                   <svg
                     className="w-6 h-6"
-                    width="32"
-                    height="32"
                     viewBox="0 0 24 24"
                     fill="currentColor"
                     xmlns="http://www.w3.org/2000/svg"
                   >
-                    <path fillRule="evenodd" clipRule="evenodd" d="M20 1C21.6569 1 23 2.34315 23 4V20C23 21.6569 21.6569 23 20 23H4C2.34315 23 1 21.6569 1 20V4C1 2.34315 2.34315 1 4 1H20ZM20 3C20.5523 3 21 3.44772 21 4V20C21 20.5523 20.5523 21 20 21H15V13.9999H17.0762C17.5066 13.9999 17.8887 13.7245 18.0249 13.3161L18.4679 11.9871C18.6298 11.5014 18.2683 10.9999 17.7564 10.9999H15V8.99992C15 8.49992 15.5 7.99992 16 7.99992H18C18.5523 7.99992 19 7.5522 19 6.99992V6.31393C19 5.99091 18.7937 5.7013 18.4813 5.61887C17.1705 5.27295 16 5.27295 16 5.27295C13.5 5.27295 12 6.99992 12 8.49992V10.9999H10C9.44772 10.9999 9 11.4476 9 11.9999V12.9999C9 13.5522 9.44771 13.9999 10 13.9999H12V21H4C3.44772 21 3 20.5523 3 20V4C3 3.44772 3.44772 3 4 3H20Z"></path>
+                    <path d="M19.589 6.686a4.793 4.793 0 0 1-3.77-1.882V15.3a5.3 5.3 0 1 1-5.3-5.3c.207 0 .41.012.61.035v2.63a2.67 2.67 0 1 0 2.07 2.596V2h2.62a4.8 4.8 0 0 0 3.77 2.19v2.496z"/>
+                  </svg>
+                </Link>
+                <Link
+                  href="https://youtube.com/@officialroadmasterspeaker?si=yn-PFq4Hv3F9td1y"
+                  target="blank"
+                  className="text-primary-foreground/80 hover:text-primary-foreground transition-colors"
+                >
+                  <svg
+                    className="w-6 h-6"
+                    viewBox="0 0 24 24"
+                    fill="currentColor"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path d="M23.498 6.186a2.997 2.997 0 0 0-2.11-2.12C19.6 3.5 12 3.5 12 3.5s-7.6 0-9.389.566a2.997 2.997 0 0 0-2.11 2.12C0 7.982 0 12 0 12s0 4.018.501 5.814a2.997 2.997 0 0 0 2.11 2.12C4.4 20.5 12 20.5 12 20.5s7.6 0 9.389-.566a2.997 2.997 0 0 0 2.11-2.12C24 16.018 24 12 24 12s0-4.018-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
                   </svg>
                 </Link>
               </div>
 
+
+              <h4 className="font-semibold mb-4">{t_footer('available-on')}</h4>
+              <div className="flex gap-4 space-y-3">
+                <Link
+                  href="https://tk.tokopedia.com/ZSHpaJsyn/"
+                  target="blank"
+                  className="text-primary-foreground/80 hover:text-primary-foreground transition-colors"
+                >
+                  <svg
+                    viewBox="0 0 192 192"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="currentColor"
+                    className="w-6 h-6"
+                  >
+                    <path
+                      fillRule="evenodd"
+                      clipRule="evenodd"
+                      d="M96 28c-9.504 0-17.78 5.307-22.008 13.127C82.736 42.123 88.89 44 96 47.332c7.11-3.332 13.264-5.209 22.008-6.205C113.781 33.31 105.506 28 96 28Zm0-12c-15.973 0-29.568 10.117-34.754 24.28C52.932 40 42.462 40 28.53 40H28a6 6 0 0 0-6 6v124a6 6 0 0 0 6 6h92c27.614 0 50-22.386 50-50V46a6 6 0 0 0-6-6h-.531c-13.931 0-24.401 0-32.715.28C125.566 26.113 111.97 16 96 16ZM34 52.001V164h86c20.987 0 38-17.013 38-38V52.001c-18.502.009-29.622.098-37.872.966-8.692.915-13.999 2.677-21.445 6.4a6 6 0 0 1-5.366 0c-7.446-3.723-12.753-5.485-21.445-6.4-8.25-.868-19.37-.957-37.872-.966ZM50 96c0-9.941 8.059-18 18-18s18 8.059 18 18-8.059 18-18 18-18-8.059-18-18Zm18-30c-16.569 0-30 13.431-30 30 0 16.569 13.431 30 30 30 1.126 0 2.238-.062 3.332-.183l20.425 20.426a6 6 0 0 0 8.486 0l20.425-20.426c1.094.121 2.206.183 3.332.183 16.569 0 30-13.431 30-30 0-16.569-13.431-30-30-30-12.764 0-23.666 7.971-28 19.207C91.666 73.971 80.764 66 68 66Zm40.082 55.433A30.1 30.1 0 0 1 96 106.793a30.101 30.101 0 0 1-12.082 14.64L96 133.515l12.082-12.082ZM124 78c-9.941 0-18 8.059-18 18s8.059 18 18 18 18-8.059 18-18-8.059-18-18-18ZM76 96a8 8 0 1 1-16 0 8 8 0 0 1 16 0Zm48 8a8 8 0 1 0 0-16 8 8 0 0 0 0 16Z"
+                    />
+                  </svg>
+                </Link>
+                <Link
+                  href="https://id.shp.ee/z53T6tQp"
+                  target="_blank"
+                  className="text-primary-foreground/80 hover:text-primary-foreground transition-colors"
+                >
+                  <svg
+                    viewBox="0 0 48 48"
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="w-6 h-6"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  >
+                    <path d="M33.0549 43.5h-18.11a4 4 0 0 1-3.9731-3.5367L8.3844 17.7726H39.6156L37.028 39.9633a4 4 0 0 1-3.9731 3.5367z" />
+                    <path d="M13.3519 17.7726V15.16a10.66 10.66 0 0 1 21.3192 0v2.613" />
+                    <path d="M19.5288 36.9825c1.1539.8654 2.3077 1.1538 4.6154 1.1538h1.1539a3.75 3.75 0 0 0 0-7.5H22.7019a3.75 3.75 0 0 1 0-7.5h1.1539c2.5961 0 3.75.2885 4.6154 1.1539" />
+                  </svg>
+                </Link>
+              </div>
           </div>
           <div>
             <h4 className="font-semibold mb-4">{t_footer('download')}</h4>
