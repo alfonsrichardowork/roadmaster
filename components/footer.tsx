@@ -95,7 +95,7 @@ export async function Footer({ categories }: FooterProps) {
               <h4 className="font-semibold mb-4">{t_footer('social-media')}</h4>
               <div className="flex gap-4 space-y-3">
                 <Link
-                  href="https://www.instagram.com/roadmasterspeaker"
+                  href="https://www.instagram.com/roadmasterspeaker?igsh=bmlzemFyNjB1aDhz"
                   target="blank"
                   className="text-primary-foreground/80 hover:text-primary-foreground transition-colors"
                 >
@@ -113,7 +113,7 @@ export async function Footer({ categories }: FooterProps) {
                   </svg>
                 </Link>
                 <Link
-                  href="https://www.tiktok.com/@officialroadmaster?_r=1&_t=ZS-95WYvtoE7vQ"
+                  href="https://www.tiktok.com/@officialroadmaster?_r=1&_t=ZS-95ZhiCtb3a9"
                   target="blank"
                   className="text-primary-foreground/80 hover:text-primary-foreground transition-colors"
                 >
@@ -127,7 +127,7 @@ export async function Footer({ categories }: FooterProps) {
                   </svg>
                 </Link>
                 <Link
-                  href="https://youtube.com/@officialroadmasterspeaker?si=yn-PFq4Hv3F9td1y"
+                  href="https://youtube.com/@officialroadmasterspeaker?si=kfzQq959E0K5B6mX"
                   target="blank"
                   className="text-primary-foreground/80 hover:text-primary-foreground transition-colors"
                 >
@@ -146,7 +146,7 @@ export async function Footer({ categories }: FooterProps) {
               <h4 className="font-semibold mb-4">{t_footer('available-on')}</h4>
               <div className="flex gap-4 space-y-3">
                 <Link
-                  href="https://tk.tokopedia.com/ZSHpaJsyn/"
+                  href="https://vt.tiktok.com/ZSHWM5w7U/?page=Mall"
                   target="blank"
                   className="text-primary-foreground/80 hover:text-primary-foreground transition-colors"
                 >

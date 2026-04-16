@@ -213,8 +213,6 @@ export const HeroForm: React.FC<HeroFormProps> = ({
     }
   };
 
-  console.log("hero_img", heroImage)
-
   return (  
     <>
       <div className="flex items-center justify-between">

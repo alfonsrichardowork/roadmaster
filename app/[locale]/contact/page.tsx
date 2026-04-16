@@ -26,7 +26,7 @@ export default function ContactPage() {
     {
       icon: Mail,
       title: 'Email Support',
-      details: 'support@roadmaster.com',
+      details: 'roadmaster@sbe2group.com',
       description: 'We respond within 24 hours',
     },
     {
