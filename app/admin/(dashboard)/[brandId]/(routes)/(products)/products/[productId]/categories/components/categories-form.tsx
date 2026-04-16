@@ -265,7 +265,7 @@ export const AllProductCategoryForm: React.FC<AllProductCategoryFormProps> = ({
                         size="sm"
                         onClick={() => deleteSelectedCat(categories.id)}
                       >
-                        <Trash className="h-4 w-4" />
+                        <Trash className="h-4 w-4 text-background" />
                       </Button>
                     </div>
                   </div>
@@ -323,7 +323,7 @@ export const AllProductCategoryForm: React.FC<AllProductCategoryFormProps> = ({
                         size="sm"
                         onClick={() => deleteSelectedSubCat(subcategories.id)}
                       >
-                        <Trash className="h-4 w-4" />
+                        <Trash className="h-4 w-4 text-background" />
                       </Button>
                     </div>
                   </div>
@@ -382,7 +382,7 @@ export const AllProductCategoryForm: React.FC<AllProductCategoryFormProps> = ({
                         size="sm"
                         onClick={() => deleteSelectedSubSubCat(subsubcategories.id)}
                       >
-                        <Trash className="h-4 w-4" />
+                        <Trash className="h-4 w-4 text-background" />
                       </Button>
                     </div>
                   </div>

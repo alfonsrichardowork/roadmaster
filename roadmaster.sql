@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 14, 2026 at 10:40 AM
+-- Generation Time: Apr 16, 2026 at 03:19 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -261,6 +261,28 @@ INSERT INTO `dynamicspecificationsubparent` (`id`, `name`, `slug`, `priority`, `
 ('8d10811b-22f9-4e65-b6bd-de72aab10789', 'Konektivitas', 'konektivitas', '4', '25cd8d0d-d185-41e8-9943-fdf1264236f2', '2026-04-01 04:03:21.403', '2026-04-08 07:12:29.447', 'Connectivity', 'connectivity'),
 ('ba3f4372-afe4-4d88-a6d0-9d3ad2b73824', 'Kontrol', 'kontrol', '2', '25cd8d0d-d185-41e8-9943-fdf1264236f2', '2026-04-01 04:06:40.102', '2026-04-08 07:12:29.447', 'Controls', 'controls'),
 ('dba0d6fd-16b2-4e6c-9923-0950e2db188b', 'Kontrol Microphone', 'kontrol-microphone', '3', '25cd8d0d-d185-41e8-9943-fdf1264236f2', '2026-04-01 04:06:48.309', '2026-04-08 07:12:29.447', 'Microphone Control', 'microphone-control');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `hero`
+--
+
+CREATE TABLE `hero` (
+  `id` varchar(191) NOT NULL,
+  `hero_img` varchar(191) NOT NULL DEFAULT '',
+  `hero_img_mobile` varchar(191) NOT NULL DEFAULT '',
+  `createdAt` datetime(3) NOT NULL DEFAULT current_timestamp(3),
+  `updatedAt` datetime(3) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `hero`
+--
+
+INSERT INTO `hero` (`id`, `hero_img`, `hero_img_mobile`, `createdAt`, `updatedAt`) VALUES
+('39966996-1afb-4ca8-9ad4-d8c76735dcbb', '/uploads/heroimages/WhatsApp Image 2026-04-15 at 13.44.32.webp', '/uploads/heroimages/WhatsApp Image 2026-04-15 at 13.44.32-1.webp', '2026-04-16 00:48:41.538', '2026-04-16 00:48:41.538'),
+('ea1adb73-ba04-4e93-b7ed-bc89ab81ee8b', '/uploads/heroimages/WhatsApp Image 2026-04-15 at 13.44.33.webp', '/uploads/heroimages/WhatsApp Image 2026-04-15 at 13.44.33-1.webp', '2026-04-16 00:48:51.171', '2026-04-16 00:48:51.171');
 
 -- --------------------------------------------------------
 
@@ -878,6 +900,12 @@ ALTER TABLE `dynamicspecificationparent`
 -- Indexes for table `dynamicspecificationsubparent`
 --
 ALTER TABLE `dynamicspecificationsubparent`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `hero`
+--
+ALTER TABLE `hero`
   ADD PRIMARY KEY (`id`);
 
 --

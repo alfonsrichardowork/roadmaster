@@ -51,6 +51,8 @@ export function DataTable<TData, TValue>({
   const indexPreview = columns.findIndex(item => item.header === 'Preview');
 
   const indexPreviewNews = columns.findIndex(item => item.header === 'Preview News');
+  const indexPreviewHero = columns.findIndex(item => item.header === 'Preview Hero');
+  
 
   const indexPreviewFeatured = columns.findIndex(item => item.header === 'Preview Featured');
   
@@ -59,16 +61,18 @@ export function DataTable<TData, TValue>({
   const indexPreviewFeaturedBoolean = columns.findIndex(item => item.header === 'Featured');
   return (
     <div>
-      <div className="flex items-center py-4">
-        <Input
-          placeholder="Search by Name"
-          value={(table.getColumn(searchKey)?.getFilterValue() as string) ?? ""}
-          onChange={(event) =>
-            table.getColumn(searchKey)?.setFilterValue(event.target.value)
-          }
-          className="max-w-sm bg-background"
-        />
-      </div>
+      {indexPreviewHero < 0 &&
+        <div className="flex items-center py-4">
+          <Input
+            placeholder="Search by Name"
+            value={(table.getColumn(searchKey)?.getFilterValue() as string) ?? ""}
+            onChange={(event) =>
+              table.getColumn(searchKey)?.setFilterValue(event.target.value)
+            }
+            className="max-w-sm bg-background"
+          />
+        </div>
+      }
       <div className="rounded-md border bg-background">
         <Table>
           <TableHeader>
@@ -122,9 +126,9 @@ export function DataTable<TData, TValue>({
                         {data[Number(row.id)]? data[Number(row.id)].new_product === true ? <Check size={30} className="text-green-500"/> : <X size={30} className="text-red-500"/> :<FileQuestion size={30}/>}
                       </div>
                       </TableCell>
-                    ) : indexcol === indexPreviewNews ? (
+                    ) : indexcol === indexPreviewNews || indexcol === indexPreviewHero ? (
                       /* @ts-ignore */<TableCell key={cell.id}><div style={{ display: 'flex' }}>
-                        {data[Number(row.id)].value!=''?<Image src={data[Number(row.id)].value.startsWith('/uploads/') ? `${process.env.NEXT_PUBLIC_ROOT_URL}${data[Number(row.id)].value}` : data[Number(row.id)].value} alt={data[Number(row.id)].name} width={200} height={200} className="w-56 h-fit"/>:<FileQuestion size={30}/>}
+                        {data[Number(row.id)].value!=''?<Image src={data[Number(row.id)].value.startsWith('/uploads/') ? `${process.env.NEXT_PUBLIC_ROOT_URL}${data[Number(row.id)].value}` : data[Number(row.id)].value} alt={data[Number(row.id)].name ?? ''} width={200} height={200} className="w-56 h-fit"/>:<FileQuestion size={30}/>}
                       </div>
                       </TableCell>
                     ) : (

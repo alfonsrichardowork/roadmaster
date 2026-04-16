@@ -209,7 +209,7 @@ export const SubCategoryForm: React.FC<SubCategoryFormProps> = ({
                     variant={"destructive"}
                     onClick={() => deleteImage()}
                   >
-                    <Trash width={20} height={20} />
+                    <Trash width={20} height={20}  className="text-background"/>
                   </Button>
                 )}
                 </div>

@@ -13,7 +13,7 @@ import {
   navigationMenuTriggerStyle,
 } from "@/app/admin/components/ui/navigation-menu"
 import { useParams, usePathname } from "next/navigation"
-import { ArrowDown01, ArrowUp, ChartColumnIncreasing, ChartColumnStacked, FileText, List, Newspaper, Package, ScrollText, Speaker, Users } from "lucide-react"
+import { ArrowDown01, ArrowUp, ChartColumnIncreasing, ChartColumnStacked, FileText, Image, List, Newspaper, Package, ScrollText, Speaker, Users } from "lucide-react"
 interface MainNavClientProps {
   isadmin: boolean;
 }
@@ -158,6 +158,11 @@ export function MainNav({
       <NavigationMenuItem>
           <NavigationMenuLink href={`${process.env.NEXT_PUBLIC_ADMIN_FOLDER_URL}/${params.brandId}/news`} className={`${navigationMenuTriggerStyle()} flex gap-1.5 text-xs ${pathSegments[3] === 'news' ? 'bg-primary text-background hover:text-background' : ''}`}>
             <Newspaper size={16} /> News
+          </NavigationMenuLink>
+        </NavigationMenuItem>
+        <NavigationMenuItem>
+          <NavigationMenuLink href={`${process.env.NEXT_PUBLIC_ADMIN_FOLDER_URL}/${params.brandId}/hero`} className={`${navigationMenuTriggerStyle()} flex gap-1.5 text-xs ${pathSegments[3] === 'hero' ? 'bg-primary text-background hover:text-background' : ''}`}>
+            <Image size={16}/> Hero
           </NavigationMenuLink>
         </NavigationMenuItem>
 

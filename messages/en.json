@@ -21,12 +21,6 @@
     "all-product" : "All Products",
     "all-product-dynamic" : "All"
   },
-  "Homepage Hero": {
-    "title": "Home Audio with High-Quality Sound & Elegant Design",
-    "desc": "Experience the clarity and power of Roadmaster sound, delivering an exceptional audio experience in every space!",
-    "button": "Explore Products",
-    "demo": "Watch Demo"
-  },
   "Homepage New Products": {
     "title": "Our Newest Collections",
     "button-view-all": "View All Products"

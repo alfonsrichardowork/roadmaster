@@ -186,3 +186,11 @@ model dynamicspecification {
   connectorSpecifications specificationconnector[] @relation("DynamicSpecificationToConnectorSpecification")
 
 }
+
+model hero {
+  id          String    @id @default(uuid())
+  hero_img String @default("")
+  hero_img_mobile String @default("")
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+}

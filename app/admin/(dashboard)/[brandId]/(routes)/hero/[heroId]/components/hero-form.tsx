@@ -1,0 +1,301 @@
+"use client"
+
+import * as z from "zod"
+import axios from "axios"
+import { useCallback, useEffect, useState } from "react"
+import { zodResolver } from "@hookform/resolvers/zod"
+import { useForm } from "react-hook-form"
+import { toast } from "react-hot-toast"
+import { hero } from "@prisma/client"
+import { useParams, useRouter } from "next/navigation"
+
+import { Input } from "@/components/ui/input"
+import { Button } from "@/components/ui/button"
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/app/admin/components/ui/form"
+import { Separator } from "@/components/ui/separator"
+import { Heading } from "@/app/admin/components/ui/heading"
+import Image from "next/image"
+import { Trash } from "lucide-react"
+import Link from "next/link"
+import { uploadImage } from "@/app/admin/upload-image"
+import { MAX_SIZE } from "@/app/admin/model/model"
+
+
+const formSchema = z.object({
+  hero_img: z.string().optional(),
+  hero_img_mobile: z.string().optional(),
+});
+
+type HeroFormValues = z.infer<typeof formSchema>
+
+interface HeroFormProps {
+  initialData: hero | null;
+};
+
+export const HeroForm: React.FC<HeroFormProps> = ({
+  initialData
+}) => {
+  const params = useParams();
+  const router = useRouter();
+
+  // const [date, setDate] = useState<Date | undefined>(new Date())
+ 
+  const [heroImage, setHeroImage] = useState<string>('')
+  const [heroImageMobile, setHeroImageMobile] = useState<string>('')
+  const [loading, setLoading] = useState(false);
+  const [selectedFile, setSelectedFile] = useState<File>();
+  const [selectedFileMobile, setSelectedFileMobile] = useState<File>();
+  const [imageUrl, setImageUrl] = useState("")
+
+  const title = initialData ? 'Edit Hero' : 'Add Hero';
+  const description_title = `Add or Change This Hero`;
+  const toastMessage = initialData ? 'Hero updated.' : 'Hero added.';
+  const action = initialData ? 'Save changes' : 'Create';
+
+  const defaultValues = initialData ? {
+    ...initialData,
+  } : {
+    hero_img: '',
+    hero_img_mobile: ''
+  }
+
+  useEffect(() => {
+  const fetchData = async () => {
+    if (initialData && initialData.hero_img != null && initialData.hero_img != '') {
+      setHeroImage(initialData.hero_img);
+    }
+    else{
+      setHeroImage('')
+    }
+
+    if (initialData && initialData.hero_img_mobile != null && initialData.hero_img_mobile != '') {
+      setHeroImageMobile(initialData.hero_img_mobile);
+    }
+    else{
+      setHeroImageMobile('')
+    }
+  };
+  
+  fetchData().catch((error) => {
+    console.error("Error fetching hero: ", error);
+  });
+  }, [params.heroId, initialData, initialData?.hero_img, initialData?.hero_img_mobile]);
+
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if(!file) return
+    if (file.size > MAX_SIZE) {
+      alert("File size must be less than 2MB");
+      e.target.value = "";
+      return;
+    }
+    setSelectedFile(file);
+  };
+
+  const handleFileChangeMobile = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if(!file) return
+    if (file.size > MAX_SIZE) {
+      alert("File size must be less than 2MB");
+      e.target.value = "";
+      return;
+    }
+    setSelectedFileMobile(file);
+  };
+
+  const deleteImage = async () => {
+    setHeroImage('')
+  };
+
+  const deleteImageMobile = async () => {
+    setHeroImageMobile('')
+  };
+
+  async function handleImageUpload (file: File): Promise<string> {
+    if (file) {
+      let updatedheroImage = heroImage;
+      try {
+        const formData = new FormData();
+        formData.append('image', file);
+
+        const url = await uploadImage(formData, 'heroimages');
+        updatedheroImage = url
+        return updatedheroImage;
+        } catch (error) {
+        console.error("Error uploading hero image:", error);
+        return '';
+      }
+    }
+    return '';
+  };
+
+
+  async function handleImageUploadMobile (file: File): Promise<string> {
+    if (file) {
+      let updatedheroImageMobile = heroImageMobile;
+      try {
+        const formData = new FormData();
+        formData.append('image', file);
+
+        const url = await uploadImage(formData, 'heroimages');
+        updatedheroImageMobile = url
+        return updatedheroImageMobile;
+        } catch (error) {
+        console.error("Error uploading hero image mobile:", error);
+        return '';
+      }
+    }
+    return '';
+  };
+
+
+  const form = useForm<HeroFormValues>({
+    resolver: zodResolver(formSchema),
+    defaultValues
+  });
+
+  const onSubmit = async (data: HeroFormValues) => {
+    try {
+      setLoading(true);
+
+      if (selectedFile) {
+        data.hero_img = await handleImageUpload(selectedFile);
+      }
+      else{
+        data.hero_img = heroImage!
+      }
+
+      if (selectedFileMobile) {
+        data.hero_img_mobile = await handleImageUploadMobile(selectedFileMobile);
+      }
+      else{
+        data.hero_img_mobile = heroImageMobile!
+      }
+
+
+      const API=`${process.env.NEXT_PUBLIC_ADMIN_FOLDER_URL}${process.env.NEXT_PUBLIC_ADMIN_UPDATE_ADD_HERO}`;
+      //@ts-ignore
+      const API_EDITED = API.replace('{brandId}', params.brandId)
+      //@ts-ignore
+      const API_EDITED2 = API_EDITED.replace('{heroId}', params.heroId)
+      const response = await axios.patch(API_EDITED2, data);
+      if(response.data === 'expired_session'){
+        router.push(`${process.env.NEXT_PUBLIC_ADMIN_FOLDER_URL}/${params.brandId}/`);
+        router.refresh();
+        toast.error("Session expired, please login again");
+      }
+      else if(response.data === 'invalid_token'){
+        router.push(`${process.env.NEXT_PUBLIC_ADMIN_FOLDER_URL}/${params.brandId}/`);
+        router.refresh();
+        toast.error("API Token Invalid, please login again");
+      }
+      else if(response.data === 'unauthorized'){
+        router.push(`${process.env.NEXT_PUBLIC_ADMIN_FOLDER_URL}/${params.brandId}/`);
+        router.refresh();
+        toast.error("Unauthorized!");
+      }
+      else{
+        router.push(`${process.env.NEXT_PUBLIC_ADMIN_FOLDER_URL}/${params.brandId}/hero`);
+        router.refresh();
+        toast.success(toastMessage);
+      }
+    } catch (error: any) {
+      toast.error('Something went wrong.');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  console.log("hero_img", heroImage)
+
+  return (  
+    <>
+      <div className="flex items-center justify-between">
+        <Heading title={title} description='' />
+      </div>
+      <Separator />
+      <Form {...form}>
+        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4 w-full">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="border rounded-lg p-4 shadow-lg bg-background">
+              <div className="text-left font-bold pb-2">Cover Image Desktop</div>
+              <div className="flex space-x-4 justify-between items-center">
+                {heroImage !== '' && (
+                  <Image alt={title} src={heroImage.startsWith('/uploads/') ? `${process.env.NEXT_PUBLIC_ROOT_URL}${heroImage}` : heroImage} width={200} height={200} className="w-52 h-fit" priority/>
+                )}
+                {heroImage === '' && (
+                <Input
+                  id={`file`}
+                  type="file"
+                  accept="image/*"
+                  name="file"
+                  onChange={(e) =>
+                    e.target.files && handleFileChange(e) // Ensure your file upload function can handle image files
+                  }
+                  disabled={loading}
+                  className="border border-gray-300 p-2 rounded-md"
+                />
+                )}
+                 {heroImage !== '' && (
+                <Button
+                  variant={"destructive"}
+                  onClick={() => deleteImage()}
+                >
+                  <Trash width={20} height={20} className="text-background" />
+                </Button>
+              )}
+              </div>
+          </div>
+
+
+            <div className="border rounded-lg p-4 shadow-lg bg-background">
+              <div className="text-left font-bold pb-2">Cover Image Mobile</div>
+              <div className="flex space-x-4 justify-between items-center">
+                {heroImageMobile !== '' && (
+                  <Image alt={title} src={heroImageMobile.startsWith('/uploads/') ? `${process.env.NEXT_PUBLIC_ROOT_URL}${heroImageMobile}` : heroImageMobile} width={200} height={200} className="w-52 h-fit" priority/>
+                )}
+                {heroImageMobile === '' && (
+                <Input
+                  id={`file`}
+                  type="file"
+                  accept="image/*"
+                  name="file"
+                  onChange={(e) =>
+                    e.target.files && handleFileChangeMobile(e) // Ensure your file upload function can handle image files
+                  }
+                  disabled={loading}
+                  className="border border-gray-300 p-2 rounded-md"
+                />
+                )}
+                 {heroImageMobile !== '' && (
+                <Button
+                  variant={"destructive"}
+                  onClick={() => deleteImageMobile()}
+                >
+                  <Trash width={20} height={20} className="text-background"/>
+                </Button>
+              )}
+              </div>
+          </div>
+        </div>
+
+        
+
+
+
+          <Button disabled={loading} className="w-full flex gap-2 bg-green-500 text-white hover:bg-green-600 transition-colors" type="submit" variant={'secondary'}>
+            {action}
+          </Button>
+        </form>
+      </Form>
+    </>
+  );
+};
+

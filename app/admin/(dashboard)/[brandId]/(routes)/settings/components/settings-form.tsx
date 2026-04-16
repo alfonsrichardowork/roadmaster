@@ -118,7 +118,7 @@ export const SettingsForm: React.FC<SettingsFormProps> = ({
           size="sm"
           onClick={() => setOpen(true)}
         >
-          <Trash className="h-4 w-4" />
+          <Trash className="h-4 w-4 text-background" />
         </Button>
       </div>
       <Separator />
@@ -132,24 +132,18 @@ export const SettingsForm: React.FC<SettingsFormProps> = ({
                 <FormItem>
                   <FormLabel>Name</FormLabel>
                   <FormControl>
-                    <Input disabled={loading} placeholder="Brand name" {...field} />
+                    <Input disabled={loading} placeholder="Brand name" className="bg-background" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
               )}
             />
           </div>
-          <Button disabled={loading} className="ml-auto" type="submit" variant={'secondary'}>
+          <Button disabled={loading} className="ml-auto" type="submit" variant={'default'}>
             Save changes
           </Button>
         </form>
       </Form>
-      <Separator />
-      <ApiAlert 
-        title="NEXT_PUBLIC_API_URL" 
-        variant="public" 
-        description={`${origin}${process.env.NEXT_PUBLIC_ADMIN_FOLDER_URL}/api/${params.brandId}`}
-      />
     </>
   );
 };

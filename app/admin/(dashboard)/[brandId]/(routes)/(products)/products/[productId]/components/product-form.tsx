@@ -456,7 +456,7 @@ const cleanHTML = initialData?.description
                     variant={"destructive"}
                     onClick={() => deleteImage()}
                   >
-                    <Trash width={20} height={20} />
+                    <Trash width={20} height={20}  className="text-background"/>
                   </Button>
                 )}
                 </div>
