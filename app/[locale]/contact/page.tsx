@@ -38,19 +38,19 @@ export default function ContactPage() {
       icon: Phone,
       title: 'Phone Support',
       details: '+62 31 806 5196',
-      description: locale === 'en' ? t('phone-desc'),
+      description: '',
     },
     {
       icon: MapPin,
       title: 'Headquarters',
-      details: '123 Audio Lane, Tech City, TC 12345',
-      description: 'Visit our showroom',
+      details: 'Raya Pilang KM. 8, Wonoayu. Sidoarjo 61261, Indonesia',
+      description: '',
     },
     {
       icon: Clock,
       title: 'Support Hours',
-      details: 'Mon-Fri: 9AM-6PM EST',
-      description: 'Email support available 24/7',
+      details: t('phone-desc'),
+      description: '',
     },
   ]
 
