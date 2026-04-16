@@ -3,7 +3,10 @@
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Mail, Phone, MapPin, Clock, Send } from 'lucide-react'
+import { useLocale } from 'next-intl'
+import { getTranslations } from 'next-intl/server'
 import { useState } from 'react'
+import { useTranslations } from 'use-intl'
 
 export default function ContactPage() {
   const [formData, setFormData] = useState({
@@ -21,19 +24,21 @@ export default function ContactPage() {
     setFormData({ name: '', email: '', phone: '', subject: '', message: '' })
     setTimeout(() => setSubmitted(false), 3000)
   }
+  const t = useTranslations('Contact Page')
+  const locale = useLocale()
 
   const contactInfo = [
     {
       icon: Mail,
       title: 'Email Support',
       details: 'roadmaster@sbe2group.com',
-      description: 'We respond within 24 hours',
+      description: '',
     },
     {
       icon: Phone,
       title: 'Phone Support',
-      details: '+1 (555) 123-4567',
-      description: 'Available Monday-Friday, 9AM-6PM EST',
+      details: '+62 31 806 5196',
+      description: locale === 'en' ? t('phone-desc'),
     },
     {
       icon: MapPin,
