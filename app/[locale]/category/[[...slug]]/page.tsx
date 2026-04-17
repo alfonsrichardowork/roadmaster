@@ -318,9 +318,6 @@ export default async function ProductsPage({ params }: ProductsPageProps) {
     }
   });
 
-
-  console.log("slug.length: ", slug.length)
-
   return (
     <>
         <section className="relative pt-30 pb-20 px-4 sm:px-6 lg:px-8 overflow-hidden">
@@ -351,7 +348,7 @@ export default async function ProductsPage({ params }: ProductsPageProps) {
 
           <div className={`${slug.length === 0 ? 'block' : 'hidden'} pt-4`}>
             {/* <ScrollArea className="w-full whitespace-nowrap border-none"> */}
-              <div className="md:grid md:grid-cols-2 block justify-center items-center fade-in-down gap-8">
+              <div className="lg:grid lg:grid-cols-2 block justify-center items-center fade-in-down gap-8">
                 {/* <Button asChild key={'all products'} variant="link" className={`${slug.length === 0 && 'underline font-bold'}`}>
                     <Link href={`/category`}>
                       {t('all-product')}
@@ -397,7 +394,7 @@ export default async function ProductsPage({ params }: ProductsPageProps) {
 
           <div className={`${slug.length === 0 ? 'hidden' : 'block'} pt-4`}>
             {/* <ScrollArea className="w-full whitespace-nowrap border-none"> */}
-              <div className="md:grid md:grid-cols-2 block justify-center items-center fade-in-down gap-8">
+              <div className="lg:grid lg:grid-cols-2 block justify-center items-center fade-in-down gap-8">
                   {/* <Button asChild key={'all products'} variant="link" className={`${slug.length === 1 && 'underline font-bold'}`}>
                     <Link href={{pathname: "/category/[...slug]", params: { slug: [slug[0] ?? ''] }}}>
                     {t('all-product-dynamic')} {allSpeakerDynamic}
@@ -414,8 +411,8 @@ export default async function ProductsPage({ params }: ProductsPageProps) {
                     href={{pathname: "/category/[...slug]", params: { slug: [slug[0]?? '', locale === 'en' ? cat.slug_eng : cat.slug] }}}
                     className={`py-8 col-span-1 block w-full duration-300 ease-in-out rounded-lg hover:shadow-md p-4 ${slug.length > 0 && slug[slug.length - 1] === (locale === 'en' ? cat.slug_eng : cat.slug) ? 'scale-110 text-accent' : 'hover:scale-105'}`}
                     >
-                    <div className="grid grid-cols-3 items-center justify-start">
-                      <div className={`col-span-1 w-[150px] h-[150px] rounded-full overflow-hidden ${slug.length > 0 && slug[slug.length - 1] === (locale === 'en' ? cat.slug_eng : cat.slug) && 'shadow-lg shadow-accent'}`}>
+                    <div className="md:grid md:grid-cols-3 block items-center justify-start">
+                      <div className={`md:col-span-1 w-[150px] h-[150px] rounded-full overflow-hidden ${slug.length > 0 && slug[slug.length - 1] === (locale === 'en' ? cat.slug_eng : cat.slug) && 'shadow-lg shadow-accent'}`}>
                       <Image
                           src={process.env.NEXT_PUBLIC_ROOT_URL + cat.thumbnail_url}
                           alt={locale === "en" ? cat.name_eng : cat.name}
@@ -424,7 +421,7 @@ export default async function ProductsPage({ params }: ProductsPageProps) {
                           className={`object-cover w-full h-full`}
                       />
                       </div>
-                      <div className="col-span-2 items-start justify-start text-sm">
+                      <div className="md:col-span-2 items-start justify-start text-sm md:pt-0 pt-4">
                         <div className='font-semibold text-lg'>{locale === 'en' ? cat.name_eng : cat.name}</div>
                         <div>{locale === 'en' ? cat.description_eng : cat.description}</div>
                       </div>
