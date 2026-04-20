@@ -42,7 +42,7 @@ export default function ContactPage() {
     },
     {
       icon: MapPin,
-      title: 'Headquarters',
+      title: t('location'),
       details: 'Raya Pilang KM. 8, Wonoayu. Sidoarjo 61261, Indonesia',
       description: '',
     },
@@ -61,10 +61,10 @@ export default function ContactPage() {
           <div className="max-w-6xl mx-auto">
             <div className="fade-in-down space-y-6 text-center">
               <h1 className="text-5xl md:text-6xl font-bold text-primary leading-tight">
-                Contact Roadmaster
+                {t('title')}
               </h1>
               <p className="text-xl text-foreground/70 max-w-3xl mx-auto">
-                Have questions? We&apos;re here to help. Reach out to our team and we&apos;ll get back to you as soon as possible.
+                {t('desc')}
               </p>
             </div>
           </div>
@@ -101,9 +101,9 @@ export default function ContactPage() {
         <section className="py-24 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-background to-secondary">
           <div className="max-w-3xl mx-auto">
             <div className="fade-in-down text-center space-y-6 mb-16">
-              <h2 className="text-4xl font-bold text-primary">Send us a Message</h2>
+              <h2 className="text-4xl font-bold text-primary">{t('title-email')}</h2>
               <p className="text-lg text-foreground/70">
-                Fill out the form below and our team will get back to you shortly.
+                {t('title-desc')}
               </p>
             </div>
 
@@ -114,7 +114,7 @@ export default function ContactPage() {
                 <form onSubmit={handleSubmit} className="relative bg-white rounded-2xl p-8 md:p-12 border border-accent/20 shadow-xl space-y-6">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div className="space-y-2">
-                      <label className="block text-sm font-semibold text-primary">Full Name</label>
+                      <label className="block text-sm font-semibold text-primary">{t('contact-form-name')}</label>
                       <Input
                         type="text"
                         placeholder="John Doe"
@@ -125,7 +125,7 @@ export default function ContactPage() {
                       />
                     </div>
                     <div className="space-y-2">
-                      <label className="block text-sm font-semibold text-primary">Email Address</label>
+                      <label className="block text-sm font-semibold text-primary">{t('contact-form-email')}</label>
                       <Input
                         type="email"
                         placeholder="john@example.com"
@@ -139,7 +139,7 @@ export default function ContactPage() {
 
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div className="space-y-2">
-                      <label className="block text-sm font-semibold text-primary">Phone Number</label>
+                      <label className="block text-sm font-semibold text-primary">{t('contact-form-phone')}</label>
                       <Input
                         type="tel"
                         placeholder="+1 (555) 123-4567"
@@ -149,10 +149,10 @@ export default function ContactPage() {
                       />
                     </div>
                     <div className="space-y-2">
-                      <label className="block text-sm font-semibold text-primary">Subject</label>
+                      <label className="block text-sm font-semibold text-primary">{t('contact-form-subject')}</label>
                       <Input
                         type="text"
-                        placeholder="How can we help?"
+                        placeholder={t('contact-form-subject-placeholder')}
                         value={formData.subject}
                         onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
                         required
@@ -162,9 +162,9 @@ export default function ContactPage() {
                   </div>
 
                   <div className="space-y-2">
-                    <label className="block text-sm font-semibold text-primary">Message</label>
+                    <label className="block text-sm font-semibold text-primary">{t('contact-form-message')}</label>
                     <textarea
-                      placeholder="Tell us more about your inquiry..."
+                      placeholder={t('contact-form-message-placeholder')}
                       value={formData.message}
                       onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                       required
@@ -179,12 +179,12 @@ export default function ContactPage() {
                     className="w-full bg-accent text-accent-foreground hover:bg-accent/90 py-6 text-lg font-semibold transition-all duration-300 transform hover:scale-105 active:scale-95 disabled:opacity-90 flex items-center justify-center gap-2"
                   >
                     <Send className="w-5 h-5" />
-                    {submitted ? 'Message Sent!' : 'Send Message'}
+                    {submitted ? t('contact-form-button-sent-message') : t('contact-form-button-send')}
                   </Button>
 
                   {submitted && (
                     <p className="text-center text-green-600 font-semibold">
-                      Thank you! We&apos;ll be in touch soon.
+                      {t('contact-form-thankyou')}
                     </p>
                   )}
                 </form>

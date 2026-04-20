@@ -125,6 +125,21 @@
     "title": "Semua Berita & Acara Roadmaster"
   },
   "Contact Page": {
-    "phone-desc" : "Senin - Sabtu, 08:00 - 17:00 WIB"
+    "phone-desc" : "Senin - Sabtu, 08:00 - 17:00 WIB",
+    "location" : "Lokasi",
+    "title" : "Kontak Roadmaster",
+    "desc" : "Punya pertanyaan? Kami siap membantu. Hubungi tim kami dan kami akan segera menghubungi Anda kembali secepat mungkin.",
+    "title-email" : "Kirim Pesan kepada Kami",
+    "title-desc" : "Isi formulir di bawah ini dan tim kami akan segera menghubungi Anda.",
+    "contact-form-name": "Nama Lengkap",
+    "contact-form-email": "Alamat Email",
+    "contact-form-phone": "Nomor Telepon",
+    "contact-form-subject": "Subjek",
+    "contact-form-subject-placeholder": "Bagaimana kami bisa membantu?",
+    "contact-form-message": "Pesan",
+    "contact-form-message-placeholder": "Ceritakan lebih lanjut tentang kebutuhan Anda...",
+    "contact-form-button-send" : "Kirim Pesan",
+    "contact-form-button-sent-message": "Pesan Terkirim!",
+    "contact-form-thankyou": "Terima kasih! Tim kami akan segera menghubungi Anda."
   }
 }

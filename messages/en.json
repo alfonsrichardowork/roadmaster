@@ -125,6 +125,21 @@
     "title": "All Roadmaster News & Events"
   },
   "Contact Page": {
-    "phone-desc" : "Monday - Saturday, 08:00 - 17:00 WIB"
+    "phone-desc" : "Monday - Saturday, 08:00 - 17:00 WIB",
+    "location" : "Location",
+    "title" : "Contact Roadmaster",
+    "desc" : "Have questions? We are here to help. Reach out to our team and we will get back to you as soon as possible.",
+    "title-email" : "Send us a Message",
+    "title-desc" : "Fill out the form below and our team will get back to you shortly.",
+    "contact-form-name": "Full Name",
+    "contact-form-email": "Email Address",
+    "contact-form-phone": "Phone Number",
+    "contact-form-subject": "Subject",
+    "contact-form-subject-placeholder": "How can we help?",
+    "contact-form-message": "Message",
+    "contact-form-message-placeholder": "Tell us more about your inquiry...",
+    "contact-form-button-send" : "Send Message",
+    "contact-form-button-sent-message": "Message Sent!",
+    "contact-form-thankyou": "Thank you! We will be in touch soon."
   }
 }
