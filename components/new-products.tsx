@@ -28,7 +28,7 @@ export async function NewProducts() {
   })
   const t = await getTranslations("Homepage New Products")
   return (
-    <section id="products" className="pt-24 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
+    <section id="products" className="pt-24 pb-8 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
       {/* Background decorative elements */}
       {/* <div className="absolute top-10 right-10 w-96 h-96 bg-accent/5 rounded-full blur-3xl opacity-40"></div>
       <div className="absolute bottom-20 left-10 w-72 h-72 bg-accent/5 rounded-full blur-3xl opacity-30"></div> */}

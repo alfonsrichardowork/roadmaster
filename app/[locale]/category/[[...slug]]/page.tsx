@@ -348,7 +348,7 @@ export default async function ProductsPage({ params }: ProductsPageProps) {
 
           <div className={`${slug.length === 0 ? 'block' : 'hidden'} pt-4`}>
             {/* <ScrollArea className="w-full whitespace-nowrap border-none"> */}
-              <div className="lg:grid lg:grid-cols-2 block justify-center items-center fade-in-down gap-8">
+              <div className="lg:grid lg:grid-cols-2 block justify-center items-center fade-in-down gap-8 text-foreground">
                 {/* <Button asChild key={'all products'} variant="link" className={`${slug.length === 0 && 'underline font-bold'}`}>
                     <Link href={`/category`}>
                       {t('all-product')}
@@ -394,7 +394,7 @@ export default async function ProductsPage({ params }: ProductsPageProps) {
 
           <div className={`${slug.length === 0 ? 'hidden' : 'block'} pt-4`}>
             {/* <ScrollArea className="w-full whitespace-nowrap border-none"> */}
-              <div className="lg:grid lg:grid-cols-2 block justify-center items-center fade-in-down gap-8">
+              <div className="lg:grid lg:grid-cols-2 block justify-center items-center fade-in-down gap-8 text-foreground">
                   {/* <Button asChild key={'all products'} variant="link" className={`${slug.length === 1 && 'underline font-bold'}`}>
                     <Link href={{pathname: "/category/[...slug]", params: { slug: [slug[0] ?? ''] }}}>
                     {t('all-product-dynamic')} {allSpeakerDynamic}
@@ -434,7 +434,7 @@ export default async function ProductsPage({ params }: ProductsPageProps) {
           </div>
           <Separator className='w-full fade-in-down mt-4 mb-8' />
           {slug.length > 1 &&
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 text-foreground">
               {allProducts.map((product, index) => (
                 <ProductCard product={product} key={product.id} index={index} />
               ))}

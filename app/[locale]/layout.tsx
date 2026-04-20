@@ -115,7 +115,7 @@ export default async function HomeLayout({
         </Head>
         <body className={`${font.className || ''} overflow-x-hidden`}>
             <NextIntlClientProvider>
-                <main className="min-h-screen bg-background">
+                <main className="min-h-screen bg-background text-foreground">
                   <Navigation categories={categoriesData} allnews={newsData}/>
                   {children}
                   <Footer categories={categoriesData} />

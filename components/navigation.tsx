@@ -152,7 +152,7 @@ export function Navigation({ categories, allnews }: NavigationProps) {
                                 </div>
                             </div>
 
-                            <div className="flex items-center justify-center text-base font-semibold mt-2">
+                            <div className="flex items-center justify-center text-base font-semibold mt-2 text-foreground">
                                 {locale === "en" ? val.name_eng : val.name}
                             </div>
                         </Link>
