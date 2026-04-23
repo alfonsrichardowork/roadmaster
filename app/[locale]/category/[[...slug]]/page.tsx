@@ -335,11 +335,11 @@ export default async function ProductsPage({ params }: ProductsPageProps) {
               <h1 className="text-3xl md:text-4xl font-bold text-background leading-tight">
                 {heroTitle}
               </h1>
-              {/* {slug.length > 1 &&
+              {slug.length > 1 &&
                 <p className="text-md text-background/70 max-w-3xl">
                   {heroDesc}
                 </p>
-              } */}
+              }
             </div>
           </div>
         </section>
@@ -392,7 +392,7 @@ export default async function ProductsPage({ params }: ProductsPageProps) {
             </ScrollArea> */}
           </div>
 
-          <div className={`${slug.length === 0 ? 'hidden' : 'block'} pt-4`}>
+          <div className={`${slug.length === 1 ? 'block' : 'hidden'} pt-4`}>
             {/* <ScrollArea className="w-full whitespace-nowrap border-none"> */}
               <div className="lg:grid lg:grid-cols-2 block justify-center items-center fade-in-down gap-8 text-foreground">
                   {/* <Button asChild key={'all products'} variant="link" className={`${slug.length === 1 && 'underline font-bold'}`}>
