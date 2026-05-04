@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server';
 
 import prismadb from '@/lib/prismadb';
 import { checkAuth, checkBearerAPI, getSession } from '@/app/admin/actions';
+import { multipledatasheetproduct } from '@prisma/client';
  
 const slugify = (str: string): string => str.toLowerCase()
                             .replace(/[^a-z0-9]+/g, '-')
@@ -23,7 +24,7 @@ export async function POST(req: Request, props: { params: Promise<{ brandId: str
 
     const body = await req.json();
 
-    const { name, description, description_eng, cover_img } = body;
+    const { name, description, description_eng, cover_img, multipleDatasheetProduct } = body;
 
     if (!name) {
       return new NextResponse("Name is required", { status: 400 });
@@ -48,7 +49,8 @@ export async function POST(req: Request, props: { params: Promise<{ brandId: str
       return NextResponse.json("duplicate")
     }
 
-    await prismadb.product.create({
+
+    const product = await prismadb.product.create({
       data: {
         name,
         description,
@@ -63,6 +65,22 @@ export async function POST(req: Request, props: { params: Promise<{ brandId: str
         updatedBy: session.name ?? '',
       }
     });
+
+    
+    
+    if(multipleDatasheetProduct.length!=0){
+      multipleDatasheetProduct.map(async (datasheet: multipledatasheetproduct) => {
+        if(datasheet.url!=''){
+          await prismadb.multipledatasheetproduct.create({
+            data:{
+              productId: product.id,
+              url:datasheet.url,
+              name: datasheet.name
+            }
+          })
+        }
+      })
+    }
     return NextResponse.json("success");
   } catch (error) {
     console.log('[PRODUCT_POST]', error);

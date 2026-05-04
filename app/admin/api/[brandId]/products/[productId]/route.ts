@@ -5,6 +5,7 @@ import { checkAuth, checkBearerAPI, getSession } from "@/app/admin/actions";
 import { revalidatePath } from "next/cache";
 import path from 'path';
 import fs from 'fs/promises';
+import { multipledatasheetproduct } from "@prisma/client";
 
 const slugify = (str: string): string => str.toLowerCase()
                             .replace(/[^a-z0-9]+/g, '-')
@@ -59,7 +60,8 @@ export async function DELETE(
         id: params.productId
       },
       select:{
-        cover_img: true
+        cover_img: true,
+        multipleDatasheetProduct: true,
       }
     })
     //Delete physical files
@@ -71,6 +73,21 @@ export async function DELETE(
         } catch (error) {
           console.warn(`Could not delete file ${val.cover_img}:`, error);
         }
+
+        val.multipleDatasheetProduct.length > 0 && val.multipleDatasheetProduct.map(async (val2) => {
+          const imagePathDatasheet = path.join(process.cwd(), val2.url);
+          try {
+            await fs.unlink(imagePathDatasheet);
+          } catch (error) {
+            console.warn(`Could not delete file ${val2.url}:`, error);
+          }
+        })
+        //Delete multipleDatasheetProduct records
+        await prismadb.multipledatasheetproduct.deleteMany({
+          where: {
+            productId: params.productId,
+          },
+        });
       })
     }
 
@@ -132,7 +149,7 @@ export async function PATCH(
 
     const body = await req.json();
 
-    const { name, description, description_eng, cover_img, new_product, isArchived, isFeatured } = body;
+    const { name, description, description_eng, cover_img, new_product, isArchived, isFeatured, multipleDatasheetProduct } = body;
 
     if (!name) {
       return new NextResponse("Name is required", { status: 400 });
@@ -165,6 +182,85 @@ export async function PATCH(
         }
       }
 
+      //DATASHEET
+      const datasheetOld = await prismadb.multipledatasheetproduct.findMany({
+        where: {
+          productId: params.productId,
+        },
+      });
+      let finalfoundDatashset : multipledatasheetproduct[] = []
+      datasheetOld.forEach((val) => {
+        const found = multipleDatasheetProduct.find((value: multipledatasheetproduct) => value.url === val.url);
+        
+        if (found && !finalfoundDatashset.some((item) => item.url === found.url)) {
+          finalfoundDatashset.push(found);
+        }
+      });
+      //DELETE DATASHEET
+      //Delete physical files
+      for (const datasheet of datasheetOld) {
+        const isInFinal = finalfoundDatashset.some((item) => item.url === datasheet.url);
+        if (isInFinal) continue;
+
+        if (datasheet.url) {
+          const datasheetPath = path.join(process.cwd(), datasheet.url);
+
+          try {
+            await fs.unlink(datasheetPath);
+          } catch (error) {
+            console.warn(`Could not delete file ${datasheet.url}:`, error);
+          }
+        }
+      }
+      //Delete oldDatasheet records
+      await prismadb.multipledatasheetproduct.deleteMany({
+        where: {
+          productId: params.productId,
+          url: {
+            notIn: finalfoundDatashset.map((val) => val.url),
+          },
+        },
+      });
+      if (multipleDatasheetProduct.length !== 0) {
+        const creations = multipleDatasheetProduct.map(async (value: multipledatasheetproduct) => {
+          if(value !== null && value !== undefined){
+            const alreadyInDB = finalfoundDatashset.some((val) => val.url === value.url);
+            if (!alreadyInDB && value.url !== '') {
+              await prismadb.multipledatasheetproduct.create({
+                data: {
+                  productId: params.productId,
+                  url: value.url,
+                  name: value.name,
+                }
+              });
+            }
+            else{ //UPDATE NAME
+              const datasheet_Id = await prismadb.multipledatasheetproduct.findFirst({
+                where: {
+                  url: value.url,
+                  productId: params.productId
+                },
+                select: {
+                  id: true
+                }
+              })
+              if (datasheet_Id) {
+                await prismadb.multipledatasheetproduct.update({
+                  where: {
+                    id: datasheet_Id.id
+                  },
+                  data: {
+                    name: value.name,
+                  },
+                });
+              }
+            }
+          }
+        });
+
+        await Promise.all(creations);
+      }
+
       await prismadb.product.update({
         where: {
           id: params.productId
@@ -184,7 +280,7 @@ export async function PATCH(
       })
     }
     else{
-      await prismadb.product.create({
+      const product = await prismadb.product.create({
         data: {
           name,
           description,
@@ -201,6 +297,20 @@ export async function PATCH(
           updatedBy: session.name ?? '',
         },
       })
+
+      if(multipleDatasheetProduct.length!=0){
+      multipleDatasheetProduct.map(async (datasheet: multipledatasheetproduct) => {
+          if(datasheet.url!=''){
+            await prismadb.multipledatasheetproduct.create({
+              data:{
+                productId: product.id,
+                url:datasheet.url,
+                name: datasheet.name
+              }
+            })
+          }
+        })
+      }
     }
 
 

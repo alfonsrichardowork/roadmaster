@@ -16,16 +16,40 @@ export default function ContactPage() {
     subject: '',
     message: '',
   })
-  const [submitted, setSubmitted] = useState(false)
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault()
-    setSubmitted(true)
-    setFormData({ name: '', email: '', phone: '', subject: '', message: '' })
-    setTimeout(() => setSubmitted(false), 3000)
-  }
   const t = useTranslations('Contact Page')
   const locale = useLocale()
+  const [submitted, setSubmitted] = useState(false)
+  const [loading, setLoading] = useState(false)
+  const [error, setError] = useState('')
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault()
+    setLoading(true)
+    setError('')
+
+    try {
+      const response = await fetch(`/api/contact/${locale}`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      })
+
+      if (!response.ok) {
+        throw new Error('Failed to send message')
+      }
+
+      setSubmitted(true)
+      setFormData({ name: '', email: '', phone: '', subject: '', message: '' })
+      setTimeout(() => setSubmitted(false), 3000)
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'An error occurred')
+    } finally {
+      setLoading(false)
+    }
+  }
+
 
   const contactInfo = [
     {
@@ -98,7 +122,7 @@ export default function ContactPage() {
         </section>
 
         {/* Contact Form Section */}
-        <section className="py-24 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-background to-secondary">
+         <section className="py-24 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-background to-secondary">
           <div className="max-w-3xl mx-auto">
             <div className="fade-in-down text-center space-y-6 mb-16">
               <h2 className="text-4xl font-bold text-primary">{t('title-email')}</h2>
@@ -175,16 +199,22 @@ export default function ContactPage() {
 
                   <Button
                     type="submit"
-                    disabled={submitted}
+                    disabled={submitted || loading}
                     className="w-full bg-accent text-accent-foreground hover:bg-accent/90 py-6 text-lg font-semibold transition-all duration-300 transform hover:scale-105 active:scale-95 disabled:opacity-90 flex items-center justify-center gap-2"
                   >
                     <Send className="w-5 h-5" />
-                    {submitted ? t('contact-form-button-sent-message') : t('contact-form-button-send')}
+                    {loading ? 'Sending...' : submitted ? t('contact-form-button-sent-message') : t('contact-form-button-send')}
                   </Button>
 
                   {submitted && (
                     <p className="text-center text-green-600 font-semibold">
                       {t('contact-form-thankyou')}
+                    </p>
+                  )}
+
+                  {error && (
+                    <p className="text-center text-red-600 font-semibold">
+                      Error: {error}
                     </p>
                   )}
                 </form>

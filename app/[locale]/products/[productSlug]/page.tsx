@@ -2,10 +2,12 @@
 import DompurifyContent from '@/components/dompurifyText'
 import SpecificationTable from '@/components/spec-table'
 import { Button } from '@/components/ui/button'
-import { Link } from '@/i18n/navigation'
+import { Link as Link18n } from '@/i18n/navigation'
 import prismadb from '@/lib/prismadb'
+import { Download } from 'lucide-react'
 import { getLocale, getTranslations } from 'next-intl/server'
 import Image from 'next/image'
+import Link from 'next/link'
 
 export interface SpecificationProp {
   parentname: string
@@ -42,6 +44,12 @@ export default async function ProductPage({
       allCat: {
         include: {
           category: true
+        }
+      },
+      multipleDatasheetProduct: {
+        select: {
+          name: true,
+          url: true
         }
       },
       connectorSpecifications: {
@@ -127,7 +135,7 @@ export default async function ProductPage({
           <div className="max-w-6xl mx-auto text-center">
             <h1 className="text-4xl font-bold text-primary mb-4">{t('not-found-title')}</h1>
             <Button asChild>
-              <Link href="/category">{t('not-found-button')}</Link>
+              <Link18n href="/category">{t('not-found-button')}</Link18n>
             </Button>
           </div>
         </main>
@@ -140,9 +148,9 @@ export default async function ProductPage({
         <div className="pt-24 px-4 sm:px-6 lg:px-8">
           <div className="max-w-6xl mx-auto">
             <div className="flex items-center gap-2 text-sm text-foreground">
-              <Link href="/" className="hover:text-accent">Home</Link>
+              <Link18n href="/" className="hover:text-accent">Home</Link18n>
               <span>/</span>
-              <Link href="/category" className="hover:text-accent">{t('product-breadcrumb')}</Link>
+              <Link18n href="/category" className="hover:text-accent">{t('product-breadcrumb')}</Link18n>
               <span>/</span>
               <span className="text-primary font-semibold">{product.name}</span>
             </div>
@@ -177,6 +185,22 @@ export default async function ProductPage({
                     {product.name}
                   </h1>
                     <DompurifyContent text={locale === 'en' ? product.description_eng : product.description || ""} />
+                    {product.multipleDatasheetProduct && product.multipleDatasheetProduct.length > 0 &&
+                      <div>
+                        <h2 className='font-bold text-base mb-1'>Datasheet:</h2>
+                        {product.multipleDatasheetProduct.map((value, index) => (
+                          value.url !== '' &&
+                          <div key={index} className={`${index !== 0 && 'pt-4'}`}>
+                            <Link href={value.url} target="_blank" className={`flex items-center hover:text-accent hover:underline`}> 
+                            <Download className="h-4 w-fit" strokeWidth={3} width={100} height={100}/>
+                            <h3 className="pl-2">
+                              {value.name}
+                            </h3>
+                          </Link>
+                          </div>
+                        ))}
+                    </div>      
+                    }
                 </div>
             </div>
           </div>

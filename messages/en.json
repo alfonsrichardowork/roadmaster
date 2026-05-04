@@ -94,7 +94,10 @@
     "desc": "Access and download Roadmaster manuals and catalogues",
     "keywords": "roadmaster downloads, product manuals, product catalogues, roadmaster resources",
     "manual": "Manual",
-    "catalogue": "Catalogue"
+    "catalogue": "Catalogue",
+    "catalogue-title" : "Roadmaster Catalogue",
+    "manual-desc": "Product manuals and technical documentation",
+    "catalogue-desc": "Complete product catalogue from Roadmaster"
   },
   "Metadata service page": {
     "title": "Service & Warranty",

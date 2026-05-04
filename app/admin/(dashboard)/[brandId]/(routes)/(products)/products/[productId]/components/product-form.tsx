@@ -6,7 +6,7 @@ import { useCallback, useEffect, useState } from "react"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import { toast } from "react-hot-toast"
-import { product } from "@prisma/client"
+import { multipledatasheetproduct, product } from "@prisma/client"
 import { useParams, useRouter } from "next/navigation"
 
 import { Input } from "@/components/ui/input"
@@ -24,7 +24,7 @@ import { Heading } from "@/app/admin/components/ui/heading"
 import { Separator } from "@/components/ui/separator"
 import { uploadImage } from "@/app/admin/upload-image"
 import Image from "next/image"
-import { Bold, Heading1, Heading2, Heading3, Heading4, Heading5, Heading6, Italic, List, ListOrdered, LucideLink, LucideUnlink, Strikethrough, Trash } from "lucide-react"
+import { Bold, CirclePlus, File, Heading1, Heading2, Heading3, Heading4, Heading5, Heading6, Italic, List, ListOrdered, LucideLink, LucideUnlink, Strikethrough, Trash } from "lucide-react"
 
 
 import { EditorContent, useEditor } from "@tiptap/react"
@@ -40,6 +40,8 @@ import { Toggle } from "@/app/admin/components/ui/toggle"
 import "@/app/style/styles.scss";
 import { MAX_SIZE } from "@/app/admin/model/model"
 import { Checkbox } from "@/components/ui/checkbox"
+import { uploadProductDatasheet } from "@/app/admin/upload-product-datasheet"
+import Link from "next/link"
 
 
 const formSchema = z.object({
@@ -49,13 +51,16 @@ const formSchema = z.object({
   description_eng: z.string().min(0).optional(),
   isArchived: z.boolean().optional(),
   isFeatured: z.boolean().optional(),
-  cover_img: z.string().optional()
+  cover_img: z.string().optional(),
+  multipleDatasheetProduct: z.object({ url: z.string() }).array().optional(),
 });
 
 type ProductFormValues = z.infer<typeof formSchema>
 
 interface ProductFormProps {
-  initialData: product | null;
+  initialData: product & {
+    multipleDatasheetProduct: multipledatasheetproduct[]
+  } | null;
 };
 
 export const ProductForm: React.FC<ProductFormProps> = ({
@@ -63,6 +68,9 @@ export const ProductForm: React.FC<ProductFormProps> = ({
 }) => {
   const params = useParams();
   const router = useRouter();
+
+  const [allDatasheet, setAllDatasheet] = useState<multipledatasheetproduct[]>([]);
+  const [selectedDatasheetFile, setSelectedDatasheetFile] = useState<File[]>([]);
 
   const [coverImgUrl, setCoverImgUrl] = useState<string>();
   const [coverImg, setCoverImg] = useState<File>();
@@ -83,12 +91,17 @@ export const ProductForm: React.FC<ProductFormProps> = ({
       isFeatured: false,
       description: '',
       description_eng: '',
-      cover_img: ''
+      cover_img: '',
+      multipleDatasheetProduct: [],
     }
   });
 
   useEffect(() => {
     const fetchData = async () => {
+      if (initialData && initialData.multipleDatasheetProduct) {
+        setAllDatasheet(initialData.multipleDatasheetProduct);
+      }
+
       if (initialData && initialData.cover_img) {
         setCoverImgUrl(initialData.cover_img);
       }
@@ -100,8 +113,58 @@ export const ProductForm: React.FC<ProductFormProps> = ({
     fetchData().catch((error) => {
       console.error("Error fetching product: ", error);
     });
-  }, [params.superiorId, initialData, initialData?.cover_img]);
+  }, [params.superiorId, initialData, initialData?.cover_img, initialData?.multipleDatasheetProduct]);
 
+  //MULTIPLE DATASHEET
+  const addDatasheetCounter = () => {
+    //@ts-ignore
+    setAllDatasheet((prev) => [
+      ...prev,
+      {
+        id: Math.random().toString(), // Using a random id for uniqueness
+        productId: params.productId,
+        url: "",
+        name: "",
+      },
+    ]);
+  };
+
+  const reduceDatasheetCounter = (index: number) => {
+    setAllDatasheet((prev) => prev.filter((_, i) => i !== index));
+  };
+
+  const handleDatasheetFileChange = (e: React.ChangeEvent<HTMLInputElement>, index: number) => {
+    const tempfile = e.target.files?.[0];
+    let temp = selectedDatasheetFile
+    temp[index] = tempfile!
+    setSelectedDatasheetFile(temp);
+  };
+
+  async function handleDatasheetFileUpload(file: File[]): Promise<multipledatasheetproduct[]> {
+    if (file && file.length > 0) {
+      let updatedDatasheet = [...allDatasheet];
+      try {
+        const uploadPromises = file.map(async (value, index) => {
+          if (value) {
+            const formData = new FormData();
+            formData.append('file', value);
+            const url = await uploadProductDatasheet(formData);
+            const elementIndex = updatedDatasheet.length - (file.length - index);
+            if (updatedDatasheet[elementIndex]) {
+              updatedDatasheet[elementIndex].url = url;
+            }
+          }
+        });
+        await Promise.all(uploadPromises);
+        return updatedDatasheet;
+      } catch (error) {
+        console.error("Error uploading files:", error);
+        return [];
+      }
+    }  
+    return [];
+  }
+  
     
   //COVER IMAGE
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -318,6 +381,13 @@ const cleanHTML = initialData?.description
   const onSubmit = async (data: ProductFormValues) => {
     try {
       setLoading(true);
+        
+      if (selectedDatasheetFile && selectedDatasheetFile.length > 0) {
+        data.multipleDatasheetProduct = await handleDatasheetFileUpload(selectedDatasheetFile)
+      }
+      else{
+        data.multipleDatasheetProduct = allDatasheet
+      }
 
       if (coverImg) {
         data.cover_img = await handleCoverImageUpload(coverImg)
@@ -476,6 +546,75 @@ const cleanHTML = initialData?.description
                   </FormItem>
                 )}
               />
+
+
+              <div className="">
+                <div className="text-center flex items-center justify-between pb-2">
+                  <div className="text-left font-bold">Datasheet</div>
+                  <div
+                    onClick={addDatasheetCounter}
+                    className="flex gap-2 bg-green-500 text-white hover:bg-green-600 transition-colors p-2 rounded-lg hover:cursor-pointer"
+                  >
+                    <CirclePlus width={20} height={20} />Add Datasheet
+                  </div>
+                </div>
+                <div>
+                  {allDatasheet.map((value, index) => (
+                    <div
+                      key={value.id}
+                      className="flex items-center justify-between rounded-md p-2 shadow-md mb-2 border"
+                    >
+                      <div className="flex items-center space-x-4">
+                        {value?.url && value.url !== '' && (
+                          <Link
+                            href={value.url}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="text-primary font-medium hover:underline transition-colors whitespace-nowrap flex items-center gap-2"
+                          >
+                            <File width={20} height={20}/> View File
+                          </Link>
+                        )}
+                        {value.url === '' && (
+                          <Input
+                            id={`file-${index}`}
+                            type="file"
+                            accept=".pdf"
+                            name="file"
+                            onChange={(e) =>
+                              e.target.files && handleDatasheetFileChange(e, index)
+                            }
+                            disabled={loading}
+                            className="border border-gray-300 p-2 rounded-md"
+                          />
+                        )}
+                        <Input
+                          type="text"
+                          defaultValue={value.name}
+                          placeholder="PDF File name"
+                          onChange={(e) => {
+                            const updatedDatasheet = [...allDatasheet];
+                            if(updatedDatasheet[index]){
+                              updatedDatasheet[index].name = e.target.value;
+                            }
+                            setAllDatasheet(updatedDatasheet);
+                          }}
+                          required
+                          className="border border-gray-300 p-2 rounded-md w-full"
+                        />
+                      </div>
+                      <Button
+                        variant={"destructive"}
+                        onClick={() => reduceDatasheetCounter(index)}
+                      >
+                        <Trash width={20} height={20}  className="text-background"/>
+                      </Button>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+
               <FormField
                 control={form.control}
                 name="description"

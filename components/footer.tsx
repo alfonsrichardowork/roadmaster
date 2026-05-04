@@ -12,6 +12,11 @@ interface FooterProps {
 export async function Footer({ categories }: FooterProps) {
   const locale = await getLocale();
   const t_footer = await getTranslations("Navbar Footer")
+  const catalogue = await prismadb.brand.findFirst({
+    select: {
+      catalogues: true
+    }
+  })
   return (
     <footer className="bg-primary text-primary-foreground">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-12 pb-8">
@@ -193,11 +198,13 @@ export async function Footer({ categories }: FooterProps) {
                   {t_footer('manual')}
                 </IntlLink>
               </li>
-              <li>
-                <IntlLink href="/download" className="text-primary-foreground/80 hover:text-primary-foreground transition-colors">
-                  {t_footer('catalog')}
-                </IntlLink>
-              </li>
+              {catalogue && catalogue.catalogues !== '' &&
+                <li>
+                  <Link href={catalogue.catalogues} target='blank' className="text-primary-foreground/80 hover:text-primary-foreground transition-colors">
+                    {t_footer('catalog')}
+                  </Link>
+                </li>
+              }
             </ul>
           </div>
         </div>

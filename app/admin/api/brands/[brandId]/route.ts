@@ -3,6 +3,8 @@ import { NextResponse } from "next/server";
 import prismadb from "@/lib/prismadb";
 import { checkAuth, checkBearerAPI, getSession } from "@/app/admin/actions";
 import { redirect } from "next/navigation";
+import path from 'path';
+import fs from 'fs/promises';
 
 
 export async function PATCH(req: Request, props: { params: Promise<{ brandId: string }> }) {
@@ -25,7 +27,7 @@ export async function PATCH(req: Request, props: { params: Promise<{ brandId: st
 
     const body = await req.json();
 
-    const { name } = body;
+    const { name, catalogues } = body;
 
     if (!name) {
       return new NextResponse("Name is required", { status: 400 });
@@ -42,6 +44,24 @@ export async function PATCH(req: Request, props: { params: Promise<{ brandId: st
     if(!(await checkAuth(session.isAdmin!, params.brandId, session.userId!))){
       return new NextResponse("Unauthorized", { status: 405 });
     }
+
+    const oldBrand = await prismadb.brand.findFirst({
+      where: {
+        id: params.brandId
+      },
+      select: {
+        catalogues: true
+      }
+    })
+
+    if(oldBrand && oldBrand.catalogues !== catalogues) {
+      const datasheetPath = path.join(process.cwd(), oldBrand.catalogues);
+      try {
+        await fs.unlink(datasheetPath);
+      } catch (error) {
+        console.warn(`Could not delete file ${oldBrand.catalogues}:`, error);
+      }
+    }
     
     const brand = await prismadb.brand.updateMany({
       where: {
@@ -49,7 +69,8 @@ export async function PATCH(req: Request, props: { params: Promise<{ brandId: st
         userId: session.userId,
       },
       data: {
-        name
+        name,
+        catalogues
       }
     });
 
@@ -91,7 +112,23 @@ export async function DELETE(req: Request, props: { params: Promise<{ brandId: s
       return new NextResponse("Unauthorized", { status: 405 });
     }
     
-    
+     const oldBrand = await prismadb.brand.findFirst({
+      where: {
+        id: params.brandId
+      },
+      select: {
+        catalogues: true
+      }
+    })
+
+    if(oldBrand && oldBrand.catalogues !== '') {
+      const datasheetPath = path.join(process.cwd(), oldBrand.catalogues);
+      try {
+        await fs.unlink(datasheetPath);
+      } catch (error) {
+        console.warn(`Could not delete file ${oldBrand.catalogues}:`, error);
+      }
+    }
 
     const brand = await prismadb.brand.deleteMany({
       where: {

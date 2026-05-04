@@ -94,7 +94,10 @@
     "desc": "Akses dan unduh manual serta katalog produk roadmaster",
     "keywords": "unduh roadmaster, manual produk, katalog produk, manual roadmaster, katalog roadmaster",
     "manual": "Manual",
-    "catalogue": "Katalog"
+    "catalogue": "Katalog",
+    "catalogue-title" : "Katalog Roadmaster",
+    "manual-desc": "Manual produk dan dokumentasi teknis",
+    "catalogue-desc": "Katalog produk lengkap dari Roadmaster"
   },
   "Metadata service page": {
     "title": "Layanan & Garansi",

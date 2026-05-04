@@ -11,6 +11,9 @@ const ProductPage = async (
     where: {
       id: params.productId,
     },
+    include: {
+      multipleDatasheetProduct: true
+    }
   });
 
 
