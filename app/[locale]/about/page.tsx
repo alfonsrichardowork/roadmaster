@@ -1,8 +1,9 @@
-import { getTranslations } from 'next-intl/server'
+import { getLocale, getTranslations } from 'next-intl/server'
 import Image from 'next/image';
 
 export default async function AboutPage() {
   const t = await getTranslations('About Us Page')
+  const lang = await getLocale()
   return (
     <>
         <section className="pt-24 px-4 sm:px-6 lg:px-8 bg-white">
@@ -29,11 +30,11 @@ export default async function AboutPage() {
             </div>
                     
               <div className="relative mt-8">
-                <div className="absolute left-8 top-14 bottom-0 w-1.5 bg-gradient-to-b from-background/20 via-primary/50 to-foreground" />
+                {/* <div className="absolute left-8 top-14 bottom-0 w-1.5 bg-gradient-to-b from-background/20 via-primary/50 to-foreground" /> */}
                 <div className="space-y-4">
                   <h3 className="text-2xl font-bold text-primary">Milestones</h3>
                   <div className="space-y-3 w-full h-full">
-                    <img src={'/images/roadmaster/milestone_indo.webp'} alt='Milestone Roadmaster' className='w-full h-full object-cover' width={1000} height={1000} />
+                    <img src={lang === 'id' ? '/images/roadmaster/milestone_indo_new.webp' : '/images/roadmaster/milestone_english_new.webp'} alt='Milestone Roadmaster' className='w-full h-full object-cover' width={1000} height={1000} />
                   </div>
                 </div>
               </div>
