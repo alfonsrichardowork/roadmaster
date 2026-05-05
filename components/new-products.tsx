@@ -1,6 +1,4 @@
-import { Button } from '@/components/ui/button'
 import prismadb from '@/lib/prismadb'
-import {Link} from "@/i18n/navigation";
 import { ProductCard } from './productCard'
 import { getTranslations } from 'next-intl/server'
 

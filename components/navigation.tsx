@@ -72,7 +72,7 @@ export function Navigation({ categories, allnews }: NavigationProps) {
                         className={`flex items-center hover:cursor-pointer`}
                         onMouseEnter={() => setIsOpen(true)}
                     >
-                        Products
+                        {t_navbar('products')}
                         <ChevronDown
                         size={20}
                         className={`ml-1 transition-transform duration-300 ${

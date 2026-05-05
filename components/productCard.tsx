@@ -2,7 +2,7 @@ import { ProductCardData } from "@/lib/type";
 import Image from "next/image";
 import { Button } from "./ui/button";
 import { Link } from "@/i18n/navigation";
-import { getLocale, getTranslations } from "next-intl/server";
+import { getTranslations } from "next-intl/server";
 
 // const order: Record<string, number> = {
 //   "Category": 0,
@@ -23,7 +23,7 @@ export async function ProductCard({ product, index }: ProductCardProps) {
             className={`fade-in-up stagger-${(index % 4) + 1} group relative`}
         >
             <div className="absolute -inset-0.5 bg-gradient-to-br from-accent/30 to-transparent opacity-0 group-hover:opacity-100 rounded-lg transition-opacity duration-300 blur-sm"></div>
-            <Link href={`/products/${product.slug}` as any} className="relative bg-white rounded-lg shadow-md hover:shadow-2xl transition-all duration-500 overflow-hidden flex flex-col h-full group-hover:translate-y-[-8px] block">
+            <Link href={{pathname: `/products/[productSlug]`, params: {productSlug: product.slug }}} className="relative bg-white rounded-lg shadow-md hover:shadow-2xl transition-all duration-500 overflow-hidden flex flex-col h-full group-hover:translate-y-[-8px] block">
                 {/* Product Image Area */}
                 <div className="relative bg-white flex items-center justify-center overflow-hidden">
                     <div className="relative z-10 transition-transform duration-500">

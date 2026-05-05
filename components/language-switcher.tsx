@@ -3,13 +3,14 @@
 import {
 DropdownMenu,
 DropdownMenuContent,
+DropdownMenuItem,
 DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { Link, usePathname as usePathnameIntl } from "@/i18n/navigation";
-import { allcategory, news } from "@prisma/client";
+import { routing } from "@/i18n/routing";
+import { allcategory } from "@prisma/client";
 import { useLocale } from "next-intl";
 import Image from "next/image";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
 const languages: { locale: string; flag: string }[] = [
 { locale: "id", flag: "/images/roadmaster/indonesia-flag-icon.svg" },
@@ -23,40 +24,96 @@ interface LanguageSwitcherProps {
 
 export function LanguageSwitcher({ categories, news } : LanguageSwitcherProps) {
     const locale = useLocale();
-    const pathnameIntl = usePathnameIntl();
+    const router = useRouter()
     const pathname = usePathname()
-    const finalPathname : string[] = pathname.split('/')
-    locale === 'en' && finalPathname.splice(1, 1)
-    const finalIntlPathname: string[] = pathnameIntl.split('/')
-    let finalLinkRoute = ''
-    finalIntlPathname.map((path: string, index) => {
-        if(path != ''){
-            if (path[0] === '[' && path[path.length - 1] === ']') {
-                if(finalPathname[index - 1] === 'category' || finalPathname[index - 1] === 'kategori') {
-                    finalPathname.map((val, idx) => {
-                        if(idx > index - 1) {
-                            let temp = categories.find((valCat) => (locale === 'en' ? valCat.slug_eng : valCat.slug) === val)
-                            finalLinkRoute = finalLinkRoute.concat('/' + (locale === 'en' ? temp?.slug : temp?.slug_eng))
-                        }
-                    })
+    const searchParams = useSearchParams()
+    
+
+     const selectLanguage = (lang: string) => {
+        if (lang !== 'en' && lang !== 'id') return;
+        if (locale !== lang)
+        {
+            setTimeout(async() => {
+            let newPath = '';
+            const allRoute = routing.pathnames
+            const iterableRoutes = Object.entries(allRoute)
+            .filter(([path]) => {
+                const segments = path.split('/').filter(Boolean);
+                return segments.length <= 1;
+            }).map(([key, value]) => ({
+                path: key,
+                id: value.id,
+                en: value.en,
+            }));
+            const segments = pathname.split('/');
+            locale === 'en' && segments.splice(1, 1)
+            const currentParams = searchParams.toString();
+            if(segments.length > 1) {
+                const match = iterableRoutes.find((val) =>
+                    `/${segments[1]}` === val.en ||
+                    `/${segments[1]}` === val.id
+                );
+                if (match) {
+                    if (locale === 'en') {
+                        segments[1] = match.id.slice(1, match.id.length);
+                    } else {
+                        segments[1] = match.en.slice(1, match.en.length);
+                    }
                 }
-                else if(finalPathname[index - 1] === 'news' || finalPathname[index - 1] === 'berita') {
-                    finalPathname.map((val, idx) => {
-                        if(idx > index - 1) {
-                            let temp = news.find((valnews) => (locale === 'en' ? valnews.slug_eng : valnews.slug) === val)
-                            finalLinkRoute = finalLinkRoute.concat('/' + (locale === 'en' ? temp?.slug : temp?.slug_eng))
+                
+                if(segments.length > 2) {
+                    if(segments[1] === 'berita' || segments[1] === "news") {
+                        let temp = news.find((valnews) => (locale === 'en' ? valnews.slug_eng : valnews.slug) === segments[2])
+                        if(temp){
+                            if (locale === 'en') {
+                                segments[2] = temp.slug
+                            } else {
+                                segments[2] = temp.slug_eng;
+                            }
                         }
-                    })
-                }
-                else{
-                    finalLinkRoute = finalLinkRoute.concat('/' + finalPathname[index])
+                            
+                    }
+                    else if(segments[1] === 'category' || segments[1] === "kategori") {
+                        segments.map((cat, index) => {
+                            if(index > 1){
+                                let temp = categories.find((valCat) => (locale === 'en' ? valCat.slug_eng : valCat.slug) === cat)
+                                if(temp){
+                                    if (locale === 'en') {
+                                        segments[index] = temp.slug
+                                    } else {
+                                        segments[index] = temp.slug_eng;
+                                    }
+                                }
+                            }
+                        })                         
+                    }
                 }
             }
-            else{
-                finalLinkRoute = finalLinkRoute.concat('/' + path)
+
+            
+
+            if (lang === 'en') {
+                if (segments[1] !== 'en') {
+                segments.splice(1, 0, 'en');
+                }
+                newPath = segments.join('/');
             }
+
+            if (lang === 'id') {
+                if (segments[1] === 'en') {
+                segments.splice(1, 1);
+                }
+                newPath = segments.join('/') || '/';
+            }
+
+            const fullPath = currentParams ? `${newPath}?${currentParams}` : newPath;
+            // console.log("final fullPath: ", fullPath)
+            router.replace(fullPath);
+            }, 100);
         }
-    })
+    };
+
+
     const selectedLanguage =
     languages.find((lang) => lang.locale === locale) ?? languages[0];
     return (
@@ -70,10 +127,12 @@ export function LanguageSwitcher({ categories, news } : LanguageSwitcherProps) {
                 className="w-fit min-w-0 p-1 bg-background/95 border shadow-xl"
             >
                 {languages.map((lang) => ( 
-                    <Link key={lang.locale} href={pathnameIntl === '/' ? pathnameIntl : finalLinkRoute as any} locale={lang.locale} className={`flex items-center gap-2 rounded px-2 py-1 ${ locale === lang.locale ? "bg-accent" : "" }`} >
-                        <Image src={lang.flag} width={30} height={30} alt={lang.locale} className="shadow-lg border"/>
-                        {lang.locale.toUpperCase()}
-                    </Link>
+                    <div key={lang.locale} onClick={() => selectLanguage(lang.locale)} className={`flex items-center justify-center rounded py-0.5`} >
+                        <DropdownMenuItem className={`cursor-pointer gap-1 ${ locale === lang.locale ? "bg-accent" : "" }`}>
+                            <Image src={lang.flag} width={30} height={30} alt={lang.locale} className="shadow-lg border"/>
+                            {lang.locale.toUpperCase()}
+                        </DropdownMenuItem>
+                    </div>
                 ))} 
             </DropdownMenuContent>
         </DropdownMenu>
