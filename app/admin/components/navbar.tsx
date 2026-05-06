@@ -36,7 +36,7 @@ const Navbar = async () => {
       <div className="flex h-16 items-center px-4">
         <div className="px-4">
           <Link href={'/admin'}>
-            <Image src={'/images/roadmaster/logo_roadmaster_black.webp'} width={150} height={100} alt="Logo Roadmaster" className="w-18 h-fit"/>
+            <Image src={'/images/admin/logo_only_roadmaster_black.webp'} width={150} height={100} alt="Logo Roadmaster" className="w-18 h-fit"/>
           </Link>
         </div>
         <MainNav className="mx-6" isadmin={session.isAdmin!}/>

@@ -47,54 +47,89 @@ export default function Page () {
   };
 
   return (
-      <div className="grid md:grid-cols-2 grid-cols-1 items-center justify-center h-full w-full">
-        <div className="md:block hidden"></div>
-        <div className="space-y-4 py-2 pb-4">
-          <div className="space-y-2">
-          <Card className="mx-auto w-1/2 bg-transparent border-none">
-            <CardHeader className="flex flex-col items-center justify-center space-y-2 w-full pb-4">
-              <Image src={'/images/admin/logo_roadmaster_white.webp'} alt="Logo Roadmaster" width={200} height={100}/>
-              <CardTitle className="md:text-xl text-base text-center text-background">Welcome to Roadmaster Admin Page!</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <Form {...form}>
-                <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-2 text-background">
-                  <FormField
-                    control={form.control}
-                    name="email"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>Username</FormLabel>
-                        <FormControl>
-                          <Input disabled={loading} placeholder="Input your username" className="bg-white shadow-md text-black" {...field} />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-                  <FormField
-                    control={form.control}
-                    name="password"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>Password</FormLabel>
-                        <FormControl>
-                          <Input disabled={loading} type="password" placeholder="********" className="bg-white shadow-md text-black" {...field} />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-                  <div className="pt-6 space-x-2 flex items-center justify-end w-full">
-                    <Button disabled={loading} type="submit" variant={'secondary'} className="w-full">Login</Button>
-                  </div>
-                </form>
-              </Form> 
-            </CardContent>
-          </Card>
+      <div className="min-h-screen w-full bg-linear-to-bl from-background via-accent/10 to-accent/15 flex items-center justify-center p-4">
+      {/* Subtle background elements */}
+      {/* <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute top-20 right-10 w-72 h-72 bg-red-500/20 rounded-full blur-3xl"></div>
+        <div className="absolute bottom-20 left-10 w-72 h-72 bg-red-400/15 rounded-full blur-3xl"></div>
+      </div> */}
+
+      {/* Login Card */}
+      <Card className="w-full max-w-md border-gray-200 bg-white shadow-xl relative z-10">
+        <CardHeader className="space-y-6 pb-6">
+          <div className="flex justify-center">
+              <Image
+                src="/images/admin/logo_roadmaster_black.webp"
+                alt="Logo Roadmaster"
+                width={200}
+                height={200}
+                className="object-contain h-fit max-w-2/3"
+              />
           </div>
-        </div>
-      </div>
+          <div className="space-y-2">
+            <CardTitle className="text-2xl font-bold text-center text-black">
+              Welcome Back
+            </CardTitle>
+            <p className="text-center text-gray-600 text-sm">
+              Sign in to your Roadmaster admin account
+            </p>
+          </div>
+        </CardHeader>
+
+        <CardContent>
+          <Form {...form}>
+            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+              <FormField
+                control={form.control}
+                name="email"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel className="text-black font-semibold">Username</FormLabel>
+                    <FormControl>
+                      <Input
+                        disabled={loading}
+                        placeholder="Enter your username"
+                        className="bg-gray-50 border-gray-300 text-black placeholder:text-gray-400 focus:border-red-500 focus:ring-red-500"
+                        {...field}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+
+              <FormField
+                control={form.control}
+                name="password"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel className="text-black font-semibold">Password</FormLabel>
+                    <FormControl>
+                      <Input
+                        disabled={loading}
+                        type="password"
+                        placeholder="••••••••"
+                        className="bg-gray-50 border-gray-300 text-black placeholder:text-gray-400 focus:border-red-500 focus:ring-red-500"
+                        {...field}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+
+              <Button
+                disabled={loading}
+                type="submit"
+                className="w-full mt-6 bg-red-600 hover:bg-red-700 text-white font-semibold py-2 transition-colors"
+              >
+                {loading ? 'Signing in...' : 'Sign In'}
+              </Button>
+            </form>
+          </Form>
+        </CardContent>
+      </Card>
+    </div>
   );
 };
 
