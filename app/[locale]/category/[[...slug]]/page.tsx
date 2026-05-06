@@ -220,7 +220,7 @@ export default async function ProductsPage({ params }: ProductsPageProps) {
                       />
                       </div>
                       <div className="md:col-span-2 items-start justify-start text-sm md:pt-0 pt-4">
-                        <div className='font-semibold text-lg'>{locale === 'en' ? cat.name_eng : cat.name}</div>
+                        <h2 className='font-semibold text-lg'>{locale === 'en' ? cat.name_eng : cat.name}</h2>
                         <div>{locale === 'en' ? cat.description_eng : cat.description}</div>
                       </div>
                     </div>

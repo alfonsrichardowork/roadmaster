@@ -5,6 +5,7 @@ export async function Hero() {
   const allHero = await prismadb.hero.findMany({})
   return (
     <section className="relative min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 overflow-hidden pt-20">
+      <h1 className='sr-only'>Roadmaster Official Website</h1>
       <div className="absolute inset-0 z-0 overflow-hidden">
         <SwiperHero slides={allHero}/>
       </div>
