@@ -33,8 +33,11 @@ export default async function AboutPage() {
                 {/* <div className="absolute left-8 top-14 bottom-0 w-1.5 bg-gradient-to-b from-background/20 via-primary/50 to-foreground" /> */}
                 <div className="space-y-4">
                   <h3 className="text-2xl font-bold text-primary">Milestones</h3>
-                  <div className="space-y-3 w-full h-full">
+                  <div className="space-y-3 w-full h-full md:block hidden">
                     <img src={lang === 'id' ? '/images/roadmaster/milestone_indo_new.webp' : '/images/roadmaster/milestone_english_new.webp'} alt='Milestone Roadmaster' className='w-full h-full object-cover' width={1000} height={1000} />
+                  </div>
+                   <div className="space-y-3 w-full h-full md:hidden block">
+                    <img src={lang === 'id' ? '/images/roadmaster/MILESTONE_MOBILE_VERSION.webp' : '/images/roadmaster/MILESTONE_english_MOBILE_VERSION.webp'} alt='Milestone Roadmaster' className='w-full h-full object-cover' width={1000} height={1000} />
                   </div>
                 </div>
               </div>
