@@ -43,13 +43,24 @@ const SwiperHero: React.FC<PropType> = (props) => {
         >
             {slides.map((val, index) => 
                 <SwiperSlide key={index}>
-                    <img
-                        className="w-full h-full object-cover"
-                        src={val.hero_img}
-                        alt={`Hero Image - ${index}`}
-                        width={1920}
-                        height={1080}
-                    />
+                    <div className='md:block hidden w-full h-full object-cover'>
+                        <img
+                            className="w-full h-full object-cover"
+                            src={val.hero_img}
+                            alt={`Hero Image - ${index}`}
+                            width={1920}
+                            height={1080}
+                        />
+                    </div>
+                    <div className='md:hidden block w-full h-full object-cover'>
+                        <img
+                            className=""
+                            src={val.hero_img_mobile}
+                            alt={`Hero Image - ${index}`}
+                            width={1920}
+                            height={1080}
+                        />
+                    </div>
                     <div className="absolute inset-0 bg-foreground/30"></div>
                 </SwiperSlide>
             )}
