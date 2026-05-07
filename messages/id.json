@@ -102,7 +102,8 @@
   "Metadata service page": {
     "title": "Layanan & Garansi",
     "desc": "Temukan informasi mengenai layanan produk, cakupan garansi, dan dukungan untuk produk Roadmaster",
-    "keywords": "layanan roadmaster, garansi roadmaster, dukungan produk, layanan perbaikan, informasi garansi"
+    "keywords": "layanan roadmaster, garansi roadmaster, dukungan produk, layanan perbaikan, informasi garansi",
+    "button-warranty": "Aktifkan Garansi Produk Anda"
   },
   "Metadata category page": {
     "title": "Semua Kategori",
@@ -128,7 +129,8 @@
     "title": "Semua Berita & Acara Roadmaster"
   },
   "Contact Page": {
-    "phone-desc" : "Senin - Sabtu, 08:00 - 17:00 WIB",
+    "phone-desc-1" : "Senin - Jumat",
+    "phone-desc-2" : "08:00 - 17:00 WIB",
     "location" : "Lokasi",
     "title" : "Kontak Roadmaster",
     "desc" : "Punya pertanyaan? Kami siap membantu. Hubungi tim kami dan kami akan segera menghubungi Anda kembali secepat mungkin.",

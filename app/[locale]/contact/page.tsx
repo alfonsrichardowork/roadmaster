@@ -55,25 +55,25 @@ export default function ContactPage() {
     {
       icon: Mail,
       title: 'Email Support',
-      details: 'roadmaster@sbe2group.com',
+      details: ['roadmaster@sbe2group.com'],
       description: '',
     },
     {
       icon: Phone,
       title: 'Phone Support',
-      details: '+62 31 806 5196',
+      details: ['031 806 5196', '0851 0169 6537'],
       description: '',
     },
     {
       icon: MapPin,
       title: t('location'),
-      details: 'Raya Pilang KM. 8, Wonoayu. Sidoarjo 61261, Indonesia',
+      details: ['Raya Pilang KM. 8, Wonoayu. Sidoarjo 61261, Indonesia'],
       description: '',
     },
     {
       icon: Clock,
       title: 'Support Hours',
-      details: t('phone-desc'),
+      details: [t('phone-desc-1'), t('phone-desc-2')],
       description: '',
     },
   ]
@@ -102,17 +102,19 @@ export default function ContactPage() {
           <div className="max-w-6xl mx-auto relative z-10">
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
               {contactInfo.map((info, index) => (
-                <div key={info.title} className={`fade-in-up stagger-${index + 1} group`}>
-                  <div className="relative">
+                <div key={info.title} className={`fade-in-up stagger-${index + 1} group h-full`}>
+                  <div className="relative h-full">
                     <div className="absolute -inset-0.5 bg-gradient-to-br from-accent/30 to-transparent opacity-0 group-hover:opacity-100 rounded-lg transition-opacity duration-300 blur-lg"></div>
 
-                    <div className="relative bg-gradient-to-br from-secondary to-background rounded-lg p-8 border border-border hover:shadow-2xl transition-all duration-500 h-full">
-                      <div className="inline-block p-3 bg-accent/10 rounded-lg mb-4">
+                    <div className="relative bg-gradient-to-br from-secondary to-background rounded-lg p-6 hover:shadow-lg transition-all duration-500 h-full flex flex-col">
+                      <div className="inline-block p-3 bg-accent/10 rounded-lg mb-4 w-fit">
                         <info.icon className="w-6 h-6 text-accent" />
                       </div>
                       <h3 className="text-xl font-bold text-primary mb-2">{info.title}</h3>
-                      <p className="font-semibold text-foreground mb-2">{info.details}</p>
-                      <p className="text-sm text-foreground/70">{info.description}</p>
+                      {info.details.length > 0 && info.details.map((val, index) => 
+                        <p className="font-semibold text-foreground" key={index}>{val}</p>
+                      )}
+                      <p className="text-sm text-foreground/70 mt-auto">{info.description}</p>
                     </div>
                   </div>
                 </div>

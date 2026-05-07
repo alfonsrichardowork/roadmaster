@@ -102,7 +102,8 @@
   "Metadata service page": {
     "title": "Service & Warranty",
     "desc": "Find information about product service, warranty coverage, and support for Roadmaster products",
-    "keywords": "roadmaster service, roadmaster warranty, product support, repair service, warranty information"
+    "keywords": "roadmaster service, roadmaster warranty, product support, repair service, warranty information",
+    "button-warranty": "Activate Your Product Warranty"
   },
   "Metadata category page": {
     "title": "All Categories",
@@ -128,7 +129,8 @@
     "title": "All Roadmaster News & Events"
   },
   "Contact Page": {
-    "phone-desc" : "Monday - Saturday, 08:00 - 17:00 WIB",
+    "phone-desc-1" : "Monday - Friday",
+    "phone-desc-2" : "08:00 - 17:00 WIB",
     "location" : "Location",
     "title" : "Contact Roadmaster",
     "desc" : "Have questions? We are here to help. Reach out to our team and we will get back to you as soon as possible.",

@@ -26,7 +26,7 @@ export default async function DownloadPage() {
         <section className="pt-32 pb-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-secondary to-background">
           <div className="max-w-6xl mx-auto">
             <div className="fade-in-down space-y-6 text-center mb-12">
-              <h1 className="text-2xl md:text-4xl font-bold text-primary leading-tight">
+              <h1 className="text-5xl md:text-6xl font-bold text-primary leading-tight">
                 {t('title')}
               </h1>
             </div>
