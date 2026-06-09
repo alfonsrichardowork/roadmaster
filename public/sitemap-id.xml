@@ -1,175 +1,171 @@
 <?xml version="1.0" encoding="UTF-8"?>
       <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
                   <url>
-            <loc>https://www.roadmasterspeakers.com</loc>
-            <lastmod>2026-05-06T03:29:55.270Z</lastmod>
+            <loc>http://localhost:3003</loc>
+            <lastmod>2026-06-05T02:35:14.125Z</lastmod>
           </url>
           <url>
-            <loc>https://www.roadmasterspeakers.com/produk</loc>
-            <lastmod>2026-05-06T03:29:55.270Z</lastmod>
+            <loc>http://localhost:3003/produk</loc>
+            <lastmod>2026-06-05T02:35:14.125Z</lastmod>
           </url>
           <url>
-            <loc>https://www.roadmasterspeakers.com/tentang</loc>
-            <lastmod>2026-05-06T03:29:55.270Z</lastmod>
+            <loc>http://localhost:3003/tentang</loc>
+            <lastmod>2026-06-05T02:35:14.125Z</lastmod>
           </url>
           <url>
-            <loc>https://www.roadmasterspeakers.com/kontak</loc>
-            <lastmod>2026-05-06T03:29:55.270Z</lastmod>
+            <loc>http://localhost:3003/kontak</loc>
+            <lastmod>2026-06-05T02:35:14.125Z</lastmod>
           </url>
           <url>
-            <loc>https://www.roadmasterspeakers.com/kategori</loc>
-            <lastmod>2026-05-06T03:29:55.270Z</lastmod>
+            <loc>http://localhost:3003/kategori</loc>
+            <lastmod>2026-06-05T02:35:14.125Z</lastmod>
           </url>
           <url>
-            <loc>https://www.roadmasterspeakers.com/katalog</loc>
-            <lastmod>2026-05-06T03:29:55.270Z</lastmod>
+            <loc>http://localhost:3003/katalog</loc>
+            <lastmod>2026-06-05T02:35:14.125Z</lastmod>
           </url>
           <url>
-            <loc>https://www.roadmasterspeakers.com/berita</loc>
-            <lastmod>2026-05-06T03:29:55.270Z</lastmod>
+            <loc>http://localhost:3003/berita</loc>
+            <lastmod>2026-06-05T02:35:14.125Z</lastmod>
           </url>
           <url>
-            <loc>https://www.roadmasterspeakers.com/unduh</loc>
-            <lastmod>2026-05-06T03:29:55.270Z</lastmod>
+            <loc>http://localhost:3003/unduh</loc>
+            <lastmod>2026-06-05T02:35:14.125Z</lastmod>
           </url>
           <url>
-            <loc>https://www.roadmasterspeakers.com/servis</loc>
-            <lastmod>2026-05-06T03:29:55.270Z</lastmod>
+            <loc>http://localhost:3003/servis</loc>
+            <lastmod>2026-06-05T02:35:14.125Z</lastmod>
           </url>
           <url>
-            <loc>https://www.roadmasterspeakers.com/produk/party-flash-28</loc>
-            <lastmod>2026-05-06T03:29:55.263Z</lastmod>
+            <loc>http://localhost:3003/produk/party-flash-28</loc>
+            <lastmod>2026-06-05T02:35:14.116Z</lastmod>
           </url>
           <url>
-            <loc>https://www.roadmasterspeakers.com/produk/minion-61</loc>
-            <lastmod>2026-05-06T03:29:55.264Z</lastmod>
+            <loc>http://localhost:3003/produk/minion-61</loc>
+            <lastmod>2026-06-05T02:35:14.117Z</lastmod>
           </url>
           <url>
-            <loc>https://www.roadmasterspeakers.com/produk/monster-212-gen-2</loc>
-            <lastmod>2026-05-06T03:29:55.264Z</lastmod>
+            <loc>http://localhost:3003/produk/monster-212-gen-2</loc>
+            <lastmod>2026-06-05T02:35:14.117Z</lastmod>
           </url>
           <url>
-            <loc>https://www.roadmasterspeakers.com/produk/pa-81</loc>
-            <lastmod>2026-05-06T03:29:55.264Z</lastmod>
+            <loc>http://localhost:3003/produk/bass-bx-8020</loc>
+            <lastmod>2026-06-05T02:35:14.117Z</lastmod>
           </url>
           <url>
-            <loc>https://www.roadmasterspeakers.com/produk/party-10</loc>
-            <lastmod>2026-05-06T03:29:55.264Z</lastmod>
+            <loc>http://localhost:3003/produk/pa-81</loc>
+            <lastmod>2026-06-05T02:35:14.117Z</lastmod>
           </url>
           <url>
-            <loc>https://www.roadmasterspeakers.com/produk/kd-pro-215-gen-2</loc>
-            <lastmod>2026-05-06T03:29:55.264Z</lastmod>
+            <loc>http://localhost:3003/produk/party-10</loc>
+            <lastmod>2026-06-05T02:35:14.117Z</lastmod>
           </url>
           <url>
-            <loc>https://www.roadmasterspeakers.com/produk/probeat-212-gen-2</loc>
-            <lastmod>2026-05-06T03:29:55.264Z</lastmod>
+            <loc>http://localhost:3003/produk/kd-pro-215-gen-2</loc>
+            <lastmod>2026-06-05T02:35:14.117Z</lastmod>
           </url>
           <url>
-            <loc>https://www.roadmasterspeakers.com/produk/pa-121-gen-2</loc>
-            <lastmod>2026-05-06T03:29:55.264Z</lastmod>
+            <loc>http://localhost:3003/produk/probeat-212-gen-2</loc>
+            <lastmod>2026-06-05T02:35:14.117Z</lastmod>
           </url>
           <url>
-            <loc>https://www.roadmasterspeakers.com/produk/pa-101-gen-2</loc>
-            <lastmod>2026-05-06T03:29:55.264Z</lastmod>
+            <loc>http://localhost:3003/produk/pa-121-gen-2</loc>
+            <lastmod>2026-06-05T02:35:14.117Z</lastmod>
           </url>
           <url>
-            <loc>https://www.roadmasterspeakers.com/produk/bass-16-gen-2</loc>
-            <lastmod>2026-05-06T03:29:55.264Z</lastmod>
+            <loc>http://localhost:3003/produk/pa-101-gen-2</loc>
+            <lastmod>2026-06-05T02:35:14.117Z</lastmod>
           </url>
           <url>
-            <loc>https://www.roadmasterspeakers.com/produk/bass-28-gen-2</loc>
-            <lastmod>2026-05-06T03:29:55.264Z</lastmod>
+            <loc>http://localhost:3003/produk/bass-16-gen-2</loc>
+            <lastmod>2026-06-05T02:35:14.117Z</lastmod>
           </url>
           <url>
-            <loc>https://www.roadmasterspeakers.com/produk/kd-pro-212-gen-2</loc>
-            <lastmod>2026-05-06T03:29:55.264Z</lastmod>
+            <loc>http://localhost:3003/produk/bass-28-gen-2</loc>
+            <lastmod>2026-06-05T02:35:14.117Z</lastmod>
           </url>
           <url>
-            <loc>https://www.roadmasterspeakers.com/produk/pa-61</loc>
-            <lastmod>2026-05-06T03:29:55.264Z</lastmod>
+            <loc>http://localhost:3003/produk/kd-pro-212-gen-2</loc>
+            <lastmod>2026-06-05T02:35:14.117Z</lastmod>
           </url>
           <url>
-            <loc>https://www.roadmasterspeakers.com/produk/bass-26-gen-2</loc>
-            <lastmod>2026-05-06T03:29:55.264Z</lastmod>
+            <loc>http://localhost:3003/produk/pa-61</loc>
+            <lastmod>2026-06-05T02:35:14.117Z</lastmod>
           </url>
           <url>
-            <loc>https://www.roadmasterspeakers.com/produk/party-8</loc>
-            <lastmod>2026-05-06T03:29:55.264Z</lastmod>
+            <loc>http://localhost:3003/produk/bass-bx-6020</loc>
+            <lastmod>2026-06-05T02:35:14.117Z</lastmod>
           </url>
           <url>
-            <loc>https://www.roadmasterspeakers.com/produk/monster-210-gen-2</loc>
-            <lastmod>2026-05-06T03:29:55.264Z</lastmod>
+            <loc>http://localhost:3003/produk/bass-26-gen-2</loc>
+            <lastmod>2026-06-05T02:35:14.117Z</lastmod>
           </url>
           <url>
-            <loc>https://www.roadmasterspeakers.com/produk/probeat-210-gen-2</loc>
-            <lastmod>2026-05-06T03:29:55.264Z</lastmod>
+            <loc>http://localhost:3003/produk/party-8</loc>
+            <lastmod>2026-06-05T02:35:14.117Z</lastmod>
           </url>
           <url>
-            <loc>https://www.roadmasterspeakers.com/produk/party-flash-10</loc>
-            <lastmod>2026-05-06T03:29:55.264Z</lastmod>
+            <loc>http://localhost:3003/produk/monster-210-gen-2</loc>
+            <lastmod>2026-06-05T02:35:14.117Z</lastmod>
           </url>
           <url>
-            <loc>https://www.roadmasterspeakers.com/berita/news-4-indo</loc>
-            <lastmod>2026-05-06T03:29:55.265Z</lastmod>
+            <loc>http://localhost:3003/produk/probeat-210-gen-2</loc>
+            <lastmod>2026-06-05T02:35:14.117Z</lastmod>
           </url>
           <url>
-            <loc>https://www.roadmasterspeakers.com/berita/news-3-indo</loc>
-            <lastmod>2026-05-06T03:29:55.265Z</lastmod>
+            <loc>http://localhost:3003/produk/party-flash-10</loc>
+            <lastmod>2026-06-05T02:35:14.117Z</lastmod>
           </url>
           <url>
-            <loc>https://www.roadmasterspeakers.com/berita/news-1-indo</loc>
-            <lastmod>2026-05-06T03:29:55.265Z</lastmod>
+            <loc>http://localhost:3003/berita/smex-2026</loc>
+            <lastmod>2026-06-05T02:35:14.119Z</lastmod>
           </url>
           <url>
-            <loc>https://www.roadmasterspeakers.com/berita/news-2-indo</loc>
-            <lastmod>2026-05-06T03:29:55.265Z</lastmod>
+            <loc>http://localhost:3003/berita/roadmaster-siap-hadir-di-psjta-sound-expo-2026</loc>
+            <lastmod>2026-06-05T02:35:14.119Z</lastmod>
           </url>
           <url>
-            <loc>https://www.roadmasterspeakers.com/berita/smex-2026</loc>
-            <lastmod>2026-05-06T03:29:55.265Z</lastmod>
+            <loc>http://localhost:3003/kategori/powered-stereo</loc>
+            <lastmod>2026-06-05T02:35:14.124Z</lastmod>
           </url>
           <url>
-            <loc>https://www.roadmasterspeakers.com/berita/roadmaster-siap-hadir-di-psjta-sound-expo-2026</loc>
-            <lastmod>2026-05-06T03:29:55.265Z</lastmod>
+            <loc>http://localhost:3003/kategori/powered-tower</loc>
+            <lastmod>2026-06-05T02:35:14.124Z</lastmod>
           </url>
           <url>
-            <loc>https://www.roadmasterspeakers.com/kategori/powered-stereo</loc>
-            <lastmod>2026-05-06T03:29:55.268Z</lastmod>
+            <loc>http://localhost:3003/kategori/portable</loc>
+            <lastmod>2026-06-05T02:35:14.124Z</lastmod>
           </url>
           <url>
-            <loc>https://www.roadmasterspeakers.com/kategori/portable</loc>
-            <lastmod>2026-05-06T03:29:55.268Z</lastmod>
+            <loc>http://localhost:3003/kategori/powered-stereo/seri-monster</loc>
+            <lastmod>2026-06-05T02:35:14.124Z</lastmod>
           </url>
           <url>
-            <loc>https://www.roadmasterspeakers.com/kategori/powered-tower</loc>
-            <lastmod>2026-05-06T03:29:55.268Z</lastmod>
+            <loc>http://localhost:3003/kategori/powered-tower/seri-bass-bx</loc>
+            <lastmod>2026-06-05T02:35:14.124Z</lastmod>
           </url>
           <url>
-            <loc>https://www.roadmasterspeakers.com/kategori/powered-stereo/seri-monster</loc>
-            <lastmod>2026-05-06T03:29:55.268Z</lastmod>
+            <loc>http://localhost:3003/kategori/portable/seri-party</loc>
+            <lastmod>2026-06-05T02:35:14.124Z</lastmod>
           </url>
           <url>
-            <loc>https://www.roadmasterspeakers.com/kategori/portable/seri-party</loc>
-            <lastmod>2026-05-06T03:29:55.268Z</lastmod>
+            <loc>http://localhost:3003/kategori/powered-stereo/minion</loc>
+            <lastmod>2026-06-05T02:35:14.124Z</lastmod>
           </url>
           <url>
-            <loc>https://www.roadmasterspeakers.com/kategori/powered-stereo/minion</loc>
-            <lastmod>2026-05-06T03:29:55.268Z</lastmod>
+            <loc>http://localhost:3003/kategori/powered-stereo/seri-bass</loc>
+            <lastmod>2026-06-05T02:35:14.124Z</lastmod>
           </url>
           <url>
-            <loc>https://www.roadmasterspeakers.com/kategori/powered-stereo/seri-bass</loc>
-            <lastmod>2026-05-06T03:29:55.268Z</lastmod>
+            <loc>http://localhost:3003/kategori/portable/seri-pa</loc>
+            <lastmod>2026-06-05T02:35:14.124Z</lastmod>
           </url>
           <url>
-            <loc>https://www.roadmasterspeakers.com/kategori/portable/seri-pa</loc>
-            <lastmod>2026-05-06T03:29:55.268Z</lastmod>
+            <loc>http://localhost:3003/kategori/powered-stereo/seri-kd-pro</loc>
+            <lastmod>2026-06-05T02:35:14.124Z</lastmod>
           </url>
           <url>
-            <loc>https://www.roadmasterspeakers.com/kategori/powered-stereo/seri-kd-pro</loc>
-            <lastmod>2026-05-06T03:29:55.268Z</lastmod>
-          </url>
-          <url>
-            <loc>https://www.roadmasterspeakers.com/kategori/powered-tower/seri-probeat</loc>
-            <lastmod>2026-05-06T03:29:55.268Z</lastmod>
+            <loc>http://localhost:3003/kategori/powered-tower/seri-probeat</loc>
+            <lastmod>2026-06-05T02:35:14.124Z</lastmod>
           </url>
       </urlset>

@@ -8,7 +8,7 @@ interface Props {
 
 export default function SpecificationTable({ spec }: Props) {
   let counter = 1;
-  const allNotes: string[] = [];
+  let allNotes: string[] = [];
 
   const sortedSpec = spec
     .map((parent) => ({
@@ -18,7 +18,9 @@ export default function SpecificationTable({ spec }: Props) {
       ),
     }))
     .sort((a, b) => a.parentname.localeCompare(b.parentname));
-
+    sortedSpec.map((val) => val.child.map((childval) => {
+      childval.notes !== '' && allNotes.push(childval.notes)
+    }))
   return (
     <div>
       {sortedSpec.map((parentGroup) => {
