@@ -9,17 +9,25 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { GoogleAnalytics } from '@next/third-parties/google'
 import prismadb from "@/lib/prismadb";
-import { getLocale, getTranslations, setRequestLocale } from "next-intl/server";
+import { getTranslations, setRequestLocale } from "next-intl/server";
 const font = Inter({ subsets: ['latin'] })
 
 export async function generateStaticParams() {
   return [{ locale: 'en' }, { locale: 'id' }]
 }
 
-export async function generateMetadata(): Promise<Metadata> {
+export async function generateMetadata({
+    params
+  }: {
+    params: Promise<{locale: string}>
+  }): Promise<Metadata> {
   const baseUrl = process.env.NEXT_PUBLIC_ROOT_URL ?? 'http://localhost:3003';
-  const t = await getTranslations('Metadata homepage')
-  const locale = await getLocale()
+  const {locale} = await params;
+  setRequestLocale(locale);
+   const t = await getTranslations({
+    locale,
+    namespace: 'Metadata homepage'
+  });
   return {
     title: {
       template: '%s | Roadmaster',
