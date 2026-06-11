@@ -9,8 +9,12 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { GoogleAnalytics } from '@next/third-parties/google'
 import prismadb from "@/lib/prismadb";
-import { getLocale, getTranslations } from "next-intl/server";
+import { getLocale, getTranslations, setRequestLocale } from "next-intl/server";
 const font = Inter({ subsets: ['latin'] })
+
+export async function generateStaticParams() {
+  return [{ locale: 'en' }, { locale: 'id' }]
+}
 
 export async function generateMetadata(): Promise<Metadata> {
   const baseUrl = process.env.NEXT_PUBLIC_ROOT_URL ?? 'http://localhost:3003';
@@ -88,6 +92,7 @@ export default async function HomeLayout({
   params: Promise<{ locale: string }>;
 }) {
     const { locale } = await params;
+    setRequestLocale(locale);
     if (!hasLocale(routing.locales, locale)) {
       notFound();
     }

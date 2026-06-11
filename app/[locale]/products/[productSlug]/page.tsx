@@ -5,7 +5,7 @@ import { Button } from '@/components/ui/button'
 import { Link as Link18n } from '@/i18n/navigation'
 import prismadb from '@/lib/prismadb'
 import { Download } from 'lucide-react'
-import { getLocale, getTranslations } from 'next-intl/server'
+import { getTranslations, setRequestLocale } from 'next-intl/server'
 import Image from 'next/image'
 import Link from 'next/link'
 
@@ -29,13 +29,31 @@ const order: Record<string, number> = {
   "Sub Sub Category": 2,
 };
 
+export async function generateStaticParams(){
+  const products = await prismadb.product.findMany({
+    where: {
+      isArchived: false
+    },
+    select: {
+      slug: true,
+    },
+  });
+  return products.map((product: { slug: string }) => ({
+    productSlug: product.slug
+  }));
+}
+
 export default async function ProductPage({
   params,
 }: {
-  params: Promise<{ productSlug: string }>
+  params: Promise<{ locale: string, productSlug: string }>
 }) {
-  const locale = await getLocale();
-  const { productSlug } = await params;
+  const { locale, productSlug } = await params;
+  const t = await getTranslations({
+    locale,
+    namespace: 'Single Product Page'
+  });
+  setRequestLocale(locale);
   const product = await prismadb.product.findFirst({
     where: {
       slug: productSlug
@@ -126,7 +144,6 @@ export default async function ProductPage({
     });
   });
 
-  const t = await getTranslations('Single Product Page')
 
   if (!product) {
     return (

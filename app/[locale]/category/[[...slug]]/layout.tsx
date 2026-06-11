@@ -1,14 +1,18 @@
 import { Metadata } from "next";
-import { getLocale, getTranslations } from "next-intl/server";
+import { getLocale, getTranslations, setRequestLocale } from "next-intl/server";
 import prismadb from "@/lib/prismadb";
 
 type Props = {
-  params: Promise<{ slug?: string[] }>
+  params: Promise<{locale: string, slug?: string[] }>
 }
 
 export async function generateMetadata(props: Props): Promise<Metadata> {
-  const { slug = [] } = await props.params
-  const locale = await getLocale()
+  const { locale, slug = [] } = await props.params
+  setRequestLocale(locale);
+  const t = await getTranslations({
+    locale,
+    namespace: 'Metadata category page'
+  });
   const product = await prismadb.allcategory.findMany({
     where: locale === 'en' ? {
       slug_eng: {
@@ -38,7 +42,6 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
 
   product.sort((a, b) => (typeOrder[a.type] ?? 0) - (typeOrder[b.type] ?? 0));
   const baseUrl = process.env.NEXT_PUBLIC_ROOT_URL ?? 'http://localhost:3003';
-  const t = await getTranslations('Metadata category page')
   if(product && product.length > 0) {
     let finalTitle = ''
     let finalKeywords: string[] = []

@@ -1,14 +1,18 @@
 import { Metadata } from "next";
-import { getLocale, getTranslations } from "next-intl/server";
+import { getTranslations, setRequestLocale } from "next-intl/server";
 import prismadb from "@/lib/prismadb";
 
 type Props = {
-  params: Promise<{ newsSlug?: string }>
+  params: Promise<{locale: string, newsSlug: string }>
 }
 
 export async function generateMetadata(props: Props): Promise<Metadata> {
-  const { newsSlug = '' } = await props.params
-  const locale = await getLocale()
+  const { locale, newsSlug = '' } = await props.params
+  setRequestLocale(locale);
+  const t = await getTranslations({
+    locale,
+    namespace: 'Metadata single news page'
+  });
   const news = await prismadb.news.findFirst({
     where: locale === 'en' ? {
       slug_eng: newsSlug
@@ -28,7 +32,6 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
     }
   })
   const baseUrl = process.env.NEXT_PUBLIC_ROOT_URL ?? 'http://localhost:3003';
-  const t = await getTranslations('Metadata single news page')
   if(!news) {
     return {
         title: t('title-no-news'),

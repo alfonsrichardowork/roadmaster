@@ -1,21 +1,126 @@
 import { Separator } from '@/components/ui/separator'
 import prismadb from '@/lib/prismadb'
 import { ProductCard } from '@/components/productCard'
-import { getLocale, getTranslations } from 'next-intl/server'
+import { getTranslations, setRequestLocale } from 'next-intl/server'
 import { Link } from '@/i18n/navigation'
 import { Prisma } from '@prisma/client'
 import Image from 'next/image'
 
 interface ProductsPageProps {
   params: Promise<{
+    locale: string,
     slug?: string[]
   }>
 }
 
+export async function generateStaticParams() {    
+  const connectors = await prismadb.allproductcategory.findMany({
+    select: {
+      productId: true,
+      category: {
+        select: {
+          slug: true,
+          type: true,
+        },
+      },
+    },
+  });
+
+  const paths = Array.from(
+  connectors.reduce((map, row) => {
+    const existing = map.get(row.productId) ?? [];
+
+    existing.push({
+    slug: row.category.slug,
+    type: row.category.type,
+    });
+
+    map.set(row.productId, existing);
+
+    return map;
+  }, new Map<string, { slug: string; type: string }[]>()).values()
+  ).flatMap(categories => {
+  const category = categories
+    .filter(c => c.type === 'Category')
+    .map(c => c.slug);
+
+  const subCategory = categories
+    .filter(c => c.type === 'Sub Category')
+    .map(c => c.slug);
+
+  const subSubCategory = categories
+    .filter(c => c.type === 'Sub Sub Category')
+    .map(c => c.slug);
+
+  const result: string[] = [];
+
+  // Category only
+  if (!subCategory.length) {
+    return category;
+  }
+
+  // Category + Sub Category
+  for (const cat of category) {
+    for (const sub of subCategory) {
+    if (!subSubCategory.length) {
+        result.push(`${cat}/${sub}`);
+    } else {
+        // Category + Sub Category + Sub Sub Category
+        for (const subSub of subSubCategory) {
+        result.push(`${cat}/${sub}/${subSub}`);
+        }
+    }
+    }
+  }
+
+  return result;
+  });
+
+  const allPaths = new Set<string>();
+
+  for (const path of paths) {
+    const parts = path.split('/');
+
+    // Original path
+    allPaths.add(path);
+
+    // Level 1 (/drivers)
+    if (parts.length >= 1) {
+        allPaths.add(parts[0] ?? '');
+    }
+
+    // Level 2 (/drivers/midranges)
+    if (parts.length >= 2) {
+        allPaths.add(parts.slice(0, 2).join('/'));
+    }
+  }
+
+  const uniqueSortedPaths = [...allPaths].sort((a, b) => {
+      const depthA = a.split('/').length;
+      const depthB = b.split('/').length;
+
+      if (depthA !== depthB) {
+          return depthA - depthB;
+      }
+
+      return a.localeCompare(b);
+  });
+
+  return [
+    { slug: [] },
+    ...uniqueSortedPaths.map(path => ({
+      slug: path.split('/'),
+    }))
+  ];
+}
+
 export default async function ProductsPage({ params }: ProductsPageProps) {
-  const { slug = [] } = await params
-  const locale = await getLocale();
-  const t = await getTranslations("All Category Page")
+  const { locale, slug = [] } = await params;
+  const t = await getTranslations({
+    locale,
+    namespace: 'All Category Page'
+  });
+  setRequestLocale(locale);
   let backgroundImage = '/images/roadmaster/product-page-bg.webp'
   let heroTitle = t('title')
   let heroDesc = t('desc')

@@ -1,9 +1,17 @@
-import { getLocale, getTranslations } from 'next-intl/server'
+import { getTranslations, setRequestLocale } from 'next-intl/server'
 import Image from 'next/image';
 
-export default async function AboutPage() {
-  const t = await getTranslations('About Us Page')
-  const lang = await getLocale()
+export default async function AboutPage({
+  params
+}: {
+  params: Promise<{locale: string}>
+}) {
+  const {locale} = await params;
+  const t = await getTranslations({
+    locale,
+    namespace: 'About Us Page'
+  });
+  setRequestLocale(locale);
   return (
     <>
         <section className="pt-24 px-4 sm:px-6 lg:px-8 bg-white">
@@ -34,10 +42,10 @@ export default async function AboutPage() {
                 <div className="space-y-4">
                   <h3 className="text-2xl font-bold text-primary">Milestones</h3>
                   <div className="space-y-3 w-full h-full md:block hidden">
-                    <img src={lang === 'id' ? '/images/roadmaster/milestone_indo_new.webp' : '/images/roadmaster/milestone_english_new.webp'} alt='Milestone Roadmaster' className='w-full h-full object-cover' width={1000} height={1000} />
+                    <img src={locale === 'id' ? '/images/roadmaster/milestone_indo_new.webp' : '/images/roadmaster/milestone_english_new.webp'} alt='Milestone Roadmaster' className='w-full h-full object-cover' width={1000} height={1000} />
                   </div>
                    <div className="space-y-3 w-full h-full md:hidden block">
-                    <img src={lang === 'id' ? '/images/roadmaster/MILESTONE_MOBILE_VERSION.webp' : '/images/roadmaster/MILESTONE_english_MOBILE_VERSION.webp'} alt='Milestone Roadmaster' className='w-full h-full object-cover' width={1000} height={1000} />
+                    <img src={locale === 'id' ? '/images/roadmaster/MILESTONE_MOBILE_VERSION.webp' : '/images/roadmaster/MILESTONE_english_MOBILE_VERSION.webp'} alt='Milestone Roadmaster' className='w-full h-full object-cover' width={1000} height={1000} />
                   </div>
                 </div>
               </div>

@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { Suspense, useEffect, useState } from 'react'
 import { ChevronDown, Menu, X } from 'lucide-react'
 import { useLocale, useTranslations } from 'next-intl';
 import { Link, usePathname } from '@/i18n/navigation';
@@ -96,14 +96,15 @@ export function Navigation({ categories, allnews }: NavigationProps) {
             </div>
           
             <div className="w-1/3 hidden md:flex items-center justify-end gap-4">
-                <LanguageSwitcher categories={categories} news={allnews}/>
+                
+      <Suspense fallback={null}><LanguageSwitcher categories={categories} news={allnews}/></Suspense>
                 {/* <Button className="bg-accent text-accent-foreground hover:bg-accent/90">
                 {t_navbar('support')}
                 </Button> */}
             </div>
 
             <div className='md:hidden w-1/3 flex justify-end gap-2 h-full items-center'>
-                <LanguageSwitcher categories={categories} news={allnews}/>
+                <Suspense fallback={null}><LanguageSwitcher categories={categories} news={allnews}/></Suspense>
                 <Button
                     onClick={() => setIsOpen(!isOpen)}
                     className={`md:hidden p-0 text-primary bg-transparent hover:bg-transparent hover:text-accent w-fit`}

@@ -4,7 +4,6 @@ import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Mail, Phone, MapPin, Clock, Send } from 'lucide-react'
 import { useLocale } from 'next-intl'
-import { getTranslations } from 'next-intl/server'
 import { useState } from 'react'
 import { useTranslations } from 'use-intl'
 

@@ -1,13 +1,18 @@
 import { Metadata } from "next";
-import { getLocale, getTranslations } from "next-intl/server";
+import { getTranslations, setRequestLocale } from "next-intl/server";
 import prismadb from "@/lib/prismadb";
 
 type Props = {
-  params: Promise<{ productSlug?: string }>
+  params: Promise<{locale: string, productSlug: string }>
 }
 
 export async function generateMetadata(props: Props): Promise<Metadata> {
-  const { productSlug = '' } = await props.params
+  const { locale, productSlug = '' } = await props.params
+  setRequestLocale(locale);
+  const t = await getTranslations({
+    locale,
+    namespace: 'Metadata single product'
+  });
   const product = await prismadb.product.findFirst({
     where: {
         slug: productSlug
@@ -19,8 +24,6 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
     }
   })
   const baseUrl = process.env.NEXT_PUBLIC_ROOT_URL ?? 'http://localhost:3003';
-  const t = await getTranslations('Metadata single product')
-  const locale = await getLocale()
   if(!product) {
     return {
         title: t('title-no-product'),

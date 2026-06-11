@@ -3,16 +3,39 @@ import DompurifyContent from '@/components/dompurifyText'
 import { Button } from '@/components/ui/button'
 import { Link } from '@/i18n/navigation'
 import prismadb from '@/lib/prismadb'
-import { getLocale, getTranslations } from 'next-intl/server'
+import { getLocale, getTranslations, setRequestLocale } from 'next-intl/server'
 import Image from 'next/image'
+
+export async function generateStaticParams({
+  params,
+}: {
+  params: { locale: string };
+}) {
+  const allNews = await prismadb.news.findMany({
+    select: {
+      slug: true,
+      slug_eng: true,
+    },
+  });
+
+  return allNews.map((news) => ({
+    newsSlug: params.locale === 'en'
+      ? news.slug_eng
+      : news.slug,
+  }));
+}
 
 export default async function SingleNewsPage({
   params,
 }: {
-  params: Promise<{ newsSlug: string }>
+  params: Promise<{ locale: string, newsSlug: string }>
 }) {
-  const locale = await getLocale();
-  const { newsSlug } = await params;
+  const { locale, newsSlug } = await params;
+  const t = await getTranslations({
+    locale,
+    namespace: 'single news page'
+  });
+  setRequestLocale(locale);
   const singlenews = await prismadb.news.findFirst({
     where: locale === 'en' ? {
       slug_eng: newsSlug
@@ -22,7 +45,6 @@ export default async function SingleNewsPage({
     },
   });
 
-  const t = await getTranslations('single news page')
 
   const formatDate = (isoDate: string): string => {
     const date = new Date(isoDate);

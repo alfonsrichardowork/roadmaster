@@ -1,10 +1,18 @@
 import { Metadata } from "next";
-import { getLocale, getTranslations } from "next-intl/server";
+import { getTranslations, setRequestLocale } from "next-intl/server";
 
-export async function generateMetadata(): Promise<Metadata> {
+export async function generateMetadata({
+    params
+  }: {
+    params: Promise<{locale: string}>
+  }): Promise<Metadata> {
   const baseUrl = process.env.NEXT_PUBLIC_ROOT_URL ?? 'http://localhost:3003';
-  const t = await getTranslations('Metadata all news page')
-  const locale = await getLocale()
+  const {locale} = await params;
+  setRequestLocale(locale);
+   const t = await getTranslations({
+    locale,
+    namespace: 'Metadata all news page'
+  });
   return {
     title: t('title'),
     description: t('desc'),

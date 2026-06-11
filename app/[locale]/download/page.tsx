@@ -1,6 +1,6 @@
 import prismadb from '@/lib/prismadb'
 import { Archive, Download, FileText } from 'lucide-react'
-import { getTranslations } from 'next-intl/server'
+import { getTranslations, setRequestLocale } from 'next-intl/server'
 import Link from 'next/link'
 
 const getFileExtension = (url: string): string => {
@@ -8,8 +8,17 @@ const getFileExtension = (url: string): string => {
   return extension
 }
 
-export default async function DownloadPage() {
-  const t = await getTranslations('Metadata download page')
+export default async function DownloadPage({
+  params
+}: {
+  params: Promise<{locale: string}>
+}) {
+  const {locale} = await params;
+  const t = await getTranslations({
+    locale,
+    namespace: 'Metadata download page'
+  });
+  setRequestLocale(locale);
   const catalogue = await prismadb.brand.findFirst({
     select: {
       catalogues: true

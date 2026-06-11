@@ -1,9 +1,18 @@
 import { NewsCard } from '@/components/newsCard';
 import prismadb from '@/lib/prismadb';
-import { getTranslations } from 'next-intl/server'
+import { getTranslations, setRequestLocale } from 'next-intl/server'
 
-export default async function AllNewsPage() {
-  const t = await getTranslations('All News Page')
+export default async function AllNewsPage({
+  params
+}: {
+  params: Promise<{locale: string}>
+}) {
+  const {locale} = await params;
+  const t = await getTranslations({
+    locale,
+    namespace: 'All News Page'
+  });
+  setRequestLocale(locale);
   const newsData = await prismadb.news.findMany({
     orderBy: {
       event_date: 'desc'
