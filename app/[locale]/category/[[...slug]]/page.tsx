@@ -13,13 +13,18 @@ interface ProductsPageProps {
   }>
 }
 
-export async function generateStaticParams() {    
+export async function generateStaticParams({
+  params,
+}: {
+  params: { locale: string };
+}) {
   const connectors = await prismadb.allproductcategory.findMany({
     select: {
       productId: true,
       category: {
         select: {
           slug: true,
+          slug_eng: true,
           type: true,
         },
       },
@@ -31,7 +36,7 @@ export async function generateStaticParams() {
     const existing = map.get(row.productId) ?? [];
 
     existing.push({
-    slug: row.category.slug,
+    slug: params.locale === 'en' ? row.category.slug_eng : row.category.slug,
     type: row.category.type,
     });
 
