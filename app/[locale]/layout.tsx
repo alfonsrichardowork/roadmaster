@@ -10,6 +10,9 @@ import { notFound } from "next/navigation";
 import { GoogleAnalytics } from '@next/third-parties/google'
 import prismadb from "@/lib/prismadb";
 import { getTranslations, setRequestLocale } from "next-intl/server";
+import { cacheLife } from "next/cache";
+import { Suspense } from "react";
+
 const font = Inter({ subsets: ['latin'] })
 
 export async function generateStaticParams() {
@@ -92,6 +95,25 @@ export async function generateMetadata({
   }
 }
 
+async function getHomeData(){
+  'use cache'
+  cacheLife('minutes')
+  const categoriesData = await prismadb.allcategory.findMany({
+    where: {
+    productCategories: {
+        some: {}
+    }
+    }
+  })
+  const newsData = await prismadb.news.findMany({
+    select: {
+      slug: true,
+      slug_eng: true
+    }
+  })
+  return [categoriesData, newsData] as const;
+}
+
 export default async function HomeLayout({
   children,
   params
@@ -104,19 +126,7 @@ export default async function HomeLayout({
     if (!hasLocale(routing.locales, locale)) {
       notFound();
     }
-    const categoriesData = await prismadb.allcategory.findMany({
-      where: {
-      productCategories: {
-          some: {}
-      }
-      }
-    })
-    const newsData = await prismadb.news.findMany({
-      select: {
-        slug: true,
-        slug_eng: true
-      }
-    })
+    const [categoriesData, newsData] = await getHomeData();
     return (
         <html lang={locale}>
         <Head>
@@ -127,6 +137,7 @@ export default async function HomeLayout({
             />
         </Head>
         <body className={`${font.className || ''} overflow-x-hidden`}>
+          <Suspense fallback={<></>}>
             <NextIntlClientProvider>
                 <main className="min-h-screen bg-background text-foreground">
                   <Navigation categories={categoriesData} allnews={newsData}/>
@@ -134,8 +145,9 @@ export default async function HomeLayout({
                   <Footer categories={categoriesData} />
                 </main>
             </NextIntlClientProvider>
+            <GoogleAnalytics gaId="XYZ" />
+          </Suspense>
         </body>
-        <GoogleAnalytics gaId="XYZ" />
         </html>
     )
 }

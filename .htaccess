@@ -32,9 +32,9 @@ DirectoryIndex
   AddOutputFilterByType DEFLATE text/html text/css application/javascript application/json
 </IfModule>
 # DO NOT REMOVE. CLOUDLINUX PASSENGER CONFIGURATION BEGIN
-PassengerAppRoot "/home/sbacoust/roadmaster.webdemosbe.xyz"
+PassengerAppRoot "/home/sbacoust/roadmasterspeakers.com"
 PassengerBaseURI "/"
-PassengerNodejs "/home/sbacoust/nodevenv/roadmaster.webdemosbe.xyz/20/bin/node"
+PassengerNodejs "/home/sbacoust/nodevenv/roadmasterspeakers.com/20/bin/node"
 PassengerAppType node
 PassengerStartupFile server.js
 PassengerAppLogFile "/home/sbacoust/logs/roadmaster_demo/passenger.log"

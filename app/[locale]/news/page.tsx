@@ -1,6 +1,18 @@
 import { NewsCard } from '@/components/newsCard';
 import prismadb from '@/lib/prismadb';
 import { getTranslations, setRequestLocale } from 'next-intl/server'
+import { cacheLife } from 'next/cache';
+
+async function getAllNewsData() {
+  'use cache'
+  cacheLife('minutes')
+  const newsData = await prismadb.news.findMany({
+    orderBy: {
+      event_date: 'desc'
+    }
+  })
+  return newsData;
+}
 
 export default async function AllNewsPage({
   params
@@ -12,12 +24,8 @@ export default async function AllNewsPage({
     locale,
     namespace: 'All News Page'
   });
+  const newsData = await getAllNewsData();
   setRequestLocale(locale);
-  const newsData = await prismadb.news.findMany({
-    orderBy: {
-      event_date: 'desc'
-    }
-  })
   return (
     <section className="pt-24 pb-8 px-4 sm:px-6 lg:px-8 bg-white">
       <div className="max-w-6xl mx-auto">

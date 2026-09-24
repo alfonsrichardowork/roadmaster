@@ -4,7 +4,22 @@ import { Button } from '@/components/ui/button'
 import { Link } from '@/i18n/navigation'
 import prismadb from '@/lib/prismadb'
 import { getLocale, getTranslations, setRequestLocale } from 'next-intl/server'
+import { cacheLife } from 'next/cache'
 import Image from 'next/image'
+
+async function getSingleNewsData(locale: string, newsSlug: string) {
+  'use cache'
+  cacheLife('minutes')
+  const singlenews = await prismadb.news.findFirst({
+    where: locale === 'en' ? {
+      slug_eng: newsSlug
+    }:
+    {
+      slug: newsSlug
+    },
+  });
+  return singlenews
+}
 
 export async function generateStaticParams({
   params,
@@ -36,15 +51,8 @@ export default async function SingleNewsPage({
     namespace: 'single news page'
   });
   setRequestLocale(locale);
-  const singlenews = await prismadb.news.findFirst({
-    where: locale === 'en' ? {
-      slug_eng: newsSlug
-    }:
-    {
-      slug: newsSlug
-    },
-  });
-
+ 
+  const singlenews = await getSingleNewsData(locale, newsSlug);
 
   const formatDate = (isoDate: string): string => {
     const date = new Date(isoDate);

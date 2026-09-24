@@ -5,6 +5,7 @@ import { checkAuth, checkBearerAPI, getSession } from "@/app/admin/actions";
 import { revalidatePath } from "next/cache";
 import path from 'path';
 import fs from 'fs/promises';
+import { uploadsprefix } from "@/lib/spec-interface";
 
 const slugify = (str: string): string => str.toLowerCase()
                             .replace(/[^a-z0-9]+/g, '-')
@@ -75,11 +76,19 @@ export async function DELETE(
     })
     //Delete physical files
     if(categoryUrl) {
-      const categoryImgPath = path.join(process.cwd(), categoryUrl.thumbnail_url);
-      try {
-        await fs.unlink(categoryImgPath);
-      } catch (error) {
-        console.warn(`Could not delete file ${categoryUrl.thumbnail_url}:`, error);
+      if(categoryUrl.thumbnail_url.startsWith(uploadsprefix)){
+        const filename = categoryUrl.thumbnail_url.slice(uploadsprefix.length)
+        // if (filename && path.basename(filename) === filename) {
+          const imgPath = path.join(process.cwd(), 'uploads', filename);
+          try {
+            await fs.unlink(imgPath);
+          } catch (error) {
+            console.warn(`Could not delete file ${categoryUrl.thumbnail_url}:`, error);
+          } 
+        // }
+      }
+      else{
+        console.warn(`Not inside uploads folder`);
       }
     }
 
@@ -168,11 +177,19 @@ export async function PATCH(
       })
       //Delete physical files
       if(oldUrl && oldUrl.thumbnail_url && oldUrl.thumbnail_url !== thumbnail_url) {
-        const ImgPath = path.join(process.cwd(), oldUrl.thumbnail_url);
-        try {
-          await fs.unlink(ImgPath);
-        } catch (error) {
-          console.warn(`Could not delete file ${oldUrl.thumbnail_url}:`, error);
+        if(oldUrl.thumbnail_url.startsWith(uploadsprefix)){
+          const filename = oldUrl.thumbnail_url.slice(uploadsprefix.length)
+          // if (filename && path.basename(filename) === filename) {
+            const imgPath = path.join(process.cwd(), 'uploads', filename);
+            try {
+              await fs.unlink(imgPath);
+            } catch (error) {
+              console.warn(`Could not delete file ${oldUrl.thumbnail_url}:`, error);
+            } 
+          // }
+        }
+        else{
+          console.warn(`Not inside uploads folder`);
         }
       }
 

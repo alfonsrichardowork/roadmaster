@@ -1,8 +1,11 @@
 import prismadb from '@/lib/prismadb'
 import { ProductCard } from './productCard'
 import { getTranslations } from 'next-intl/server'
+import { cacheLife } from 'next/cache'
 
-export async function NewProducts() {
+async function getNewProductData() {
+  'use cache'
+  cacheLife('minutes')
   const newproductdata = await prismadb.product.findMany({
     where: {
       new_product: true,
@@ -13,17 +16,17 @@ export async function NewProducts() {
       cover_img: true,
       name: true,
       slug: true,
-      // allCat: {
-      //   include: {
-      //     category: true
-      //   }
-      // }
     },
     take: 4,
     orderBy: {
       updatedAt: 'desc'
     }
   })
+  return newproductdata;
+}
+
+export async function NewProducts() {
+  const newproductdata = await getNewProductData();
   const t = await getTranslations("Homepage New Products")
   return (
     <section id="products" className="pt-24 pb-8 px-4 sm:px-6 lg:px-8 relative overflow-hidden">

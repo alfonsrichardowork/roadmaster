@@ -46,7 +46,7 @@ export async function uploadImage(formData: FormData, folder: string) {
   // Find a unique filename by incrementing
   const uniqueFilename = await getUniqueFilename(uploadDir, safeName);
 
-  const filePath = path.join(uploadDir, uniqueFilename);
+  const filePath = path.join(/* turbopackIgnore: true */ uploadDir, uniqueFilename);
 
   await fs.writeFile(filePath, buffer);
 

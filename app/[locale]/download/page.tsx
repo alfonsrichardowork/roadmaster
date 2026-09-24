@@ -1,11 +1,29 @@
 import prismadb from '@/lib/prismadb'
 import { Archive, Download, FileText } from 'lucide-react'
 import { getTranslations, setRequestLocale } from 'next-intl/server'
+import { cacheLife } from 'next/cache'
 import Link from 'next/link'
 
 const getFileExtension = (url: string): string => {
   const extension = url.split('.').pop()?.toUpperCase() || 'FILE'
   return extension
+}
+
+async function getDownloadData() {
+  'use cache'
+  cacheLife('minutes')
+  const catalogue = await prismadb.brand.findFirst({
+    select: {
+      catalogues: true
+    }
+  })
+  const allDatasheet = await prismadb.multipledatasheetproduct.findMany({
+    select: {
+      name: true,
+      url: true
+    }
+  })
+  return [catalogue, allDatasheet] as const;
 }
 
 export default async function DownloadPage({
@@ -19,17 +37,7 @@ export default async function DownloadPage({
     namespace: 'Metadata download page'
   });
   setRequestLocale(locale);
-  const catalogue = await prismadb.brand.findFirst({
-    select: {
-      catalogues: true
-    }
-  })
-  const allDatasheet = await prismadb.multipledatasheetproduct.findMany({
-    select: {
-      name: true,
-      url: true
-    }
-  })
+  const [catalogue, allDatasheet] = await getDownloadData();
   return (
     <>
         <section className="pt-32 pb-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-secondary to-background">

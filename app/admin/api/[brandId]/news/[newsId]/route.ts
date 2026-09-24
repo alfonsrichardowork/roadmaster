@@ -5,6 +5,7 @@ import { checkAuth, checkBearerAPI, getSession } from '@/app/admin/actions';
 import path from 'path';
 import fs from 'fs/promises';
 import { revalidatePath } from 'next/cache';
+import { uploadsprefix } from '@/lib/spec-interface';
 
 const slugify = (str: string): string => {
   const normalizedStr = str.replace(/["“”‟″‶〃״˝ʺ˶ˮײ]/g, "'");
@@ -90,11 +91,19 @@ export async function PATCH(
       if (newsImageOld && newsImageOld.news_img && newsImageOld.news_img != '') {
       
         if(newsImageOld.news_img !== news_img){
-          const newsImgPath = path.join(process.cwd(), newsImageOld.news_img);
-          try {
-            await fs.unlink(newsImgPath);
-          } catch (error) {
-            console.warn(`Could not delete file ${newsImageOld.news_img}:`, error);
+          if(newsImageOld.news_img.startsWith(uploadsprefix)){
+            const filename = newsImageOld.news_img.slice(uploadsprefix.length)
+            // if (filename && path.basename(filename) === filename) {
+              const imgPath = path.join(process.cwd(), 'uploads', filename);
+              try {
+                await fs.unlink(imgPath);
+              } catch (error) {
+                console.warn(`Could not delete file ${newsImageOld.news_img}:`, error);
+              } 
+            // }
+          }
+          else{
+            console.warn(`Not inside uploads folder`);
           }
         }
       }
@@ -183,11 +192,19 @@ export async function PATCH(
       })
       //Delete physical files
       if(newsUrl) {
-        const newsImgPath = path.join(process.cwd(), newsUrl.news_img);
-        try {
-          await fs.unlink(newsImgPath);
-        } catch (error) {
-          console.warn(`Could not delete file ${newsUrl.news_img}:`, error);
+        if(newsUrl.news_img.startsWith(uploadsprefix)){
+          const filename = newsUrl.news_img.slice(uploadsprefix.length)
+          // if (filename && path.basename(filename) === filename) {
+            const imgPath = path.join(process.cwd(), 'uploads', filename);
+            try {
+              await fs.unlink(imgPath);
+            } catch (error) {
+              console.warn(`Could not delete file ${newsUrl.news_img}:`, error);
+            } 
+          // }
+        }
+        else{
+          console.warn(`Not inside uploads folder`);
         }
       }
   

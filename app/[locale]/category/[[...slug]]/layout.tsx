@@ -1,18 +1,15 @@
 import { Metadata } from "next";
-import { getLocale, getTranslations, setRequestLocale } from "next-intl/server";
+import { getTranslations, setRequestLocale } from "next-intl/server";
 import prismadb from "@/lib/prismadb";
+import { cacheLife } from "next/cache";
 
 type Props = {
   params: Promise<{locale: string, slug?: string[] }>
 }
 
-export async function generateMetadata(props: Props): Promise<Metadata> {
-  const { locale, slug = [] } = await props.params
-  setRequestLocale(locale);
-  const t = await getTranslations({
-    locale,
-    namespace: 'Metadata category page'
-  });
+async function getNewsData(locale: string, slug: string[]) {
+  'use cache'
+  cacheLife('minutes')
   const product = await prismadb.allcategory.findMany({
     where: locale === 'en' ? {
       slug_eng: {
@@ -33,6 +30,17 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
         thumbnail_url: true
     }
   })
+  return product;
+}
+
+export async function generateMetadata(props: Props): Promise<Metadata> {
+  const { locale, slug = [] } = await props.params
+  setRequestLocale(locale);
+  const t = await getTranslations({
+    locale,
+    namespace: 'Metadata category page'
+  });
+  const product = await getNewsData(locale, slug);  
 
   const typeOrder: Record<string, number> = {
     Category: 1,
@@ -142,7 +150,7 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
     }
   }
   
-}   
+}
 
 export default function CategoryLayout({
   children,

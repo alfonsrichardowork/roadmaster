@@ -2,6 +2,11 @@ import { ModalProvider } from '@/app/admin/providers/modal-provider'
 import { ToastProvider } from '@/app/admin/providers/toast-provider'
 import { Inter } from 'next/font/google'
 
+// @next-codemod-ignore Cache Components adoption: this segment temporarily allows blocking.
+// Remove this opt-out after verifying the segment passes validation without it.
+// See: https://nextjs.org/docs/app/guides/migrating-to-cache-components
+export const instant = false;
+
 const font = Inter({ subsets: ['cyrillic'] })
 
 export const metadata = {

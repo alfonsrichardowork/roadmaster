@@ -5,6 +5,7 @@ import { checkAuth, checkBearerAPI, getSession } from "@/app/admin/actions";
 import { redirect } from "next/navigation";
 import path from 'path';
 import fs from 'fs/promises';
+import { uploadsprefix } from "@/lib/spec-interface";
 
 
 export async function PATCH(req: Request, props: { params: Promise<{ brandId: string }> }) {
@@ -55,11 +56,19 @@ export async function PATCH(req: Request, props: { params: Promise<{ brandId: st
     })
 
     if(oldBrand && oldBrand.catalogues !== catalogues) {
-      const datasheetPath = path.join(process.cwd(), oldBrand.catalogues);
-      try {
-        await fs.unlink(datasheetPath);
-      } catch (error) {
-        console.warn(`Could not delete file ${oldBrand.catalogues}:`, error);
+      if(oldBrand.catalogues.startsWith(uploadsprefix)){
+        const filename = oldBrand.catalogues.slice(uploadsprefix.length)
+        // if (filename && path.basename(filename) === filename) {
+          const imgPath = path.join(process.cwd(), 'uploads', filename);
+          try {
+            await fs.unlink(imgPath);
+          } catch (error) {
+            console.warn(`Could not delete file ${oldBrand.catalogues}:`, error);
+          } 
+        // }
+      }
+      else{
+        console.warn(`Not inside uploads folder`);
       }
     }
     
@@ -122,11 +131,19 @@ export async function DELETE(req: Request, props: { params: Promise<{ brandId: s
     })
 
     if(oldBrand && oldBrand.catalogues !== '') {
-      const datasheetPath = path.join(process.cwd(), oldBrand.catalogues);
-      try {
-        await fs.unlink(datasheetPath);
-      } catch (error) {
-        console.warn(`Could not delete file ${oldBrand.catalogues}:`, error);
+      if(oldBrand.catalogues.startsWith(uploadsprefix)){
+        const filename = oldBrand.catalogues.slice(uploadsprefix.length)
+        // if (filename && path.basename(filename) === filename) {
+          const imgPath = path.join(process.cwd(), 'uploads', filename);
+          try {
+            await fs.unlink(imgPath);
+          } catch (error) {
+            console.warn(`Could not delete file ${oldBrand.catalogues}:`, error);
+          } 
+        // }
+      }
+      else{
+        console.warn(`Not inside uploads folder`);
       }
     }
 

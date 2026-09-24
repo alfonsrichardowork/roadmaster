@@ -4,6 +4,7 @@ import createNextIntlPlugin from 'next-intl/plugin'
 const withNextIntl = createNextIntlPlugin()
 
 const nextConfig = {
+  cacheComponents: true,
   experimental: {
     serverActions: {
       bodySizeLimit: '50mb',
@@ -32,7 +33,7 @@ const nextConfig = {
     },
     {
       protocol: 'https', // for production
-      hostname: 'roadmaster.webdemosbe.xyz',
+      hostname: 'roadmasterspeakers.com',
       port: '',
       pathname: '/uploads/**',
     },

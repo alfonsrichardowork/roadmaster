@@ -1,8 +1,16 @@
 import prismadb from '@/lib/prismadb'
 import SwiperHero from './swiperHero'
+import { cacheLife } from 'next/cache'
+
+async function getHeroData() {
+  'use cache'
+  cacheLife('minutes')
+  const allHero = await prismadb.hero.findMany({})
+  return allHero
+}
 
 export async function Hero() {
-  const allHero = await prismadb.hero.findMany({})
+  const allHero = await getHeroData();
   return (
     <section className="relative min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 overflow-hidden pt-20">
       <h1 className='sr-only'>Roadmaster Official Website</h1>

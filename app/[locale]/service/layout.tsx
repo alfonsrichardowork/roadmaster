@@ -1,5 +1,5 @@
 import { Metadata } from "next";
-import { getLocale, getTranslations, setRequestLocale } from "next-intl/server";
+import { getTranslations, setRequestLocale } from "next-intl/server";
 
 export async function generateMetadata({
     params
@@ -55,7 +55,7 @@ export async function generateMetadata({
       },
     },
   }
-}   
+}
 
 export default function ServiceLayout({
   children,

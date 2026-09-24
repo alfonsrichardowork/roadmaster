@@ -5,6 +5,7 @@ import { checkAuth, checkBearerAPI, getSession } from '@/app/admin/actions';
 import path from 'path';
 import fs from 'fs/promises';
 import { revalidatePath } from 'next/cache';
+import { uploadsprefix } from '@/lib/spec-interface';
 
 export async function GET(
   req: Request,
@@ -78,23 +79,37 @@ export async function PATCH(
 
       if(heroImageOld && heroImageOld.hero_img && heroImageOld.hero_img !== hero_img) {
         //DELETE FILE
-        const heroImgPath = path.join(process.cwd(), heroImageOld.hero_img);
-
-        try {
-          await fs.unlink(heroImgPath);
-        } catch (error) {
-          console.warn(`Could not delete file ${heroImageOld.hero_img}:`, error);
+        if(heroImageOld.hero_img.startsWith(uploadsprefix)){
+          const filename = heroImageOld.hero_img.slice(uploadsprefix.length)
+          // if (filename && path.basename(filename) === filename) {
+            const imgPath = path.join(process.cwd(), 'uploads', filename);
+            try {
+              await fs.unlink(imgPath);
+            } catch (error) {
+              console.warn(`Could not delete file ${heroImageOld.hero_img}:`, error);
+            } 
+          // }
+        }
+        else{
+          console.warn(`Not inside uploads folder`);
         }
       }
 
       if(heroImageOld && heroImageOld.hero_img_mobile && heroImageOld.hero_img_mobile !== hero_img_mobile) {
         //DELETE FILE
-        const heroImgPathMobile = path.join(process.cwd(), heroImageOld.hero_img_mobile);
-
-        try {
-          await fs.unlink(heroImgPathMobile);
-        } catch (error) {
-          console.warn(`Could not delete file ${heroImageOld.hero_img_mobile}:`, error);
+        if(heroImageOld.hero_img_mobile.startsWith(uploadsprefix)){
+          const filename = heroImageOld.hero_img_mobile.slice(uploadsprefix.length)
+          // if (filename && path.basename(filename) === filename) {
+            const imgPath = path.join(process.cwd(), 'uploads', filename);
+            try {
+              await fs.unlink(imgPath);
+            } catch (error) {
+              console.warn(`Could not delete file ${heroImageOld.hero_img_mobile}:`, error);
+            } 
+          // }
+        }
+        else{
+          console.warn(`Not inside uploads folder`);
         }
       }
 
@@ -171,24 +186,38 @@ export async function PATCH(
       if(aboutToDelete){
         //Delete physical files
         if (aboutToDelete.hero_img) {
-          const imagePath = path.join(process.cwd(), aboutToDelete.hero_img);
-
-          try {
-            await fs.unlink(imagePath);
-          } catch (error) {
-            console.warn(`Could not delete file ${aboutToDelete.hero_img}:`, error);
+          if(aboutToDelete.hero_img.startsWith(uploadsprefix)){
+            const filename = aboutToDelete.hero_img.slice(uploadsprefix.length)
+            // if (filename && path.basename(filename) === filename) {
+              const imgPath = path.join(process.cwd(), 'uploads', filename);
+              try {
+                await fs.unlink(imgPath);
+              } catch (error) {
+                console.warn(`Could not delete file ${aboutToDelete.hero_img}:`, error);
+              } 
+            // }
+          }
+          else{
+            console.warn(`Not inside uploads folder`);
           }
         }
 
 
         //Delete physical files
         if (aboutToDelete.hero_img_mobile) {
-          const imagePath = path.join(process.cwd(), aboutToDelete.hero_img_mobile);
-
-          try {
-            await fs.unlink(imagePath);
-          } catch (error) {
-            console.warn(`Could not delete file ${aboutToDelete.hero_img_mobile}:`, error);
+          if(aboutToDelete.hero_img_mobile.startsWith(uploadsprefix)){
+            const filename = aboutToDelete.hero_img_mobile.slice(uploadsprefix.length)
+            // if (filename && path.basename(filename) === filename) {
+              const imgPath = path.join(process.cwd(), 'uploads', filename);
+              try {
+                await fs.unlink(imgPath);
+              } catch (error) {
+                console.warn(`Could not delete file ${aboutToDelete.hero_img_mobile}:`, error);
+              } 
+            // }
+          }
+          else{
+            console.warn(`Not inside uploads folder`);
           }
         }
       }

@@ -4,24 +4,12 @@ import SpecificationTable from '@/components/spec-table'
 import { Button } from '@/components/ui/button'
 import { Link as Link18n } from '@/i18n/navigation'
 import prismadb from '@/lib/prismadb'
+import { ChildSpecificationProp, SpecificationProp } from '@/lib/spec-interface'
 import { Download } from 'lucide-react'
 import { getTranslations, setRequestLocale } from 'next-intl/server'
+import { cacheLife } from 'next/cache'
 import Image from 'next/image'
 import Link from 'next/link'
-
-export interface SpecificationProp {
-  parentname: string
-  child: ChildSpecificationProp[]
-}
-
-export interface ChildSpecificationProp {
-  childname: string
-  value: string
-  slug: string
-  notes: string
-  unit: string
-  subParentName: string
-}
 
 const order: Record<string, number> = {
   "Category": 0,
@@ -43,17 +31,9 @@ export async function generateStaticParams(){
   }));
 }
 
-export default async function ProductPage({
-  params,
-}: {
-  params: Promise<{ locale: string, productSlug: string }>
-}) {
-  const { locale, productSlug } = await params;
-  const t = await getTranslations({
-    locale,
-    namespace: 'Single Product Page'
-  });
-  setRequestLocale(locale);
+async function getProductData(productSlug: string) {
+  'use cache'
+  cacheLife('minutes')
   const product = await prismadb.product.findFirst({
     where: {
       slug: productSlug
@@ -79,7 +59,21 @@ export default async function ProductPage({
       }
     }
   });
+  return product;
+}
 
+export default async function ProductPage({
+  params,
+}: {
+  params: Promise<{ locale: string, productSlug: string }>
+}) {
+  const { locale, productSlug } = await params;
+  const t = await getTranslations({
+    locale,
+    namespace: 'Single Product Page'
+  });
+  setRequestLocale(locale);
+  const product = await getProductData(productSlug);
   const specsCombined = (product?.connectorSpecifications ?? []).reduce<SpecificationProp[]>(
     (acc, connector) => {
       const parentname = locale === 'en' ? connector.dynamicspecificationParent?.name_eng : connector.dynamicspecificationParent?.name ?? "";

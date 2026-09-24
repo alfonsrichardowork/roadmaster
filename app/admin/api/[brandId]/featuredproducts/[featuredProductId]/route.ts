@@ -4,6 +4,7 @@ import prismadb from '@/lib/prismadb';
 import { checkAuth, checkBearerAPI, getSession } from '@/app/admin/actions';
 import path from 'path';
 import fs from 'fs/promises';
+import { uploadsprefix } from '@/lib/spec-interface';
 
 export async function GET(
   req: Request,
@@ -79,20 +80,36 @@ export async function PATCH(
     if (featuredImageOld && featuredImageOld.featured_img && featuredImageOld.featured_img != '') {
 
       if(featuredImageOld.featured_img !== featured_img){
-        const featuredImgPath = path.join(process.cwd(), featuredImageOld.featured_img);
-        try {
-          await fs.unlink(featuredImgPath);
-        } catch (error) {
-          console.warn(`Could not delete file ${featuredImageOld.featured_img}:`, error);
+        if(featuredImageOld.featured_img.startsWith(uploadsprefix)){
+          const filename = featuredImageOld.featured_img.slice(uploadsprefix.length)
+          // if (filename && path.basename(filename) === filename) {
+            const imgPath = path.join(process.cwd(), 'uploads', filename);
+            try {
+              await fs.unlink(imgPath);
+            } catch (error) {
+              console.warn(`Could not delete file ${featuredImageOld.featured_img}:`, error);
+            } 
+          // }
+        }
+        else{
+          console.warn(`Not inside uploads folder`);
         }
       }
 
       if (!isFeatured) {
-        const featuredImgPath = path.join(process.cwd(), featuredImageOld.featured_img);
-        try {
-          await fs.unlink(featuredImgPath);
-        } catch (error) {
-          console.warn(`Could not delete file ${featuredImageOld.featured_img}:`, error);
+        if(featuredImageOld.featured_img.startsWith(uploadsprefix)){
+          const filename = featuredImageOld.featured_img.slice(uploadsprefix.length)
+          // if (filename && path.basename(filename) === filename) {
+            const imgPath = path.join(process.cwd(), 'uploads', filename);
+            try {
+              await fs.unlink(imgPath);
+            } catch (error) {
+              console.warn(`Could not delete file ${featuredImageOld.featured_img}:`, error);
+            } 
+          // }
+        }
+        else{
+          console.warn(`Not inside uploads folder`);
         }
       }
     }

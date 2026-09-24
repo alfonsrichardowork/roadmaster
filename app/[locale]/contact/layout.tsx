@@ -1,6 +1,5 @@
 import { Metadata } from "next";
 import { getLocale, getTranslations, setRequestLocale } from "next-intl/server";
-import prismadb from "@/lib/prismadb";
 
 export async function generateMetadata({
     params
@@ -56,7 +55,7 @@ export async function generateMetadata({
       },
     },
   }
-}   
+}
 
 export default function ContactLayout({
   children,

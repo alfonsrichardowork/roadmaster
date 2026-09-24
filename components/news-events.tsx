@@ -3,14 +3,22 @@ import { Link } from '@/i18n/navigation';
 import prismadb from '@/lib/prismadb'
 import { getTranslations } from 'next-intl/server';
 import { NewsCard } from './newsCard';
+import { cacheLife } from 'next/cache';
 
-export async function NewsEvents() {
+async function getNewsData() {
+  'use cache'
+  cacheLife('minutes')
   const newsData = await prismadb.news.findMany({
     take: 3,
     orderBy: {
       event_date: 'desc'
     }
   })
+  return newsData;
+}
+
+export async function NewsEvents() {
+  const newsData = await getNewsData();
   const t = await getTranslations("Homepage Latest News")
   return (
     <section className="pt-24 pb-14 px-4 sm:px-6 lg:px-8 bg-linear-to-b from-background to-secondary relative overflow-hidden">

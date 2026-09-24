@@ -1,18 +1,15 @@
 import { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import prismadb from "@/lib/prismadb";
+import { cacheLife } from "next/cache";
 
 type Props = {
   params: Promise<{locale: string, newsSlug: string }>
 }
 
-export async function generateMetadata(props: Props): Promise<Metadata> {
-  const { locale, newsSlug = '' } = await props.params
-  setRequestLocale(locale);
-  const t = await getTranslations({
-    locale,
-    namespace: 'Metadata single news page'
-  });
+async function getSingleNewsMetadata(locale: string, newsSlug: string) {
+  'use cache'
+  cacheLife('minutes')
   const news = await prismadb.news.findFirst({
     where: locale === 'en' ? {
       slug_eng: newsSlug
@@ -31,7 +28,19 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
       event_date: true
     }
   })
+  return news;
+}
+
+
+export async function generateMetadata(props: Props): Promise<Metadata> {
+  const { locale, newsSlug = '' } = await props.params
+  setRequestLocale(locale);
+  const t = await getTranslations({
+    locale,
+    namespace: 'Metadata single news page'
+  });
   const baseUrl = process.env.NEXT_PUBLIC_ROOT_URL ?? 'http://localhost:3003';
+  const news = await getSingleNewsMetadata(locale, newsSlug);
   if(!news) {
     return {
         title: t('title-no-news'),
@@ -87,7 +96,7 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
       },
     },
   }
-}   
+}
 
 export default function SingleNewsLayout({
   children,
