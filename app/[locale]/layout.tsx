@@ -137,6 +137,7 @@ export default async function HomeLayout({
             />
         </Head>
         <body className={`${font.className || ''} overflow-x-hidden`}>
+            <GoogleAnalytics gaId="XYZ" />
           <Suspense fallback={<></>}>
             <NextIntlClientProvider>
                 <main className="min-h-screen bg-background text-foreground">
@@ -145,7 +146,6 @@ export default async function HomeLayout({
                   <Footer categories={categoriesData} />
                 </main>
             </NextIntlClientProvider>
-            <GoogleAnalytics gaId="XYZ" />
           </Suspense>
         </body>
         </html>
