@@ -3,10 +3,11 @@ import DompurifyContent from '@/components/dompurifyText'
 import SpecificationTable from '@/components/spec-table'
 import { Button } from '@/components/ui/button'
 import { Link as Link18n } from '@/i18n/navigation'
+import { routing } from '@/i18n/routing'
 import prismadb from '@/lib/prismadb'
 import { ChildSpecificationProp, SpecificationProp } from '@/lib/spec-interface'
 import { Download } from 'lucide-react'
-import { getTranslations, setRequestLocale } from 'next-intl/server'
+import { getTranslations } from 'next-intl/server'
 import { cacheLife } from 'next/cache'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -17,19 +18,22 @@ const order: Record<string, number> = {
   "Sub Sub Category": 2,
 };
 
-export async function generateStaticParams(){
-  const products = await prismadb.product.findMany({
-    where: {
-      isArchived: false
-    },
-    select: {
-      slug: true,
-    },
-  });
-  return products.map((product: { slug: string }) => ({
-    productSlug: product.slug
-  }));
-}
+// export async function generateStaticParams(){
+//   const products = await prismadb.product.findMany({
+//     where: {
+//       isArchived: false
+//     },
+//     select: {
+//       slug: true,
+//     },
+//   });
+//   return routing.locales.flatMap((locale) =>
+//     products.map((product) => ({
+//       locale,
+//       productSlug: product.slug,
+//     }))
+//   );
+// }
 
 async function getProductData(productSlug: string) {
   'use cache'
@@ -68,11 +72,8 @@ export default async function ProductPage({
   params: Promise<{ locale: string, productSlug: string }>
 }) {
   const { locale, productSlug } = await params;
-  const t = await getTranslations({
-    locale,
-    namespace: 'Single Product Page'
-  });
-  setRequestLocale(locale);
+  const t = await getTranslations('Single Product Page');
+  
   const product = await getProductData(productSlug);
   const specsCombined = (product?.connectorSpecifications ?? []).reduce<SpecificationProp[]>(
     (acc, connector) => {

@@ -1,5 +1,5 @@
 import { Metadata } from "next";
-import { getTranslations, setRequestLocale } from "next-intl/server";
+import { getTranslations } from "next-intl/server";
 import prismadb from "@/lib/prismadb";
 import { cacheLife } from "next/cache";
 
@@ -25,11 +25,8 @@ async function getProductsData(productSlug: string) {
 
 export async function generateMetadata(props: Props): Promise<Metadata> {
   const { locale, productSlug = '' } = await props.params
-  setRequestLocale(locale);
-  const t = await getTranslations({
-    locale,
-    namespace: 'Metadata single product'
-  });
+  
+  const t = await getTranslations('Metadata single product');
   const product = await getProductsData(productSlug)
   const baseUrl = process.env.NEXT_PUBLIC_ROOT_URL ?? 'http://localhost:3003';
   if(!product) {

@@ -1,4 +1,4 @@
-import { getTranslations, setRequestLocale } from 'next-intl/server'
+import { getTranslations } from 'next-intl/server'
 import Image from 'next/image';
 
 export default async function AboutPage({
@@ -7,11 +7,8 @@ export default async function AboutPage({
   params: Promise<{locale: string}>
 }) {
   const {locale} = await params;
-  const t = await getTranslations({
-    locale,
-    namespace: 'About Us Page'
-  });
-  setRequestLocale(locale);
+  const t = await getTranslations('About Us Page');
+  
   return (
     <>
         <section className="pt-24 px-4 sm:px-6 lg:px-8 bg-white">

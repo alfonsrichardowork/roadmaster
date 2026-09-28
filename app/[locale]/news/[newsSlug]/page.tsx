@@ -2,8 +2,9 @@
 import DompurifyContent from '@/components/dompurifyText'
 import { Button } from '@/components/ui/button'
 import { Link } from '@/i18n/navigation'
+import { routing } from '@/i18n/routing'
 import prismadb from '@/lib/prismadb'
-import { getLocale, getTranslations, setRequestLocale } from 'next-intl/server'
+import { getLocale, getTranslations } from 'next-intl/server'
 import { cacheLife } from 'next/cache'
 import Image from 'next/image'
 
@@ -21,24 +22,26 @@ async function getSingleNewsData(locale: string, newsSlug: string) {
   return singlenews
 }
 
-export async function generateStaticParams({
-  params,
-}: {
-  params: { locale: string };
-}) {
-  const allNews = await prismadb.news.findMany({
-    select: {
-      slug: true,
-      slug_eng: true,
-    },
-  });
+// export async function generateStaticParams({
+//   params,
+// }: {
+//   params: { locale: string };
+// }) {
+//   const allNews = await prismadb.news.findMany({
+//     select: {
+//       slug: true,
+//       slug_eng: true,
+//     },
+//   });
 
-  return allNews.map((news) => ({
-    newsSlug: params.locale === 'en'
-      ? news.slug_eng
-      : news.slug,
-  }));
-}
+//   return routing.locales.flatMap((locale) =>
+//     allNews.map((news) => ({
+//       locale,
+//       newsSlug: params.locale === 'en'
+//         ? news.slug_eng
+//         : news.slug,
+//     })));
+// }
 
 export default async function SingleNewsPage({
   params,
@@ -46,11 +49,8 @@ export default async function SingleNewsPage({
   params: Promise<{ locale: string, newsSlug: string }>
 }) {
   const { locale, newsSlug } = await params;
-  const t = await getTranslations({
-    locale,
-    namespace: 'single news page'
-  });
-  setRequestLocale(locale);
+  const t = await getTranslations('single news page');
+  
  
   const singlenews = await getSingleNewsData(locale, newsSlug);
 

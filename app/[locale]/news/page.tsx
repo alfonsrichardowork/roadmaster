@@ -1,6 +1,6 @@
 import { NewsCard } from '@/components/newsCard';
 import prismadb from '@/lib/prismadb';
-import { getTranslations, setRequestLocale } from 'next-intl/server'
+import { getTranslations } from 'next-intl/server'
 import { cacheLife } from 'next/cache';
 
 async function getAllNewsData() {
@@ -20,12 +20,9 @@ export default async function AllNewsPage({
   params: Promise<{locale: string}>
 }) {
   const {locale} = await params;
-  const t = await getTranslations({
-    locale,
-    namespace: 'All News Page'
-  });
+  const t = await getTranslations('All News Page');
   const newsData = await getAllNewsData();
-  setRequestLocale(locale);
+  
   return (
     <section className="pt-24 pb-8 px-4 sm:px-6 lg:px-8 bg-white">
       <div className="max-w-6xl mx-auto">

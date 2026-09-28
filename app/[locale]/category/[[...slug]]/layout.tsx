@@ -1,5 +1,5 @@
 import { Metadata } from "next";
-import { getTranslations, setRequestLocale } from "next-intl/server";
+import { getTranslations } from "next-intl/server";
 import prismadb from "@/lib/prismadb";
 import { cacheLife } from "next/cache";
 
@@ -35,11 +35,8 @@ async function getNewsData(locale: string, slug: string[]) {
 
 export async function generateMetadata(props: Props): Promise<Metadata> {
   const { locale, slug = [] } = await props.params
-  setRequestLocale(locale);
-  const t = await getTranslations({
-    locale,
-    namespace: 'Metadata category page'
-  });
+  
+  const t = await getTranslations('Metadata category page');
   const product = await getNewsData(locale, slug);  
 
   const typeOrder: Record<string, number> = {

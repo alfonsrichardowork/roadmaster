@@ -9,14 +9,14 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { GoogleAnalytics } from '@next/third-parties/google'
 import prismadb from "@/lib/prismadb";
-import { getTranslations, setRequestLocale } from "next-intl/server";
+import { getTranslations } from "next-intl/server";
 import { cacheLife } from "next/cache";
 import { Suspense } from "react";
 
 const font = Inter({ subsets: ['latin'] })
 
 export async function generateStaticParams() {
-  return [{ locale: 'en' }, { locale: 'id' }]
+  return routing.locales.map((locale) => ({locale}));
 }
 
 export async function generateMetadata({
@@ -26,11 +26,8 @@ export async function generateMetadata({
   }): Promise<Metadata> {
   const baseUrl = process.env.NEXT_PUBLIC_ROOT_URL ?? 'http://localhost:3003';
   const {locale} = await params;
-  setRequestLocale(locale);
-   const t = await getTranslations({
-    locale,
-    namespace: 'Metadata homepage'
-  });
+  
+   const t = await getTranslations('Metadata homepage');
   return {
     title: {
       template: '%s | Roadmaster',
@@ -122,7 +119,7 @@ export default async function HomeLayout({
   params: Promise<{ locale: string }>;
 }) {
     const { locale } = await params;
-    setRequestLocale(locale);
+    
     if (!hasLocale(routing.locales, locale)) {
       notFound();
     }

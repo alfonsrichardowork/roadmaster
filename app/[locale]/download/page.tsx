@@ -1,6 +1,6 @@
 import prismadb from '@/lib/prismadb'
 import { Archive, Download, FileText } from 'lucide-react'
-import { getTranslations, setRequestLocale } from 'next-intl/server'
+import { getTranslations } from 'next-intl/server'
 import { cacheLife } from 'next/cache'
 import Link from 'next/link'
 
@@ -32,11 +32,8 @@ export default async function DownloadPage({
   params: Promise<{locale: string}>
 }) {
   const {locale} = await params;
-  const t = await getTranslations({
-    locale,
-    namespace: 'Metadata download page'
-  });
-  setRequestLocale(locale);
+  const t = await getTranslations('Metadata download page');
+  
   const [catalogue, allDatasheet] = await getDownloadData();
   return (
     <>
