@@ -18,22 +18,22 @@ const order: Record<string, number> = {
   "Sub Sub Category": 2,
 };
 
-// export async function generateStaticParams(){
-//   const products = await prismadb.product.findMany({
-//     where: {
-//       isArchived: false
-//     },
-//     select: {
-//       slug: true,
-//     },
-//   });
-//   return routing.locales.flatMap((locale) =>
-//     products.map((product) => ({
-//       locale,
-//       productSlug: product.slug,
-//     }))
-//   );
-// }
+export async function generateStaticParams(){
+  const products = await prismadb.product.findMany({
+    where: {
+      isArchived: false
+    },
+    select: {
+      slug: true,
+    },
+  });
+  return routing.locales.flatMap((locale) =>
+    products.map((product) => ({
+      locale,
+      productSlug: product.slug,
+    }))
+  );
+}
 
 async function getProductData(productSlug: string) {
   'use cache'

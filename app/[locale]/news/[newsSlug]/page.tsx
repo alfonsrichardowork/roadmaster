@@ -22,26 +22,26 @@ async function getSingleNewsData(locale: string, newsSlug: string) {
   return singlenews
 }
 
-// export async function generateStaticParams({
-//   params,
-// }: {
-//   params: { locale: string };
-// }) {
-//   const allNews = await prismadb.news.findMany({
-//     select: {
-//       slug: true,
-//       slug_eng: true,
-//     },
-//   });
+export async function generateStaticParams({
+  params,
+}: {
+  params: { locale: string };
+}) {
+  const allNews = await prismadb.news.findMany({
+    select: {
+      slug: true,
+      slug_eng: true,
+    },
+  });
 
-//   return routing.locales.flatMap((locale) =>
-//     allNews.map((news) => ({
-//       locale,
-//       newsSlug: params.locale === 'en'
-//         ? news.slug_eng
-//         : news.slug,
-//     })));
-// }
+  return routing.locales.flatMap((locale) =>
+    allNews.map((news) => ({
+      locale,
+      newsSlug: params.locale === 'en'
+        ? news.slug_eng
+        : news.slug,
+    })));
+}
 
 export default async function SingleNewsPage({
   params,
