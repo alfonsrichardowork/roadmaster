@@ -25,6 +25,12 @@ export function proxy(req: NextRequest) {
       return NextResponse.next();
     }
 
+
+    if (url.pathname === '/id' || url.pathname === '/') {
+      url.pathname = `/${routing.defaultLocale}`;
+      return NextResponse.rewrite(url);
+    }
+
     return intlMiddleware(req);
   }
 
