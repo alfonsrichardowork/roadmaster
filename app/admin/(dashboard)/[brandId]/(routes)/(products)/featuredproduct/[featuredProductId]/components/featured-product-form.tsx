@@ -2,7 +2,7 @@
 
 import * as z from "zod"
 import axios from "axios"
-import { useEffect, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import { toast } from "react-hot-toast"
@@ -27,7 +27,7 @@ import Image from "next/image"
 import { Trash } from "lucide-react"
 import Link from "next/link"
 import { uploadImage } from "@/app/admin/upload-image"
-import { MAX_SIZE } from "@/app/admin/model/model"
+import { formatFileSize, MAX_SIZE } from "@/app/admin/model/model"
 
 
 const formSchema = z.object({
@@ -54,6 +54,7 @@ export const FeaturedProductForm: React.FC<FeaturedProductFormProps> = ({
   const [featuredImage, setFeaturedImage] = useState<string>()
   const [loading, setLoading] = useState(false);
   const [selectedFile, setSelectedFile] = useState<File>();
+  const submitInProgress = useRef(false); 
 
   const title = initialData ? 'Edit Featured Image' : 'Add Featured Image';
   const description = `For ${initialData!.name}`;
@@ -89,7 +90,7 @@ export const FeaturedProductForm: React.FC<FeaturedProductFormProps> = ({
     const file = e.target.files?.[0];
     if(!file) return
     if (file.size > MAX_SIZE) {
-      alert("File size must be less than 2MB");
+      toast.error(`The image exceeds the 50 MB per-file limit (${formatFileSize(file.size)}).`);
       e.target.value = "";
       return;
     }
@@ -125,6 +126,8 @@ export const FeaturedProductForm: React.FC<FeaturedProductFormProps> = ({
   });
 
   const onSubmit = async (data: FeaturedProductFormValues) => {
+    if (submitInProgress.current) return;
+    submitInProgress.current = true;
     try {
       setLoading(true);
 
@@ -165,6 +168,7 @@ export const FeaturedProductForm: React.FC<FeaturedProductFormProps> = ({
       toast.error('Something went wrong.');
     } finally {
       setLoading(false);
+      submitInProgress.current = false;
     }
   };
 
@@ -177,7 +181,21 @@ export const FeaturedProductForm: React.FC<FeaturedProductFormProps> = ({
       </div>
       <Separator />
       <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4 w-full">
+        <form 
+          onSubmit={form.handleSubmit(onSubmit)}
+          onKeyDown={(event) => {
+            const target = event.target;
+            if (
+              event.key === "Enter" &&
+              !event.nativeEvent.isComposing &&
+              target instanceof HTMLInputElement &&
+              !target.hasAttribute("cmdk-input") &&
+              !["button", "checkbox", "file", "image", "radio", "reset", "submit"].includes(target.type)
+            ) {
+              event.preventDefault();
+            }
+          }} 
+          className="space-y-4 w-full">
           <div className="md:grid md:grid-cols-2 gap-4">
             
             <div className="rounded-lg p-4 shadow-lg bg-white/50 gap-4">

@@ -7,7 +7,7 @@ import { useForm } from "react-hook-form"
 import { toast } from "react-hot-toast"
 import { File, Trash } from "lucide-react"
 import { useParams, useRouter } from "next/navigation"
-import { useEffect, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
@@ -25,7 +25,7 @@ import { AlertModal } from "@/app/admin/components/modals/alert-modal"
 import { ApiAlert } from "@/app/admin/components/ui/api-alert"
 import { useOrigin } from "@/app/admin/hooks/use-origin"
 import { brand } from "@prisma/client"
-import { MAX_SIZE } from "@/app/admin/model/model"
+import { formatFileSize, MAX_SIZE } from "@/app/admin/model/model"
 import { uploadProductDatasheet } from "@/app/admin/upload-product-datasheet"
 import Link from "next/link"
 
@@ -51,6 +51,7 @@ export const SettingsForm: React.FC<SettingsFormProps> = ({
 
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
+  const submitInProgress = useRef(false);
 
   const form = useForm<SettingsFormValues>({
     resolver: zodResolver(formSchema),
@@ -80,7 +81,7 @@ export const SettingsForm: React.FC<SettingsFormProps> = ({
     const file = e.target.files?.[0];
     if(!file) return
     if (file.size > MAX_SIZE) {
-      alert("File size must be less than 2MB");
+      toast.error(`The file exceeds the 50 MB per-file limit (${formatFileSize(file.size)}).`);
       e.target.value = "";
       return;
     }
@@ -110,6 +111,8 @@ export const SettingsForm: React.FC<SettingsFormProps> = ({
   }
 
   const onSubmit = async (data: SettingsFormValues) => {
+    if (submitInProgress.current) return;
+    submitInProgress.current = true;
     try {
       setLoading(true);
 
@@ -147,6 +150,7 @@ export const SettingsForm: React.FC<SettingsFormProps> = ({
       toast.error('Something went wrong.');
     } finally {
       setLoading(false);
+      submitInProgress.current = false;
     }
   };
 
@@ -189,7 +193,21 @@ export const SettingsForm: React.FC<SettingsFormProps> = ({
       </div>
       <Separator />
       <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8 w-full">
+        <form 
+          onSubmit={form.handleSubmit(onSubmit)}
+          onKeyDown={(event) => {
+            const target = event.target;
+            if (
+              event.key === "Enter" &&
+              !event.nativeEvent.isComposing &&
+              target instanceof HTMLInputElement &&
+              !target.hasAttribute("cmdk-input") &&
+              !["button", "checkbox", "file", "image", "radio", "reset", "submit"].includes(target.type)
+            ) {
+              event.preventDefault();
+            }
+          }}
+          className="space-y-8 w-full">
   
         <div className="grid grid-cols-2 gap-8">
 

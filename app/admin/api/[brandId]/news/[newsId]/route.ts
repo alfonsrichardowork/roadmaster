@@ -148,7 +148,12 @@ export async function PATCH(
       })
     }
 
-    revalidatePath(`/news/${slugify(title)}`);
+    revalidatePath(`/`);
+    revalidatePath(`/berita`);
+    revalidatePath(`/berita/${slugify(title)}`);
+    revalidatePath(`/en`);
+    revalidatePath(`/en/news`);
+    revalidatePath(`/en/news/${slugify(title)}`);
     return NextResponse.json("success");
   } catch (error) {
     console.log('[NEWS_PATCH]', error);
@@ -214,6 +219,10 @@ export async function PATCH(
         },
       });
   
+      revalidatePath(`/`);
+      revalidatePath(`/berita`);
+      revalidatePath(`/en`);
+      revalidatePath(`/en/news`);
       return NextResponse.json(newsDeleted);
     } catch (error) {
       console.log('[NEWS_DELETE]', error);

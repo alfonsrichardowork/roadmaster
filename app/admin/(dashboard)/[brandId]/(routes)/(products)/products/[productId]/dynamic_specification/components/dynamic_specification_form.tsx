@@ -2,7 +2,7 @@
 
 import { dynamicspecification, dynamicspecificationparent, dynamicspecificationsubparent, specificationconnector } from "@prisma/client"
 import { ChevronsUpDown, CirclePlus, Trash } from "lucide-react"
-import { useEffect, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import axios, { AxiosResponse } from "axios"
 import { useParams, useRouter } from "next/navigation"
 import toast from "react-hot-toast"
@@ -62,6 +62,7 @@ export const SpecForm: React.FC<SBAudienceCompressionDimensionSpecFormProps> = (
   const params = useParams();
   const router = useRouter();
   const [loading, setLoading] = useState<boolean>(true)
+  const submitInProgress = useRef(false); 
 
 
   const title = initialData ? 'Edit Specification' : 'Create Specification';
@@ -201,6 +202,8 @@ export const SpecForm: React.FC<SBAudienceCompressionDimensionSpecFormProps> = (
         notes_eng: r.notes_eng,
       })),
     )
+    if (submitInProgress.current) return;
+    submitInProgress.current = true;
     try {
       // setLoading(true);
 
@@ -237,6 +240,7 @@ export const SpecForm: React.FC<SBAudienceCompressionDimensionSpecFormProps> = (
       toast.error('Something went wrong.');
     } finally {
       // setLoading(false);
+      submitInProgress.current = false;
     }
     
   }
@@ -256,7 +260,19 @@ export const SpecForm: React.FC<SBAudienceCompressionDimensionSpecFormProps> = (
           <Heading title={title} description={description} />
         </div>
         <Separator />
-        <form onSubmit={onSubmit} className="space-y-8">
+        <form onSubmit={onSubmit}
+          onKeyDown={(event) => {
+            const target = event.target;
+            if (
+              event.key === "Enter" &&
+              !event.nativeEvent.isComposing &&
+              target instanceof HTMLInputElement &&
+              !target.hasAttribute("cmdk-input") &&
+              !["button", "checkbox", "file", "image", "radio", "reset", "submit"].includes(target.type)
+            ) {
+              event.preventDefault();
+            }
+          }} className="space-y-8">
             <Button
               type="button"
               onClick={addGroup}

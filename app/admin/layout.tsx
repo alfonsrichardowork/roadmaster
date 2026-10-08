@@ -21,7 +21,7 @@ export default async function AdminRootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={`${font.className || ''} overflow-x-hidden bg-foreground/5 `}>
+      <body className={`${font.className || ''} overflow-hidden bg-foreground/5 `}>
         <div className='bg-foreground/5 h-screen overflow-x-hidden'>
           <ToastProvider />
           <ModalProvider />

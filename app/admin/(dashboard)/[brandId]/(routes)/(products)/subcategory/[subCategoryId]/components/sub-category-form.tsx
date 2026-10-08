@@ -2,7 +2,7 @@
 
 import * as z from "zod"
 import axios, { AxiosResponse } from "axios"
-import { useEffect, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import { toast } from "react-hot-toast"
@@ -24,7 +24,7 @@ import { Heading } from "@/app/admin/components/ui/heading"
 import { Trash } from "lucide-react"
 import Image from "next/image"
 import { uploadImage } from "@/app/admin/upload-image"
-import { MAX_SIZE } from "@/app/admin/model/model"
+import { formatFileSize, MAX_SIZE } from "@/app/admin/model/model"
 
 const formSchema = z.object({
   name: z.string().min(1),
@@ -49,6 +49,7 @@ export const SubCategoryForm: React.FC<SubCategoryFormProps> = ({
 
   const [coverImgUrl, setCoverImgUrl] = useState<string>();
   const [coverImg, setCoverImg] = useState<File>();
+  const submitInProgress = useRef(false); 
 
   const [loading, setLoading] = useState(false);
 
@@ -89,7 +90,7 @@ export const SubCategoryForm: React.FC<SubCategoryFormProps> = ({
       const file = e.target.files?.[0];
       if(!file) return
       if (file.size > MAX_SIZE) {
-        alert("File size must be less than 2MB");
+        toast.error(`The image exceeds the 50 MB per-file limit (${formatFileSize(file.size)}).`);
         e.target.value = "";
         return;
       }
@@ -119,6 +120,8 @@ export const SubCategoryForm: React.FC<SubCategoryFormProps> = ({
     }
   
   const onSubmit = async (data: SubCategoryFormValues) => {
+    if (submitInProgress.current) return;
+    submitInProgress.current = true;
     try {
       setLoading(true);
       
@@ -170,6 +173,7 @@ export const SubCategoryForm: React.FC<SubCategoryFormProps> = ({
       toast.error('Something went wrong.');
     } finally {
       setLoading(false);
+      submitInProgress.current = false;
     }
   };
 
@@ -180,7 +184,22 @@ export const SubCategoryForm: React.FC<SubCategoryFormProps> = ({
       </div>
       <Separator />
       <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4 w-full">
+        <form 
+          onSubmit={form.handleSubmit(onSubmit)}
+          onKeyDown={(event) => {
+            const target = event.target;
+            if (
+              event.key === "Enter" &&
+              !event.nativeEvent.isComposing &&
+              target instanceof HTMLInputElement &&
+              !target.hasAttribute("cmdk-input") &&
+              !["button", "checkbox", "file", "image", "radio", "reset", "submit"].includes(target.type)
+            ) {
+              event.preventDefault();
+            }
+          }} 
+          className="space-y-4 w-full"
+        >
           <div className="grid md:grid-cols-2 grid-cols-1 md:gap-8 gap-4 rounded-lg p-4 shadow-lg bg-white/50">
            
             <div className="rounded-lg p-4 bg-white/50">

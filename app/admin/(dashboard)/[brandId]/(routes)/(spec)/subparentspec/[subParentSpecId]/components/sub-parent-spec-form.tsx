@@ -2,7 +2,7 @@
 
 import * as z from "zod"
 import axios, { AxiosResponse } from "axios"
-import { useState } from "react"
+import { useRef, useState } from "react"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import { toast } from "react-hot-toast"
@@ -32,6 +32,7 @@ export const SubParentSpecForm: React.FC<SubParentSpecFormProps> = ({
   const params = useParams();
   const router = useRouter();
   const [loading, setLoading] = useState(false);
+  const submitInProgress = useRef(false); 
 
   const title = initialData ? 'Edit Sub Parent Specification' : 'Create Sub Parent Specification';
   const description = initialData ? `For ${initialData.name}` : 'Add a new Sub Parent Specification';
@@ -52,6 +53,8 @@ export const SubParentSpecForm: React.FC<SubParentSpecFormProps> = ({
   });
 
   const onSubmit = async (data: SubParentSpecFormValues) => {
+    if (submitInProgress.current) return;
+    submitInProgress.current = true;
     try {
       setLoading(true);
     
@@ -88,6 +91,7 @@ export const SubParentSpecForm: React.FC<SubParentSpecFormProps> = ({
       toast.error('Something went wrong.');
     } finally {
       setLoading(false);
+      submitInProgress.current = false;
     }
   };
   
@@ -98,9 +102,23 @@ export const SubParentSpecForm: React.FC<SubParentSpecFormProps> = ({
       </div>
       <Separator />
       <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit, (errors) => {
-          console.log("validation errors:", errors);
-        })} className="space-y-4 w-full">
+        <form 
+          onSubmit={form.handleSubmit(onSubmit, (errors) => {
+            console.log("validation errors:", errors);
+          })}
+          onKeyDown={(event) => {
+            const target = event.target;
+            if (
+              event.key === "Enter" &&
+              !event.nativeEvent.isComposing &&
+              target instanceof HTMLInputElement &&
+              !target.hasAttribute("cmdk-input") &&
+              !["button", "checkbox", "file", "image", "radio", "reset", "submit"].includes(target.type)
+            ) {
+              event.preventDefault();
+            }
+          }} 
+          className="space-y-4 w-full">
           
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
 
