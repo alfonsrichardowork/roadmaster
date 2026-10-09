@@ -2,10 +2,10 @@
     <sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
       <sitemap>
         <loc>http://localhost:3003/sitemap-id.xml</loc>
-        <lastmod>2026-10-08T01:13:54.395Z</lastmod>
+        <lastmod>2026-10-09T06:55:23.508Z</lastmod>
       </sitemap>
       <sitemap>
         <loc>http://localhost:3003/sitemap-en.xml</loc>
-        <lastmod>2026-10-08T01:13:54.395Z</lastmod>
+        <lastmod>2026-10-09T06:55:23.508Z</lastmod>
       </sitemap>
     </sitemapindex>
