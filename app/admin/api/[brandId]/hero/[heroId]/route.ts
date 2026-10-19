@@ -138,7 +138,7 @@ export async function PATCH(
       })
     }
 
-    revalidatePath('')
+    revalidatePath('/')
     revalidatePath('/en')
     return NextResponse.json("success");
   } catch (error) {
@@ -229,7 +229,7 @@ export async function PATCH(
         },
       });
 
-      revalidatePath('')
+      revalidatePath('/')
       revalidatePath('/en')
   
       return NextResponse.json(product);

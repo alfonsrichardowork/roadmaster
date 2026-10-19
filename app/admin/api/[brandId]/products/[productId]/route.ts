@@ -2,7 +2,6 @@ import { NextResponse } from "next/server";
 
 import prismadb from "@/lib/prismadb";
 import { checkAuth, checkBearerAPI, getSession } from "@/app/admin/actions";
-import { revalidatePath } from "next/cache";
 import path from 'path';
 import fs from 'fs/promises';
 import { multipledatasheetproduct } from "@prisma/client";

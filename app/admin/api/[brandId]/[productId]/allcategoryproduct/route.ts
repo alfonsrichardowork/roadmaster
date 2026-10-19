@@ -148,7 +148,8 @@ export async function DELETE(
     });
 
     const productSlug = updatedProduct.slug;
-    revalidatePath(`/products/${productSlug}`);
+    revalidatePath(`/en/products/${productSlug}`);
+    revalidatePath(`/produk/${productSlug}`);
   
     return NextResponse.json(allproductcategory);
   } catch (error) {
