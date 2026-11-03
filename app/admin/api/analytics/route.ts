@@ -1,7 +1,9 @@
-import { NextResponse } from 'next/server';
+import { connection, NextResponse } from 'next/server';
 import { getDeviceUsed, getMostVisitedPages, getTotalVisitorPerDay, getTrafficbyCountry } from '@/lib/analytics';
 
 export async function GET() {
+  await connection();
+
   try {
     const mostvisited = await getMostVisitedPages();
     const trafficbycountry = await getTrafficbyCountry();

@@ -1,7 +1,7 @@
 "use client"
 
 import { useEffect, useState } from "react"
-import { brand, roles } from "@prisma/client"
+import { brand, roles } from "@/generated/prisma/client"
 import { useParams, useRouter } from "next/navigation"
 
 import { Button } from "@/components/ui/button"

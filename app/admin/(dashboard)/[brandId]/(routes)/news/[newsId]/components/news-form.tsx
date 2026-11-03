@@ -6,7 +6,7 @@ import { useCallback, useEffect, useRef, useState } from "react"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import { toast } from "react-hot-toast"
-import { news } from "@prisma/client"
+import { news } from "@/generated/prisma/client"
 import { useParams, useRouter } from "next/navigation"
 
 import { Input } from "@/components/ui/input"
@@ -1322,4 +1322,3 @@ export const NewsForm: React.FC<NewsFormProps> = ({
     </>
   );
 };
-

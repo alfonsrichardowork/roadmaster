@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import { MainNav } from "@/app/admin/components/main-nav";
 import LogoutButton from "@/app/admin/components/logout-button";
-import { brand } from "@prisma/client";
+import { brand } from "@/generated/prisma/client";
 import { getSession } from "../actions";
 import { redirect } from "next/navigation";
 import Link from "next/link";

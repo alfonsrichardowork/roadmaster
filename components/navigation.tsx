@@ -7,7 +7,7 @@ import { Link, usePathname } from '@/i18n/navigation';
 import Image from 'next/image';
 import { Button } from './ui/button';
 import { LanguageSwitcher } from './language-switcher';
-import { allcategory, news } from '@prisma/client';
+import { allcategory, news } from '@/generated/prisma/client';
 import prismadb from '@/lib/prismadb';
 import { Separator } from './ui/separator';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from './ui/accordion';

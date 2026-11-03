@@ -333,8 +333,9 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 ];
 }
 
-sitemap()
-  .then(async (data) => {
+async function writeSitemaps() {
+  try {
+    const data = await sitemap();
     // Convert the sitemap array to XML format
     for (let i = 0; i < 2; i++) { 
     const xmlContent = `
@@ -379,5 +380,12 @@ sitemap()
     // Write to sitemap.xml file
     await writeFile(filePath, xmlContent, "utf8");
     console.log(`Sitemap saved to ${filePath}`);
-  })
-  .catch(console.error);
+  } finally {
+    await prismadb.$disconnect();
+  }
+}
+
+writeSitemaps().catch((error: unknown) => {
+  console.error(error);
+  process.exitCode = 1;
+});

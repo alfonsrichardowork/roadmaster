@@ -13,7 +13,7 @@ import 'swiper/css/pagination';
 import '@/app/style/swiperstyles.css';
 
 import { Autoplay, Navigation, Pagination } from 'swiper/modules';
-import { hero } from '@prisma/client';
+import { hero } from '@/generated/prisma/client';
 
 type PropType = {
   slides: hero[];

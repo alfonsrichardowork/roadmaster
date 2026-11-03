@@ -1,6 +1,6 @@
 import prismadb from "@/lib/prismadb";
 import { redirect } from "next/navigation";
-import { roles } from "@prisma/client";
+import { roles } from "@/generated/prisma/client";
 import { UserColumn } from "./components/columns";
 import { UsersClient } from "./components/client";
 import { getSession } from "@/app/admin/actions";

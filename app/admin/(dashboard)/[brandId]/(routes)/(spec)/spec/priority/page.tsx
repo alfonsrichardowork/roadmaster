@@ -1,3 +1,4 @@
+import { connection } from "next/server";
 import prismadb from "@/lib/prismadb";
 import { PriorityForm } from "./components/priority-form";
 
@@ -9,6 +10,8 @@ export const instant = false;
 const DynamicSpecPriorityPage = async (props: {
     params: Promise<{ brandId: string }>
   }) => {
+  await connection();
+
   let allCat: string[] = ["Parent", "SubParent", "Child"]
   const allParent = await prismadb.dynamicspecificationparent.findMany({})
   const allSubParent = await prismadb.dynamicspecificationsubparent.findMany({})

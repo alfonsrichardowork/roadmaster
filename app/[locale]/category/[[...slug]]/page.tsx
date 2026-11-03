@@ -3,7 +3,7 @@ import prismadb from '@/lib/prismadb'
 import { ProductCard } from '@/components/productCard'
 import { getTranslations } from 'next-intl/server'
 import { Link } from '@/i18n/navigation'
-import { Prisma } from '@prisma/client'
+import { Prisma } from '@/generated/prisma/client'
 import Image from 'next/image'
 import { cacheLife } from 'next/cache'
 

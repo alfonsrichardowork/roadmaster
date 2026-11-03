@@ -6,7 +6,7 @@ import { useCallback, useEffect, useRef, useState } from "react"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import { toast } from "react-hot-toast"
-import { multipledatasheetproduct, product } from "@prisma/client"
+import { multipledatasheetproduct, product } from "@/generated/prisma/client"
 import { useParams, useRouter } from "next/navigation"
 
 import { Input } from "@/components/ui/input"
@@ -35,7 +35,7 @@ import LinkTiptap from '@tiptap/extension-link'
 import BulletList from '@tiptap/extension-bullet-list'
 import OrderedList from '@tiptap/extension-ordered-list'
 import Text from '@tiptap/extension-text'
-import TextStyle from '@tiptap/extension-text-style'
+import { TextStyle } from '@tiptap/extension-text-style'
 import { Toggle } from "@/app/admin/components/ui/toggle"
 import "@/app/style/styles.scss";
 import { formatFileSize, MAX_SIZE } from "@/app/admin/model/model"

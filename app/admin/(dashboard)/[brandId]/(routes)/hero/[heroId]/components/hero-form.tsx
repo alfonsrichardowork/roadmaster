@@ -6,7 +6,7 @@ import { useCallback, useEffect, useRef, useState } from "react"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import { toast } from "react-hot-toast"
-import { hero } from "@prisma/client"
+import { hero } from "@/generated/prisma/client"
 import { useParams, useRouter } from "next/navigation"
 
 import { Input } from "@/components/ui/input"
@@ -308,4 +308,3 @@ export const HeroForm: React.FC<HeroFormProps> = ({
     </>
   );
 };
-

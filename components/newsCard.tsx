@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { Link } from "@/i18n/navigation";
 import { getLocale } from "next-intl/server";
-import { news } from "@prisma/client";
+import { news } from "@/generated/prisma/client";
 import { Calendar } from "lucide-react";
 
 type NewsCardProps = {

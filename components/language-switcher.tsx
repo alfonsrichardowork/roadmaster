@@ -7,7 +7,7 @@ DropdownMenuItem,
 DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { routing } from "@/i18n/routing";
-import { allcategory } from "@prisma/client";
+import { allcategory } from "@/generated/prisma/client";
 import { useLocale } from "next-intl";
 import Image from "next/image";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";

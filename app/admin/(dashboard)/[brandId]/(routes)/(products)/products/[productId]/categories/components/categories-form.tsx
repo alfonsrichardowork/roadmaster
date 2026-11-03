@@ -4,7 +4,7 @@ import axios, { AxiosResponse } from "axios"
 import { useEffect, useRef, useState } from "react"
 import { toast } from "react-hot-toast"
 import { ChevronsUpDown, Trash, } from "lucide-react"
-import { allcategory, allproductcategory, product } from "@prisma/client"
+import { allcategory, allproductcategory, product } from "@/generated/prisma/client"
 import { useParams, useRouter } from "next/navigation"
 
 import { Separator } from "@/components/ui/separator"

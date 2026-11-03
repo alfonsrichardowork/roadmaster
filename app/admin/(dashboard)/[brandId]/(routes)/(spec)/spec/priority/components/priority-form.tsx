@@ -5,7 +5,7 @@ import { useParams, useRouter } from "next/navigation";
 import { GripVertical } from "lucide-react";
 import { toast } from "react-hot-toast";
 import axios from "axios";
-import { dynamicspecification, dynamicspecificationparent, dynamicspecificationsubparent } from "@prisma/client";
+import { dynamicspecification, dynamicspecificationparent, dynamicspecificationsubparent } from "@/generated/prisma/client";
 import { Heading } from "@/app/admin/components/ui/heading";
 import { Separator } from "@/components/ui/separator";
 import { Button } from "@/components/ui/button";

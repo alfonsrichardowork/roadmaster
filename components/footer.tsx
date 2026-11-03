@@ -3,7 +3,7 @@ import prismadb from '@/lib/prismadb'
 import { getLocale, getTranslations } from 'next-intl/server'
 import Link from 'next/link';
 import { Link as IntlLink } from '@/i18n/navigation';
-import { allcategory } from '@prisma/client';
+import { allcategory } from '@/generated/prisma/client';
 
 interface FooterProps {
   categories: allcategory[]

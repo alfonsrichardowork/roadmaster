@@ -4,7 +4,7 @@ import prismadb from "@/lib/prismadb";
 import { checkAuth, checkBearerAPI, getSession } from "@/app/admin/actions";
 import path from 'path';
 import fs from 'fs/promises';
-import { multipledatasheetproduct } from "@prisma/client";
+import { multipledatasheetproduct } from "@/generated/prisma/client";
 import { uploadsprefix } from "@/lib/spec-interface";
 
 const slugify = (str: string): string => str.toLowerCase()

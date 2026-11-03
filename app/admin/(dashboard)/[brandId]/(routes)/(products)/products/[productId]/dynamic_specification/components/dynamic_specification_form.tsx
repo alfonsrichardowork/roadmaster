@@ -1,6 +1,6 @@
 "use client"
 
-import { dynamicspecification, dynamicspecificationparent, dynamicspecificationsubparent, specificationconnector } from "@prisma/client"
+import { dynamicspecification, dynamicspecificationparent, dynamicspecificationsubparent, specificationconnector } from "@/generated/prisma/client"
 import { ChevronsUpDown, CirclePlus, Trash } from "lucide-react"
 import { useEffect, useRef, useState } from "react"
 import axios, { AxiosResponse } from "axios"
